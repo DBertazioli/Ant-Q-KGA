@@ -10,6 +10,7 @@
 	- general overview: http://www.cs.unibo.it/bison/publications/ACO.pdf (our implementation should have coherent notation with)
 	- technical intro: https://www.sciencedirect.com/science/article/pii/B9780128036365000074
 	- http://www.ijiet.org/papers/67-R052.pdf
+	- http://www-igm.univ-mlv.fr/~lombardy/ens/JavaTTT0708/fourmis.pdf (NICE, with benchmarks!)
 
 ## RL improvements in ACO --> Ant-Q ref
 	- http://people.idsia.ch/~luca/ml95.pdf
