@@ -103,7 +103,12 @@ The ABSTRACT is not a part of the body of the report itself. Rather, the abstrac
 \section{Introduction}
 %The introduction should provide a clear statement of the problem posed by the project, and why the problem is of interest. It should reflect the scenario, if available. If needed, the introduction also needs to present background information so that the reader can understand the significance of the problem. A brief summary of the hypotheses and the approach your group used to solve the problem should be given, possibly also including a concise introduction to theory or concepts used later to analyze and to discuss the results.
 \paragraph{The problem:}
-the travelling salesman problem (TSP) is an algorithmic problem tasked with finding the shortest route between a set of points and locations that must be visited. In the problem statement, the points are the cities a salesperson might visit. The salesman‘s goal is to keep the distance travelled as low as possible. TSP has been studied for decades and several solutions have been theorized. The simplest solution is to try all possibilities, but this is also the most time consuming and expensive method. Many solutions use heuristics, which provides probability outcomes. It must be considered that the results are approximate and not always optimal. 
+the travelling salesman problem (TSP) is an algorithmic problem tasked with finding the shortest route between a set of points and locations that must be visited. 
+In the problem statement, the points are the cities a salesperson might visit. The salesman‘s goal is to keep the distance travelled as low as possible. 
+TSP has been studied for decades and several solutions have been theorized. 
+The simplest solution is to try all possibilities, but this is also the most time consuming and expensive method. 
+Many solutions use heuristics, which provides probability outcomes. 
+It must be considered that the results are approximate and not always optimal. 
 \paragraph{Our approach:}
 in this project we tried to apply two meta-heuristics named \textit{Ant Colony Optimization} and \textit{Genetic Algorithm}, implementing their "classical" version and a custom one integrating \textit{Reinforcement Learning Algorithms}, namely \textit{Q-learning}.
 \paragraph{Theoretical hints:}
@@ -112,7 +117,10 @@ in this project we tried to apply two meta-heuristics named \textit{Ant Colony O
 \section{Datasets}
 %In this section the available data sets must be presented. The term dataset refers to any type of information source, for example web services for geolocation fall into this category. 
 %In addition, all necessary data manipulation processes, such as cleaning and enrichment with external sources, must be presented and discussed.
-The datasets are taken from  \url{www.math.uwaterloo.ca/tsp/world/countries.html\# DJ}.
+The datasets used in this work are taken from  \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/tsp/}, a large source of TSP datasets largely cited in literature. 
+There are datasets of variable dimension and for everyone is also available the optimal solution so that is possible for us to compare our results with the optimal one.
+Every solution is available at \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}.
+Every dataset is composed by a list of \textit{"cities"} with two coordinates points; the only preprocessing we applied was to compute a matrix containing the distance between every point and the other ones.
 %here we need to talk about our dataset source
 \section{The Methodological Approach}
 
