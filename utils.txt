@@ -1,0 +1,22 @@
+## MPI:
+	- mpi4py plugin: https://mpi4py.readthedocs.io/en/stable/appendix.html
+	- a nice introduction to MPI shared memory env https://princetonuniversity.github.io/PUbootcamp/sessions/parallel-programming/Intro_PP_bootcamp_2018.pdf
+
+
+## ant colony ref: 
+
+	- quick intro: http://mat.uab.cat/~alseda/MasterOpt/ACO_Intro.pdf 
+	- wiki: https://en.wikipedia.org/wiki/Ant_colony_optimization_algorithms
+	- general overview: http://www.cs.unibo.it/bison/publications/ACO.pdf (our implementation should have coherent notation with)
+	- technical intro: https://www.sciencedirect.com/science/article/pii/B9780128036365000074
+	- http://www.ijiet.org/papers/67-R052.pdf
+
+## RL improvements in ACO --> Ant-Q ref
+	- http://people.idsia.ch/~luca/ml95.pdf
+
+
+
+## Genomic hybrid
+	- https://ieeexplore.ieee.org/document/5178938/keywords#keywords
+	- https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5178938
+	- https://www.researchgate.net/publication/221909672_Hybrid_Metaheuristics_Using_Reinforcement_Learning_Applied_to_Salesman_Traveling_Problem
