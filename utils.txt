@@ -14,6 +14,9 @@
 
 ## RL improvements in ACO --> Ant-Q ref
 	- http://people.idsia.ch/~luca/ml95.pdf
+	- http://people.idsia.ch/~luca/ppsn96.pdf
+	- https://pdfs.semanticscholar.org/c32c/76f28432872161f5c17310b7e85a30d54b64.pdf
+	- http://www.lsi.us.es/iberamia2002/confman/SUBMISSIONS/280-detoingnek.pdf
 
 
 
