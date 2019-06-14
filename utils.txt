@@ -17,6 +17,10 @@
 	- http://people.idsia.ch/~luca/ppsn96.pdf
 	- https://pdfs.semanticscholar.org/c32c/76f28432872161f5c17310b7e85a30d54b64.pdf
 	- http://www.lsi.us.es/iberamia2002/confman/SUBMISSIONS/280-detoingnek.pdf
+	
+	- https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1468-0394.2004.00265.x #phe-Q learning #could be the same as the previous, check it out 
+	- https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=973515 #another multi-agent like phe-Q alg
+	
 
 
 
