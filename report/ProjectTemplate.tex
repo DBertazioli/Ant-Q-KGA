@@ -38,6 +38,8 @@
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{hyperref}
+\usepackage{booktabs,array}
+\usepackage{tabto}
 
 \begin{document}
 
@@ -97,7 +99,7 @@ Massimiliano Perletti-XXXXXX-m.perletti2@campus.unimib.it\\[1cm] % Your name
 
 
 \begin{abstract}
-The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
+%The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
 \end{abstract}
 
 \section{Introduction}
@@ -110,9 +112,11 @@ The simplest solution is to try all possibilities, but this is also the most tim
 Many solutions use heuristics, which provides probability outcomes. 
 It must be considered that the results are approximate and not always optimal. 
 \paragraph{Our approach:}
-in this project we tried to apply two meta-heuristics named \textit{Ant Colony Optimization} and \textit{Genetic Algorithm}, implementing their "classical" version and a custom one integrating \textit{Reinforcement Learning Algorithms}, namely \textit{Q-learning}.
-\paragraph{Theoretical hints:}
+in this project we tried to apply two meta-heuristics named \textit{Ant Colony Optimization} and \textit{Genetic Algorithm}, implementing their "classical" version and a custom one integrating \textit{Reinforcement Learning Algorithm}, namely \textit{Q-learning}.
+%\paragraph{Theoretical hints:}
 %improve this paragraph
+%In this work we focus on two different approaches to the TSP.
+%The former is the Genetic Algorithm, which we implement in its classical  
 
 \section{Datasets}
 %In this section the available data sets must be presented. The term dataset refers to any type of information source, for example web services for geolocation fall into this category. 
@@ -124,19 +128,65 @@ Every dataset is composed by a list of \textit{"cities"} with two coordinates po
 %here we need to talk about our dataset source
 \section{The Methodological Approach}
 
-This is the central and most important section of the report. Its objective must be to show, with linearity and clarity, the steps that have led to the definition of a decision model. The description of the working hypotheses, confirmed or denied, can be found in this section together with the description of the subsequent refining processes of the models. Comparisons between different models (e.g. heuristics vs. optimal models) in terms of quality of solutions, their explainability and execution times are welcome. 
+\subsection{Theoretical context}
+\paragraph{Genetic Algorithms:}
+In this work we focus on two different approaches to the TSP.
+The former is the \textbf{Genetic Algorithm}, which we initially implement in its classical version.
+This algorithm is based on a biological metaphor: the resolution of a problem is seen as a competition among a population whose evolving individuals become better and better candidates solutions over time. 
+A “fitness” function is used to evaluate each individual to decide whether it will contribute to the next
+generation. 
+Then, in analogy with the biological metaphor (the gene transfer in sexual reproduction), a crossover operator is applied in order to generate the next generation of the population.
+This process, according to the evolutionary theory (Darwinism), should lead after a certain number of iterations to a much more fit ensemble of individuals representing "good" candidate solutions to the considered problem.
 
-Do not attempt to describe all the code in the system, and do not include large pieces of code in this section, use pseudo-code where necessary. Complete source code should be provided separately (in Appendixes, as separated material or as a link to an on-line repo). Instead pick out and describe just the pieces of code which, for example:
-\begin{itemize}
-\item are especially critical to the operation of the system;
-\item you feel might be of particular interest to the reader for some reason;
-\item  illustrate a non-standard or innovative way of implementing an algorithm, data
-structure, etc..
-\end{itemize}
+%At the beginning of a run of a genetic algorithm, a large population of random chromosomes is created. Each one, when decoded, will represent a different solution to the problem at hand. Some of the advantages of a GA (R. Haupt & S. E. Haupt 2004) include the following: • It optimizes with continuous or discrete variables;• Does not require derivative information;• Simultaneously searches through wide sampling of the cost surface;• Deals with a large number of variables and is well suited for parallel computers;• Optimizes variables with extremely complex cost surfaces (they can jump out of alocal minimum);• Provides a list of optimum variables, not just a single solution;• May encode the variables so that the optimization is done with the encodedvariables; and• Works with numerically generated data, experimental data, or analyticalfunctions.A typical genetic algorithm presents the following operators:• Crossover - this operator is used to vary the population of the chromosomes fromone generation to the next. It selects the two fittest chromosomes in the populationand produces a number of offspring. There are several crossover techniques; in thiswork, we will use the one-point crossover.• Selection - this operator replicates the most successful solutions found in apopulation at a rate proportional to their relative quality, which is determined bythe fitness function. In this paper we will use the roulette wheel selection techniquefor this operator.• Mutation - used to maintain genetic diversity from one generation of a populationof chromosomes to the next. It selects a position of an offspring chromosome withsmall probability and changes the value based on the problem model; for example,in this work, the mutation operator modifies the offspring chromosome simply bychanging the position of a gene.
+The pseudo code of the standard genetic algorithm is summarized in the Fig. 2, where Tc is
+the crossover rate or parameter that determines the rate at which the crossover operator is
+applied, Tm is the equivalent for the mutation rate, Tp is the population size (number of
+chromosomes) and MaxG the number of generations used in the experiment.
 
-You should also mention any unforeseen problems you encountered when implementing the
-system and how and to what extent you overcame them. Common problems are:
- difficulties involving existing software.
+\begin{table}
+\centering
+\begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
+\toprule
+\unskip \textbf{Algorithm 1} Genetic Algorithm\\
+{\footnotesize 1:} \textbf{procedure} Genetic(Tc,Tm,Tp,MaxIt)\\[.25\normalbaselineskip]
+{\footnotesize 2:}\quad $Pop \leftarrow GeneratePopulation(Tp)$ \\
+{\footnotesize 3:}\quad $Pop \leftarrow Evaluation(Pop)$ \\
+{\footnotesize 4:}\quad \textbf{for} $i = 1\dots MaxIt$ \textbf{do} \\
+{\footnotesize 5:}\qquad $Pop \leftarrow Selection(Pop)$ \\
+{\footnotesize 6:}\qquad With probability $Tc$ do: \\
+{\footnotesize 7:}\qquad $Pop \leftarrow Crossover(Pop)$ \\
+{\footnotesize 8:}\qquad $Pop \leftarrow Selection(Pop)$ \\
+{\footnotesize 9:}\qquad With probability $Tm$ do: \\
+{\footnotesize 10:}\qquad $Pop \leftarrow Mutation(Pop)$ \\
+{\footnotesize 11:}\quad \textbf{end for} \\
+{\footnotesize 12:} \quad \textbf{return} the best solution in $Pop$ \\
+{\footnotesize 13:} \textbf{end procedure} \\
+\bottomrule
+\end{tabular}
+\caption{Genetic Algorithm pseudocode}
+\end{table}
+
+With the aim to explore a new variation of the standard algorithm, we try to integrate a \textbf{Q-Learning} Algorithm in the genetic procedure in order to provide a better guideline for the initialization of the population and the crossover operation.
+% insert Q-version
+
+\paragraph{Ant Colony Optimization:}
+The latter kind of algorithm we implement is the \textbf{Ant Colony Optimization} algorithm 
+
+
+%This is the central and most important section of the report. Its objective must be to show, with linearity and clarity, the steps that have led to the definition of a decision model. The description of the working hypotheses, confirmed or denied, can be found in this section together with the description of the subsequent refining processes of the models. Comparisons between different models (e.g. heuristics vs. optimal models) in terms of quality of solutions, their explainability and execution times are welcome. 
+
+%Do not attempt to describe all the code in the system, and do not include large pieces of code in this section, use pseudo-code where necessary. Complete source code should be provided separately (in Appendixes, as separated material or as a link to an on-line repo). Instead pick out and describe just the pieces of code which, for example:
+%\begin{itemize}
+%\item are especially critical to the operation of the system;
+%\item you feel might be of particular interest to the reader for some reason;
+%\item  illustrate a non-standard or innovative way of implementing an algorithm, data
+%structure, etc..
+%\end{itemize}
+
+%You should also mention any unforeseen problems you encountered when implementing the
+%system and how and to what extent you overcame them. Common problems are:
+ %difficulties involving existing software.
 
 
 \section{Results and Evaluation}
