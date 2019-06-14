@@ -174,6 +174,50 @@ With the aim to explore a new variation of the standard algorithm, we try to int
 The latter kind of algorithm we implement is the \textbf{Ant Colony Optimization} algorithm 
 
 
+\begin{table}
+\centering
+\begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
+\toprule
+\unskip \textbf{Algorithm 2} Ant Colony Optimization \\
+[.25\normalbaselineskip]
+\textbf{Main Algorithm}\\[.25\normalbaselineskip]
+{\footnotesize 1:} \textbf{for} generation \textbf{in} generations: \\
+{\footnotesize 2:} \quad create n\_ants artificial ants \\
+{\footnotesize 3:} \quad \textbf{for} one\_ant \textbf{in} ants: \\
+{\footnotesize 4:} \qquad make\_path \\
+{\footnotesize 5:} \qquad compute\_path\_length \\
+{\footnotesize 6:} \qquad update best\_dist and best\_path \\
+{\footnotesize 7:} \quad update pheromon matrix (local for child process) \\
+{\footnotesize 8:} \textbf{return} best\_dist, best\_sol \\
+[.25\normalbaselineskip]
+\textbf{Make path}\\[.25\normalbaselineskip]
+{\footnotesize 1:} start from a vertex \\
+{\footnotesize 2:} add start vertex to visited nodes \\
+[.25\normalbaselineskip]
+{\footnotesize 3:} \textbf{for} each remaining vertex: \\
+{\footnotesize 4:} \quad list the neighbors \\
+{\footnotesize 5:} \quad list the not yet visited neighb \\
+{\footnotesize 6:} \quad calculate the probability of choosing a vertex \\
+{\footnotesize 7:} \quad choice the vertex according to probability \\
+{\footnotesize 8:} \quad add the vertex to the passed list \\
+{\footnotesize 9:} \quad return the chosen vertex id \\
+[.25\normalbaselineskip]
+\textbf{Update pheromon matrix}\\[.25\normalbaselineskip]
+{\footnotesize 1:} \textbf{evaporate pheromon} \\
+{\footnotesize 2:} \textbf{for} ant \textbf{in} ant\_colony : \\
+{\footnotesize 3:} \quad \textbf{for} each vertex of one\_ant\_path : \\
+{\footnotesize 4:} \qquad pheromon\_matrix.increase(c\_v, n\_v,+1) \\
+[.25\normalbaselineskip]
+\textbf{Update pheromon matrix}\\[.25\normalbaselineskip]
+{\footnotesize 1:} gather from MPI env all the pm matrix \\
+{\footnotesize 2:} \textbf{if} process is the parent process (rank==0): \\
+{\footnotesize 3:}\quad for each element average over the n\_cores matrices. \\
+{\footnotesize 4:} broadcast obtained pm matrix to the child process \\
+\bottomrule
+\end{tabular}
+\caption{Ant Colony pseudocode}
+\end{table}
+
 %This is the central and most important section of the report. Its objective must be to show, with linearity and clarity, the steps that have led to the definition of a decision model. The description of the working hypotheses, confirmed or denied, can be found in this section together with the description of the subsequent refining processes of the models. Comparisons between different models (e.g. heuristics vs. optimal models) in terms of quality of solutions, their explainability and execution times are welcome. 
 
 %Do not attempt to describe all the code in the system, and do not include large pieces of code in this section, use pseudo-code where necessary. Complete source code should be provided separately (in Appendixes, as separated material or as a link to an on-line repo). Instead pick out and describe just the pieces of code which, for example:
