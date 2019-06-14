@@ -1,0 +1,7 @@
+.ipynb_checkpoints
+*.aux
+*.gz
+*.idx
+*.log
+*.out
+*.toc
