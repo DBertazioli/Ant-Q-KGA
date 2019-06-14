@@ -28,3 +28,9 @@
 	- https://ieeexplore.ieee.org/document/5178938/keywords#keywords
 	- https://ieeexplore.ieee.org/document/4389652
 	- https://www.researchgate.net/publication/221909672_Hybrid_Metaheuristics_Using_Reinforcement_Learning_Applied_to_Salesman_Traveling_Problem
+
+## GA with RL
+	- https://github.com/mpatacchiola/dissecting-reinforcement-learning
+
+## RL in python
+	- https://learndatasci.com/tutorials/reinforcement-q-learning-scratch-python-openai-gym/
