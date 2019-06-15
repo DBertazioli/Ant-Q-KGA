@@ -28,43 +28,18 @@ class Ant:
         self.curr_path = c
         return c
 
-    """
     # Choose next vertex
     def find_next(self, vertex):
         neighbors = self.graph.all_neighb(vertex)
         possibles = self.remove_already_visited(neighbors)
-        next_step_probabilities = self.next_step_probabilities(vertex, possibles)
-        chosen_vertex = choice(possibles, 1, p=next_step_probabilities)[0]
 
-        self.already_visited[chosen_vertex] = True
-        return chosen_vertex
-    """
-    
-    # Choose next vertex
-    def find_next(self, vertex):
-        neighbors = self.graph.all_neighb(vertex)
-        possibles = self.remove_already_visited(neighbors)
-        
-        #print("heyhey: ",vertex in possibles)
-        #next_step_probabilities = self.next_step_probabilities(vertex, possibles)
-        #chosen_vertex = choice(possibles, 1, p=next_step_probabilities)[0]
         q = random.random()
-        max_node=-1
-        max_val=-1
-
-        #print("hello: ", node)
             
         max_node, max_val= self.graph.getantQmax(possibles, vertex)
-        #print("best_curr_node, val: ",max_node, " ",max_val)
-        #if val < max_val:
-        #        max_val=val
-        #        max_node=best_curr_node
                 
         if q <= self.q0:
-            #print("Exploitation")
             chosen_vertex = max_node
         else:
-            # print("Exploration")
             next_step_probabilities = self.next_step_probabilities(vertex, possibles)
             chosen_vertex = choice(possibles, 1, p=next_step_probabilities)[0]
             
@@ -72,22 +47,15 @@ class Ant:
         self.already_visited[chosen_vertex] = True
         
         learned_val = self.graph.getMaxAntQ(chosen_vertex)
-        #learned_val = max_val
-        #print(learned_val)
-        #print("max: ", max_val)
         self.graph.phero_matrix.produce_phero(vertex, chosen_vertex, learned_val)
                 
         return chosen_vertex
-    
-    #"""
-    
     
     # Remove already visited locations
     def remove_already_visited(self, neighbors):
         return [x for x in neighbors if not self.already_visited[x]]
         
-    
-
+        
     # Calculate probability for a neighbors
     def next_step_probabilities(self, vertex, neighb_vertices):
         phero_dict = {}
@@ -107,6 +75,4 @@ class Ant:
     def compute_phero_intensity(self, v1, v2):
         phero_quantity = self.graph.phero_matrix.get_phero_matrix_elem(v1, v2)
         (_, one_step_dist) = self.graph.get_matrix_element(v1, v2)
-        #if self.graph.rank==0:
-        #    print(one_step_dist)
         return ((phero_quantity**self.graph.alpha) * (1/one_step_dist ** self.graph.beta))
