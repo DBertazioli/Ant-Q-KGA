@@ -1,0 +1,59 @@
+#### main algorithm ####
+
+for generation in generations:
+
+	create n_ants artificial ants
+	
+	for one_ant in ants:
+		make_path
+		compute_path_len
+		update best_dist and best_path 
+
+	    update pheromon matrix with delayed rewards (local for child process)
+	
+	every generations: update global matrix (global for every process) #just for the parallel strategy
+
+return best_dist, best_sol
+
+
+#### make_path ####
+
+start from a vertex (default id=0)
+add start vertex to visited nodes
+
+for each remaining vertex:
+	list the neighbors
+	list the not yet visited neighb
+	generate a  rand number q
+	if q<q0:
+	    chosen vertex id = argmax(qtable)
+	else:
+	    calculate the probability of choosing a vertex, according to formulas in papers ( ((pherom_quantity*alpha) * (1/d_k * beta))
+	    choice the vertex according to probability
+	
+	add the vertex to the passed list
+	
+	immediate reward = max(qtable (from the current vertex))
+	update qtable (insert immediate reward)
+	return the chosen vertex id
+
+
+#### Update pheromon matrix (local) ####
+
+ evaporate pheromon : multiply each element of the pheromon matrix by a \rho evaporation coeff (<1)
+
+ for ant in ant_colony:
+	
+	for each vertex of one_ant_path :
+		pheromon_matrix.increase(curr vertex, next vertex, +1)
+		
+#### Delayed reward : global update ####
+
+to add 
+
+#### Update pheromon matrix (local) ####
+
+-gather from MPI env all the pm matrix
+-if process is the parent process (rank==0):
+	make for each element an average over the n=n_cores matrices.
+-broadcast the obtained pm matrix to all the child process
