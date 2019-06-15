@@ -13,4 +13,12 @@ ACO Applied to TSP with RL algorithm integration (Q-learning)
   </li>
   <li>Approach genetic TSP</li>
   <li>Study</li>
+  
 </ol>
+
+## Datasets per test performances:
+        - berlin52
+        - ch130
+        - d198
+        - maybe dj38 (http://www.math.uwaterloo.ca/tsp/world/dj38.tsp) 
+        
