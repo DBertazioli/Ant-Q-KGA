@@ -31,7 +31,8 @@
 
 ## GA with RL
 	- https://github.com/mpatacchiola/dissecting-reinforcement-learning (RL with GA but useful to better understand GA)
-	- https://pdfs.semanticscholar.org/4ed9/3dab19e1d90df50dfcdc5fce12d581e86e94.pdf (GA with RL)
+	- https://pdfs.semanticscholar.org/4ed9/3dab19e1d90df50dfcdc5fce12d581e86e94.pdf (GA with RL) [synopsis only]
+	- https://www.sciencedirect.com/science/article/pii/S0957417408006064 [with VPN]
 
 ## RL in python
 	- https://learndatasci.com/tutorials/reinforcement-q-learning-scratch-python-openai-gym/
