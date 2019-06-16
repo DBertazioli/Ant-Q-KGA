@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.5.2)  14 JUN 2019 13:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.5.2)  16 JUN 2019 16:25
 entering extended mode
 **./ProjectTemplate.tex
 (ProjectTemplate.tex
@@ -700,15 +700,15 @@ LaTeX Info: Redefining \nameref on input line 44.
 ("C:\Program Files\MiKTeX 2.9\tex/latex/ucs\uni-0.def"
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 )
-<figs/logo.png, id=58, 160.6pt x 172.645pt>
-File: figs/logo.png Graphic file (type png)
-<use figs/logo.png>
-Package pdftex.def Info: figs/logo.png  used on input line 92.
-(pdftex.def)             Requested size: 160.5996pt x 172.64456pt.
+<figs/logo_uni.png, id=58, 1039.885pt x 1022.82124pt>
+File: figs/logo_uni.png Graphic file (type png)
+<use figs/logo_uni.png>
+Package pdftex.def Info: figs/logo_uni.png  used on input line 92.
+(pdftex.def)             Requested size: 155.97601pt x 153.41656pt.
  [1
 
-{C:/Users/fabri/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2 <./figs/
-logo.png (PNG copy)>] ("C:\Program Files\MiKTeX 2.9\tex/latex/ucs\uni-32.def"
+{C:/Users/Massi/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./figs/logo
+_uni.png (PNG copy)>] ("C:\Program Files\MiKTeX 2.9\tex/latex/ucs\uni-32.def"
 File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
 )
 Overfull \hbox (18.03967pt too wide) in paragraph at lines 124--129
@@ -721,12 +721,7 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.140 
-       [1]pdfTeX warning (ext4): destination with the same identifier (name{pag
-e.2}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.238 
-       [2] [3] [4]
+       [1] [2] [3] [4]
 
 LaTeX Warning: Citation `Lee2015' on page 5 undefined on input line 248.
 
@@ -747,7 +742,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 253.
  ) 
 Here is how much of TeX's memory you used:
  18105 strings out of 492897
- 334360 string characters out of 3133499
+ 334494 string characters out of 3133499
  424484 words of memory out of 3000000
  21663 multiletter control sequences out of 15000+200000
  11849 words of font info for 42 fonts, out of 3000000 for 9000
@@ -762,9 +757,9 @@ e1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
 /amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti1
 2.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on ProjectTemplate.pdf (7 pages, 160962 bytes).
+Output written on ProjectTemplate.pdf (6 pages, 246980 bytes).
 PDF statistics:
- 147 PDF objects out of 1000 (max. 8388607)
+ 142 PDF objects out of 1000 (max. 8388607)
  20 named destinations out of 1000 (max. 500000)
  170 words of extra memory for PDF output out of 10000 (max. 10000000)
 
