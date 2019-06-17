@@ -17,7 +17,7 @@ if __name__ == "__main__":
 		print('Correct syntax: {} <test> <n_ant> <n_generations> <alpha> <beta> <rho>'.format(sys.argv[0]))
 		sys.exit(1)
 
-	#init a common environment for enabling parallelism through generations
+	#init a common MPI environment for enabling parallelism through generations
 	common_world = MPI.COMM_WORLD
 	
 	n_cores = common_world.Get_size() 	#basically n_cores available, specified in the mpirun exec options (-n <n_cores>) 
@@ -25,8 +25,8 @@ if __name__ == "__main__":
 								
 	rank = common_world.Get_rank() 		#rank of the current process (rank == 0 --> master, rank >0 child)
     #print(sys.argv[2], n_cores)
-
-	ant_number_per_core = int(int(sys.argv[2]) / n_cores) #ant_number_per_core for each core (here's the parallelism in action)
+    #ant_number_per_core = int(int(sys.argv[2]) / n_cores)
+	ant_number_per_core = int(sys.argv[2])  #ant_number_per_core for each core (here's the parallelism in action)
 	n_generations = int(sys.argv[3])
 	alpha = float(sys.argv[4])
 	beta = float(sys.argv[5])

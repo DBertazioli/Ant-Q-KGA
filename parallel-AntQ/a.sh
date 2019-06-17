@@ -3,13 +3,14 @@
 #echo "Bash version ${BASH_VERSION}..."
 #Correct syntax: {} <test> <n_city> <n_generations> <alpha> <beta> <rho>'.
 
-for i in {0..4} #set n_repeat here
+for i in {0..0} #set n_repeat here
   do 
      #time mpirun --hostfile hostfile -n 2 python3 main.py test/pr76 76 30 1 3 0.5 $i
-     ##time mpirun -n 2 python3 main.py test/a280 100 30 1 3 0.5 $i #bad smth
+     time mpirun -n 2 python3 main.py test/a280 280 100 1 3 0.5 $i #bad smth
      #time mpirun -n 2 python3 main.py test/ch130 130 30 1 3 0.5 $i
-     time mpirun -n 2 python3 main.py test/berlin52 52 1000 1 3 0.5 $i
-     echo "time mpirun -n 2 python3 main.py test/berlin52 52 1000 1 3 0.5 $i"
+     #time mpirun -n 2 python3 main.py test/berlin52 52 1000 1 3 0.5 $i
+     #echo "time mpirun -n 2 python3 main.py test/berlin52 52 1000 1 3 0.5 $i"
+     echo "time mpirun -n 2 python3 main.py test/a280 280 100 1 3 0.5 $i"
      #time mpirun -n 2 python3 main.py test/d198 198 30 1 3 0.5 $i
   
   
