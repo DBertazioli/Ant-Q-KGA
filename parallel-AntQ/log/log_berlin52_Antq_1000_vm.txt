@@ -9,7 +9,7 @@ best path found = [28, 15, 45, 43, 33, 34, 35, 38, 39, 37, 36, 47, 23, 4, 14, 5,
 real	2m45,250s
 user	10m40,672s
 sys	0m17,012s
-time mpirun -n 4 python3 main.py test/berlin52 52 500 1 3 0.5 0
+time mpirun -n 4 python3 main.py test/berlin52 52 1000 1 3 0.5 0
 \n\n****berlin52****\n\n
 Process Rank: 2
 Process Rank: 1
@@ -21,7 +21,7 @@ best path found = [35, 34, 33, 38, 39, 36, 37, 23, 47, 4, 14, 5, 3, 24, 11, 27, 
 real	2m43,967s
 user	10m37,788s
 sys	0m14,648s
-time mpirun -n 4 python3 main.py test/berlin52 52 500 1 3 0.5 1
+time mpirun -n 4 python3 main.py test/berlin52 52 1000 1 3 0.5 1
 \n\n****berlin52****\n\n
 Process Rank: 2
 Process Rank: 3
@@ -33,7 +33,7 @@ best path found = [45, 15, 43, 33, 34, 35, 38, 39, 37, 36, 47, 23, 4, 14, 5, 3, 
 real	2m46,355s
 user	10m46,228s
 sys	0m15,800s
-time mpirun -n 4 python3 main.py test/berlin52 52 500 1 3 0.5 2
+time mpirun -n 4 python3 main.py test/berlin52 52 1000 1 3 0.5 2
 \n\n****berlin52****\n\n
 Process Rank: 1
 Process Rank: 2
@@ -45,7 +45,7 @@ best path found = [45, 43, 33, 34, 35, 38, 39, 37, 36, 47, 23, 4, 14, 5, 3, 24, 
 real	2m44,362s
 user	10m37,664s
 sys	0m16,472s
-time mpirun -n 4 python3 main.py test/berlin52 52 500 1 3 0.5 3
+time mpirun -n 4 python3 main.py test/berlin52 52 1000 1 3 0.5 3
 \n\n****berlin52****\n\n
 Process Rank: 3
 Process Rank: 1
@@ -57,7 +57,7 @@ best path found = [45, 43, 33, 34, 35, 38, 39, 37, 36, 47, 23, 4, 14, 5, 3, 24, 
 real	2m41,974s
 user	10m30,672s
 sys	0m13,920s
-time mpirun -n 4 python3 main.py test/berlin52 52 500 1 3 0.5 4
+time mpirun -n 4 python3 main.py test/berlin52 52 1000 1 3 0.5 4
 \n\n****berlin52****\n\n
 Process Rank: 2
 Process Rank: 1
@@ -69,7 +69,7 @@ best path found = [49, 19, 22, 30, 17, 21, 0, 48, 31, 34, 35, 38, 39, 37, 36, 33
 real	2m57,424s
 user	11m9,412s
 sys	0m36,932s
-time mpirun -n 4 python3 main.py test/berlin52 52 500 1 3 0.5 5
+time mpirun -n 4 python3 main.py test/berlin52 52 1000 1 3 0.5 5
 \n\n****berlin52****\n\n
 Process Rank: 1
 Process Rank: 0
@@ -81,7 +81,7 @@ best path found = [45, 47, 23, 4, 14, 5, 3, 24, 11, 27, 26, 25, 46, 12, 13, 51, 
 real	2m43,812s
 user	10m37,564s
 sys	0m14,428s
-time mpirun -n 4 python3 main.py test/berlin52 52 500 1 3 0.5 6
+time mpirun -n 4 python3 main.py test/berlin52 52 1000 1 3 0.5 6
 \n\n****berlin52****\n\n
 Process Rank: 1
 Process Rank: 3
@@ -93,7 +93,7 @@ best path found = [6, 1, 41, 20, 30, 22, 49, 19, 29, 28, 15, 45, 43, 33, 34, 35,
 real	2m45,521s
 user	10m43,748s
 sys	0m14,944s
-time mpirun -n 4 python3 main.py test/berlin52 52 500 1 3 0.5 7
+time mpirun -n 4 python3 main.py test/berlin52 52 1000 1 3 0.5 7
 \n\n****berlin52****\n\n
 Process Rank: 0
 Process Rank: 3
@@ -105,7 +105,7 @@ best path found = [41, 6, 1, 29, 22, 19, 49, 28, 15, 43, 33, 34, 35, 38, 39, 37,
 real	2m46,973s
 user	10m47,040s
 sys	0m17,692s
-time mpirun -n 4 python3 main.py test/berlin52 52 500 1 3 0.5 8
+time mpirun -n 4 python3 main.py test/berlin52 52 1000 1 3 0.5 8
 \n\n****berlin52****\n\n
 Process Rank: 1
 Process Rank: 3
@@ -117,5 +117,5 @@ best path found = [34, 35, 33, 38, 39, 37, 36, 47, 23, 4, 14, 5, 3, 24, 11, 27, 
 real	2m44,741s
 user	10m39,600s
 sys	0m16,016s
-time mpirun -n 4 python3 main.py test/berlin52 52 500 1 3 0.5 9
+time mpirun -n 4 python3 main.py test/berlin52 52 1000 1 3 0.5 9
 \n\n****berlin52****\n\n
