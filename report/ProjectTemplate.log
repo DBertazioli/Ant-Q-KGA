@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.3.7)  17 JUN 2019 14:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.3.7)  17 JUN 2019 14:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -744,16 +744,12 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 436.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 436.
 Package rerunfilecheck Info: File `ProjectTemplate.out' has not changed.
 (rerunfilecheck)             Checksum: 1DB80C4B0457528DD4F06A270E016A5D;564.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 436.
  ) 
 Here is how much of TeX's memory you used:
  18294 strings out of 494871
  330673 string characters out of 6179252
- 397073 words of memory out of 5000000
+ 397081 words of memory out of 5000000
  21243 multiletter control sequences out of 15000+600000
  9189 words of font info for 33 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
@@ -776,7 +772,7 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmtt10.pfb>
-Output written on ProjectTemplate.pdf (12 pages, 366763 bytes).
+Output written on ProjectTemplate.pdf (12 pages, 366807 bytes).
 PDF statistics:
  274 PDF objects out of 1000 (max. 8388607)
  235 compressed objects within 3 object streams
