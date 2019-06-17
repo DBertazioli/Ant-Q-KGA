@@ -26,12 +26,12 @@
 % title page.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\title{Title page with logo}
+\title{ \huge \bfseries Q-ant \& Q-gen}
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\documentclass[12pt]{article}
+\documentclass[10pt]{article}
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage{amsmath}
@@ -60,8 +60,8 @@
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
-
 \HRule \\[0.4cm]
+%\maketitle
 { \huge \bfseries Q-ant \& Q-gen}\\[0.4cm] % Title of your document
 \HRule \\[1.5cm]
  
@@ -73,8 +73,7 @@
 \emph{Authors:}\\
 Dario Bertazioli-847761-d.bertazioli@campus.unimib.it \\   % Your name
 Fabrizio D'Intinosante-838866-f.dintinosante@campus.unimib.it \\
-Massimiliano Perletti-XXXXXX-m.perletti2@campus.unimib.it\\[1cm] % Your name
-
+Massimiliano Perletti-847548-m.perletti2@campus.unimib.it\\[1cm] % Your name
 % If you don't want a supervisor, uncomment the two lines below and remove the section above
 %\Large \emph{Author:}\\
 %John \textsc{Smith}\\[3cm] % Your name
@@ -89,18 +88,19 @@ Massimiliano Perletti-XXXXXX-m.perletti2@campus.unimib.it\\[1cm] % Your name
 %	LOGO SECTION
 %----------------------------------------------------------------------------------------
 
-\includegraphics{figs/logo.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
- 
+\includegraphics[scale=0.15]{figs/logo_uni.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
+
 %----------------------------------------------------------------------------------------
 
 \vfill % Fill the rest of the page with whitespace
 
 \end{titlepage}
-
-
 \begin{abstract}
-%The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
+The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
 \end{abstract}
+
+\tableofcontents
+
 
 \section{Introduction}
 %The introduction should provide a clear statement of the problem posed by the project, and why the problem is of interest. It should reflect the scenario, if available. If needed, the introduction also needs to present background information so that the reader can understand the significance of the problem. A brief summary of the hypotheses and the approach your group used to solve the problem should be given, possibly also including a concise introduction to theory or concepts used later to analyze and to discuss the results.
@@ -113,23 +113,9 @@ Many solutions use heuristics, which provides probability outcomes.
 It must be considered that the results are approximate and not always optimal. 
 \paragraph{Our approach:}
 in this project we tried to apply two meta-heuristics named \textit{Ant Colony Optimization} and \textit{Genetic Algorithm}, implementing their "classical" version and a custom one integrating \textit{Reinforcement Learning Algorithm}, namely \textit{Q-learning}.
-%\paragraph{Theoretical hints:}
-%improve this paragraph
-%In this work we focus on two different approaches to the TSP.
-%The former is the Genetic Algorithm, which we implement in its classical  
 
-\section{Datasets}
-%In this section the available data sets must be presented. The term dataset refers to any type of information source, for example web services for geolocation fall into this category. 
-%In addition, all necessary data manipulation processes, such as cleaning and enrichment with external sources, must be presented and discussed.
-The datasets used in this work are taken from  \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/tsp/}, a large source of TSP datasets largely cited in literature. 
-There are datasets of variable dimension and for everyone is also available the optimal solution so that is possible for us to compare our results with the optimal one.
-Every solution is available at \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}.
-Every dataset is composed by a list of \textit{"cities"} with two coordinates points; the only preprocessing we applied was to compute a matrix containing the distance between every point and the other ones.
-%here we need to talk about our dataset source
-\section{The Methodological Approach}
-
-\subsection{Theoretical context}
-\paragraph{Genetic Algorithms:}
+\section{Theoretical context}
+\subsection{Genetic Algorithms:}
 In this work we focus on two different approaches to the TSP.
 The former is the \textbf{Genetic Algorithm}, which we initially implement in its classical version.
 This algorithm is based on a biological metaphor: the resolution of a problem is seen as a competition among a population whose evolving individuals become better and better candidates solutions over time. 
@@ -170,10 +156,85 @@ chromosomes) and MaxG the number of generations used in the experiment.
 With the aim to explore a new variation of the standard algorithm, we try to integrate a \textbf{Q-Learning} Algorithm in the genetic procedure in order to provide a better guideline for the initialization of the population and the crossover operation.
 % insert Q-version
 
-\paragraph{Ant Colony Optimization:}
-The latter kind of algorithm we implement is the \textbf{Ant Colony Optimization} algorithm 
+\subsection{Ant Colony Optimization:}
+The latter kind of algorithm we implement is the \textbf{Ant Colony Optimization} (ACO) algorithm.
 
+The procedure draws inspiration from a "real"  Ant  Colony. 
+In nature, such a system is  known  to  accomplish  some  difficult  tasks,  being beyond  the capabilities  of  a  single  ant,  exploiting the individuals collaborating  with  each  other.  
 
+In particular, ACO algorithm  is based on  foraging  behaviour  of  some  ant species.  
+This behaviour  can  be  summed up as  their  ability  to  find  the  shortest  paths between  a source of food  and  their  nest.
+The cooperation  among  the  ants  has inspired researchers to apply a similar collaboration based algorithm to those problems whose   solutions   can   be formulated as a least cost path between an origin and a destination.
+Since most optimisation problems  might have such a formulation,  those kind of algorithms are  pretty interesting.
+
+The first ACO algorithm, Ant System, was proposed by Dorigo \cite{cinque, sei, sette, otto, nove}.
+
+It consists in a multi-agent approximate approach that it is said it can produce good-quality solutions in a reasonable time for combinatorial optimisation problems \cite{cinque}. 
+The author demonstrate the performance of this algorithm on Travelling Salesman  Problem  (TSP) \cite{sei}. 
+
+Regarding the basic mechanism of ACO, here follows a quick biological explaination.
+Ant species are almost blind, thus they interact with the environment and communicate with each  other  expliting the hormones  they  release.  
+In partiuclar some  ant  species use a special kind of hormone called \textbf{pheromone}: they lay pheromone trails on the paths they explore, these traces act as stimuli and other ants belonging to the colony are attracted to follow  the  paths  that  have  relatively  more  tracked.  
+Due to this mechanism, an individual who is following a  path  because of the  pheromone  trail  also reinforces  it  by  dropping its  own pheromone  too.  
+
+Thus, the  more ants  follow  a  specific  path,  the  more  likely  that  path  becomes  to  be  followed  by  the  ants  in the colony \cite{ cinque,otto, nove}.  
+
+ACO  algorithm  makes use  of ant-like  agents  called artificial ants, that construct their   solutions   collaboratively   by   sharing   their experience on the quality of solutions that were generated so far.
+The pheromone trails play  a  leading  role  in  the  utilization  of collective experience.
+The solutions are built iteratively.
+Artificial  ants  have  "memory"  to  store  the  path  they  followed  while  constructing  their solutions.  Exploiting such a memory,  typically (even though depending on the speficic class of ant colony algorithm) artificial  ants  do not deposit  the pheromone until they have constructed their solution. Then, They determine the amount of pheromone according  to  the  quality  of  their  solution  and upload the pheromone matrix (the data structure in which the pheromone amount for each part of the total path is stored). 
+Automatically, the  paths  belonging  to  better  solutions,  receive  more pheromone.
+
+In iteratively building a solution (a total path) for a single ant, a  local  stochastic  transition  policy  is typically applied, stating how to decide the next node to visit in a graph. Artificial  ants  make  their  decisions  and  transitions  to  their  next  state  in  discrete  time steps, deciding whether to follow the main trails, or to random explore a new path (in our implementation, such a decision is made by a random number generation and imposing a threshold).
+Exploration  is  also encouraged  by  a mechanism of  pheromone  evaporation, which prevents the  colony from  getting  stuck  into a solution  corresponding to a (only) local optimum (note however that in  real  ant  colonies  pheromone evaporation is too slow to be a significant part of their search mechanism).
+
+Summing up, Ant Colony Optimisation is a metaheuristic proposed to solve hard optimisation problems. 
+The ACO metaheuristic, from a high-level view, is composed of 3 main    stages:    
+\begin{itemize}
+\item ConstructAntSolutions:
+the  artificial  ants  construct  their  solutions.  The transition policy controls  the  ants’  next step to one of the adjacent nodes. Once the ants have completed  their  path,  the quality  of  the current solution is evaluated,  and used in the next step. 
+The decision policy is based on following a probability distribution of the type \cite{cinque}:
+
+\begin{equation}
+p_{ij}^k=  \frac{[\tau_{ij}]^{\alpha}[\eta_{ij}]^{\beta}}{\sum_{l \in N_i^k} ~  [\tau_{il}]^{\alpha}[\eta_{il}]^{\beta}} ~~~\rm{if} ~j \in N_i^k
+\end{equation}
+
+where 
+\begin{itemize}
+
+\item $\eta_{ij}$ indicates an heuristic value specified according to the problem (in the TSP case, is equal to $1/d_{ij}$,
+\item  $\tau_{ij}$ is the pheromone quantity on the path between the $i$-th and $j$-th nodes,
+\item $\alpha$ and $\beta$ are the parameters used to set the relative importance of the pheromone trail and the heuristic  value.
+As $\alpha \rightarrow 0$,  the pheromone  track become  less  important  and  the  ants tend  to choose the closest cities, resulting in a much more "greedy" search. 
+Viceversa, when $\beta \rightarrow 0$, heuristic values are almost ignored and only the tracks are considered in the decision making.  
+\end{itemize}
+\item UpdatePheromones:  the   pheromone   trails   are   adjusted   based   on   the   latest iteration of  the  colony search process.  
+Two different updates happen: 
+\begin{itemize}
+\item the pheromone  evaporates according to the equation:
+\begin{equation}
+\tau_{ij}= (1-\rho) \tau_{ij}
+\end{equation} 
+where $\rho$ is the evaporation coefficient.
+
+\item new pheromone is deposited on the followed path.  The  amount  of  pheromone  to  deposit  is  typically decided  according  to  the  quality  of  the particular  solutions  that  each  path  belongs  to:
+
+\begin{equation}
+\Delta \tau_{ij}= \sum_{k=1}^{m} \Delta \tau_{ij}^k
+\label{eq:delta-tau}
+\end{equation} 
+where $\Delta \tau_{ij}^k$ is the pheromone increase amount deposited by the $k$-th ant, which can be (e.g. in Dorigo initial work) taken either as a constant, or $\Delta \tau_{ij}= 1/L_k$, where $L_k$ is the $k-th$ ant path lenght.
+
+However  the entity of  pheromone  update and  it's weight on how the search will be biased towards the best solution found so far is an implementation decision.
+\item the following equations can be combinated in:
+\begin{equation}
+\tau_{ij}= (1-\rho) \tau_{ij} + \Delta \tau_{ij}
+\label{eq:aco-update}
+\end{equation}
+\end{itemize}
+\end{itemize}
+
+(FIXME: fix pseudocode)
 \begin{table}
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
@@ -217,9 +278,89 @@ The latter kind of algorithm we implement is the \textbf{Ant Colony Optimization
 \end{tabular}
 \caption{Ant Colony pseudocode}
 \end{table}
+ 
+\subsection{Ant-Q Metaheuristic}
+In order to better understanding the working mechanism of Ant-Q Metaheuristic and to give deeper insight in our implentation (following \cite{undici} ), let us introduce some theoretical hints for the context.
+\paragraph{Hints on reinforcement learning:}
+Reinforcement  Learning  (RL)  is  an  (almost) unsupervised  learning  approach.
 
+It consists of an  \textbf{agent}  who tries to learn how  to  reach  a  goal  by  a continuous interaction with  the environment. 
+There is an evaluation phase where the quality of agent's actions is considered and feedbacks to the agent are given in the form a numerical reward. 
+This type of feedback is known as evaluative feedback: in contrary of supervised learning, here the agent is not explicitly told what action is the best to take  in  a  certain  situation, whereas it should  try  a set of possible actions and learn the best strategy yielding the most reward itself.  
+
+In some cases, the goal state (that is, the agent reaching its objective) can be obtained only after a sequence of actions: as a result the reward is delayed (FIXME: cfr section ant q delayer reward). 
+
+Summing up, and according to \cite{diciotto}, the  RL  problem  can  be  defined  as  the  problem  of  an agent  interacting  with  a  complex environment trying to maximise its long-run reward over a sequence of discrete time steps.
+
+The agent follows a \textbf{policy} to decide on its action according to the current state and conditions. 
+
+This policy is typically a  stochastic  function ($\pi(s,a)$) that  indicates a probability  of  choosing an action $a$ given a state $s$.
+Notice that agent has the possibility to change its initial policy  according  to  new experiences  in order to  achieve  optimal cumulative  reward  over  time.  
+
+The  value  of  a  state $V_\pi(s)$  is  defined  as  the  expected  cumulative reward that  will  be  obtained starting from a state $s$ and acting according to the current policy $\pi$. 
+In the same way, the value of  a pair state-action($Q_\pi(s,a)$) is  the  expected  return  obtained starting  from  $s$  with  action $a$  and  then following  the policy. 
+In formulas, $V$ is defined as:
+\begin{equation}
+V^\pi(s)=E_\pi \{ \sum_i \gamma^i r_{t+1, i+1 ~ | s_t=s } \}
+\end{equation}
+
+and accordingly:
+\begin{equation}
+Q^\pi(s,a)=E_\pi \{ \sum_i \gamma^i r_{t+1, i+1 ~|~ s_t=s,~ a_t=a } \}
+\end{equation}
+
+The RL problem consists in the agent trying to find the optimal policy $\pi^*$ that maximizes the value  functions, obtaining thus:
+\begin{equation}
+V^*(s)= max_{a \in A(s)}(Q^{\pi^*}(s,a)
+\end{equation} 
+however, the policy estimation can be in general a complex problem, and an optimal policy can be obtained with various algorithms, such as Policy Iteration and Value Iteration. There are also kind of learning mechanism defined as "off-policy", because they do not exploit a proper policy procedure.
+
+\paragraph{Q-Learning}: 
+is  an  off-policy  method, meaning  that  it updates the values  iteratively basing this process on  the  action that  gives  the  maximum  value  (that is, such an algorithm tries to directly  learn $Q^*$  instead  of  learning $Q_\pi$ first). In figure~\ref{fig:q_pseudo} it is shown the pseudocode of the algorithm:  the  agent  uses  a  so called $\epsilon$-greedy  policy,  but  updating the  current  value  estimate  considering the  action  that  provides  the  maximum  value  at  the successor state instead of considering the (current-)policy-suggested action. 
+\begin{figure}
+\includegraphics[scale=0.6]{figs/q_pseudo.png}
+\caption{\label{fig:q_pseudo} The pseudo code of a typical Q-learning algorithm implementation.}
+\end{figure}
+
+\paragraph{Ant-Q Algorithm}:
+one of the core points of this project consists in the implementation of the Ant-Q algorithm, introduced by Gambarella \cite{undici} in collaboration with Dorigo, attempting to ameliorate the "classic" ACO performances.  
+
+In this approach, the pheromone update rule  is borrowed from the Q-learning prassi:
+\begin{equation}
+Q(s,a) \leftarrow (1-\alpha) Q(s,a) + \alpha (r + \gamma [max_{a^{'}} Q(s^{'},a^{'})-Q(s,a)]~.
+\label{eq:q-eq}
+\end{equation}
+In particular, equation \ref{eq:aco-update} is changed into the following: 
+\begin{equation}
+\tau_{ij}= (1-\alpha) \tau_{ij} + \alpha( \Delta \tau_{ij} + \gamma max_{l\in N^k_j}\tau_{jl}) ~.
+\label{eq:antq-eq}
+\end{equation} 
+(FIXME: fix eq punctuation everywhere)
+
+Comparing equation~\ref{eq:antq-eq} to to the Q-learning update rule \ref{eq:q-eq} , it is worth to notice that :
+\begin{itemize}
+\item  equation~\ref{eq:antq-eq}  updates the pheromone  value  of  the  transition  ($i$, $j$)  according to the  pheromone  value  of  the  next transition  ($j$, $ l$),
+\item equation~\ref{eq:antq-eq} uses  the second part of equation \ref{eq:q-eq} (known as TD Error) to  weight the  pheromone  quantity associated  to  the current  edge  with  a learning  rate $\alpha$  and  a discount  rate $\gamma$, 
+\item the equation 
+\begin{equation}
+\tau_{ij}= (1-\alpha) \tau_{ij} + \alpha(\gamma max_{l\in N^k_j}\tau_{jl}) 
+\label{eq:localupd}
+\end{equation}
+is used for the pheromon matrix update (namely a local update) during each path construction (of each ant), and it does not include the delayed reward $\Delta \tau_{ij}$,
+\item $\Delta \tau_{ij}$ is calculated according to the solution quality, as anticipated circa equation \ref{eq:delta-tau}, and assigned in a "delayed" mode: thus the value of $\Delta \tau_{ij}$  for all $i$ and $j$ will be $0$ while the ants  apply  the  update  rule \ref{eq:localupd}  during  their  construction  of the  current solution. 
+Therefore, the update rule \ref{eq:antq-eq}	 is reapplied at the completion of the current solution, but with the value of the next transition considered to be equal to zero. (thus uploading only with $\Delta \tau_{ij}$.
+
+\item still according to \cite{undici} \cite{diciotto} $\Delta \tau_{ij}$ can be updated with an iteration  best  rule (update every single colony iteration) or  global  best (update based on the global best value.
+\end{itemize}
+
+Notice that many other attempts were made in the direction of hybridizing ACO and reinforcement learning based algorithms, some particularly interesting and successful, such as \cite{quattordici},\cite{quindici},\cite{sedici}. However, due to the few time available, we could head our force in implementing only the in-detail-described Ant-Q.
+
+\section{Datasets}
+The datasets used in this work are taken from  \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/tsp/}, a large source of TSP datasets largely cited in literature. 
+There are datasets of variable dimension and for everyone is also available the optimal solution so that is possible for us to compare our results with the optimal one. 
+Every solution is available at \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}. Every dataset is composed by a list of \textit{"cities"} with two coordinates points; the only preprocessing we applied was to compute a matrix containing the distance between every point and the other ones.
+\section{The Methodological Approach}
 %This is the central and most important section of the report. Its objective must be to show, with linearity and clarity, the steps that have led to the definition of a decision model. The description of the working hypotheses, confirmed or denied, can be found in this section together with the description of the subsequent refining processes of the models. Comparisons between different models (e.g. heuristics vs. optimal models) in terms of quality of solutions, their explainability and execution times are welcome. 
-
 %Do not attempt to describe all the code in the system, and do not include large pieces of code in this section, use pseudo-code where necessary. Complete source code should be provided separately (in Appendixes, as separated material or as a link to an on-line repo). Instead pick out and describe just the pieces of code which, for example:
 %\begin{itemize}
 %\item are especially critical to the operation of the system;
@@ -227,12 +368,9 @@ The latter kind of algorithm we implement is the \textbf{Ant Colony Optimization
 %\item  illustrate a non-standard or innovative way of implementing an algorithm, data
 %structure, etc..
 %\end{itemize}
-
 %You should also mention any unforeseen problems you encountered when implementing the
 %system and how and to what extent you overcame them. Common problems are:
  %difficulties involving existing software.
-
-
 \section{Results and Evaluation}
 The Results section is dedicated to presenting the actual results (i.e. measured and calculated quantities), not to discussing their meaning or interpretation. The results should be summarized using appropriate Tables and Figures (graphs or schematics). Every Figure and Table should have a legend that describes concisely what is contained or shown. Figure legends go below the figure, table legends above the table. Throughout the report, but especially in this section, pay attention to reporting numbers with an appropriate number of significant figures. 
 
@@ -243,11 +381,56 @@ The discussion section aims at interpreting the results in light of the project'
 \section{Conclusions}
 Conclusions should summarize the central points made in the Discussion section, reinforcing for the reader the value and implications of the work. If the results were not definitive, specific future work that may be needed can be (briefly) described. The conclusions should never contain ``surprises''. Therefore, any conclusions should be based on observations and data already discussed. It is considered extremely bad form to introduce new data in the conclusions.
 
-\section*{References}
+%\section*{References}
 
-The references section should contain complete citations following standard form.  The references should be numbered and listed in the order they were cited in the body of the report. In the text of the report, a particular reference can be cited by using a numerical number in brackets as \cite{Lee2015} that corresponds to its number in the reference list. \LaTeX provides several styles to format the references
+%The references section should contain complete citations following standard form.  The references should be numbered and listed in the order they were cited in the body of the report. In the text of the report, a particular reference can be cited by using a numerical number in brackets as %\cite{Lee2015} that corresponds to its number in the reference list. \LaTeX provides several styles to format the references
 
-\bibliographystyle{IEEEtran}
-\bibliography{references.bib}
+%\bibliographystyle{IEEEtran}
+%\bibliography{references.bib}
+\newpage
+\begin{thebibliography}{9}
+\bibitem{uno}
+Blum,  C.,  and  Dorigo,  M.  The  Hypercube  framework  for  Ant  Colony  Optimization. In:IEEE Transactions on Systems, Man, and Cybernetics, Vol. 34, No. 2, April 2004. 
+ 
+\bibitem{due}
+Buşoniu,  L.,  Schutter,  B.,  and  Babuska  R.  Learning  and  Coordination  in  Dynamic Multiagent  Systems.  Technical  Report  submitted  to  Delft  University  of  Technology,  Delft Center for Systems and Control, Netherlands, October 2005. 
 
+\bibitem{tre}
+Cordon,  O.,  Herrera,  F.,  Fernandez  de  Viana,  I.,  and  Moreno,  L.  A  New  ACO  Model Integrating Evolutionary Computation Concepts: The Best-Worst Ant System. In:  Proc. of ANTS’2000.  From  Ant  Colonies  to  Artificial  Ants:  Second  International  Workshop  on  Ant Algorithms, Brussels, Belgium, September 7-9, pp. 22-29, 2000.
+
+\bibitem{quattro}
+Cordon,  O.,  Herrea,  F.,  and  Stützle,  T.  A  Review  on  The  Ant  Colony  Optimization Metaheuristic:  Basis,  Models  and  New  Trends.  In: Mathware  and  Soft  Computing.  Vol.  9, pp.141-175, 2002.
+
+\bibitem{cinque}
+Dorigo,  M.,  Maniezzo,  V.,  and  Colorni,  A.  Ant  System:  Optimization  by  a  Colony  of Cooperating Agents. In: IEEE Transactions on Systems, Man, and Cybernetics. Vol. 26, No. 1, 1996.
+
+\bibitem{sei}
+Dorigo,  M.,  and  Gambardella,  L.  M.  Ant  Colony  System:  A  Cooperative  Learning Approach  to  the  Travelling  Salesman  Problem.  In: IEEE  Transactions  on  Evolutionary Computation, Vol.1 No.1, pp.53-66, April 1997.
+
+\bibitem{sette}
+Dorigo, M., Di Caro, G., and Gambardella, L. M. Ant algorithms for discrete optimisation. In: Artificial Life 5(2),pp.137-172, April 1999. 
+
+\bibitem{otto}
+Dorigo, M., and Stützle, T. Ant Colony Optimization, MIT Press, Cambridge, MA, 2004.
+
+\bibitem{nove}
+Dorigo,  M.,  Birattari,  M.,  and  Stützle,  T.  Ant Colony  Optimization:  Artificial  Ants  as  a Computational   Intelligence   Technique.  In: IEEE  Computational  Intelligence  Magazine, November 2006.
+
+\bibitem{undici}
+Gambardella, L. M. and Dorigo, M. Ant-Q: A Reinforcement Learning Approach to the Traveling Salesman Problem. In: Proc. ML-95, 12th Int. Conf. Machine Learning. Palo Alto, CA: Morgan Kaufmann, pp. 252–260, 1995.
+
+\bibitem{diciotto}
+Sutton,  R.  S.,  and  Barto,  A.  G. Reinforcement  Learning:  An  Introduction.  MIT  Press, Cambridge, MA, 1998.
+
+\bibitem{sedici}
+Sun,  R.,  Tatsimu,  S.,  Zhao,  G.,  Multiagent  Reinforcement  Learning  with  an  Improved Ant  Colony  System.  In:IEEE  Transactions  on  Systems,  Man,  and  Cybernetics,  Vol.3, pp.1612-1617, 2001.
+\bibitem{quattordici}
+
+ Miagkikh,  V.  and  Punch,  W.  F.  An  Approach  to  Solving  Combinatorial  Optimization Problems   Using   a   Population   of   Reinforcement   Learning   Agents.   In: Genetic   and Evolutionary Computation Conference, pp. 1358-1365, 1999. 
+
+\bibitem{quindici}
+ Monekosso,  N.,  and  Remagnino,  P.,  The  Analysis  and  Performance  Evaluation  of  the Pheromone-Q-learning Algorithm. In: Expert Systems, Vol.21, No.2, pp.80-91, May 2004. 
+
+
+\end{thebibliography}
 \end{document}
