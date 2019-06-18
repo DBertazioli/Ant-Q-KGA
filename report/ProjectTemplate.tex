@@ -501,8 +501,12 @@ d_{ij} + d_{i'j'} - d_{ii'} - d_{jj'}\\d_{ij'} + d_{i'j} - d_{ii'} - d_{jj'}
 \label{eq: int-group-conn}
 \end{equation}
 where $i' \in \{i-1; i+1\}, j' \in \{j-1;j+1\}$.
-Following this strategy, the first two clusters are combined into one, then the new generated cluster combines with the third cluster, and so on, step by step. At last, all those clusters are joined into one tour, and the shortest whole traveling tour is derived.
+Following this strategy, the first two clusters are combined into one, then the new generated cluster combines with the third cluster, and so on, step by step. At last, all those clusters are joined into one tour, and the shortest whole traveling tour is derived as shown in Fig.~\ref{fig:gconnect}.
 The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{ventitre},\cite{ventiquattro}.
+\begin{figure}
+\centering \includegraphics[scale=0.9]{figs/inter_group_connection.png}
+\caption{\label{fig:gconnect} The inter-group connection procedure illustrated.}
+\end{figure}
 \begin{table}
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
@@ -586,8 +590,11 @@ Among these we remember:
 \end{itemize}
 The \textit{single-point} crossover is one of the simple crossover technique used for random GA applications. This crossover uses the single point fragmentation of the parents and then combines the parents at the crossover point to create the offspring or child \cite{venticinque}.
 
-The point mutation consist in change each individual gene value according to a certain probability. The method is easy for operating, but it cannot effective control to mutation
+The \textit{point mutation} consist in change each individual gene value according to a certain probability. The method is easy for operating, but it cannot effective control to mutation
 result \cite{ventisei}.
+
+%tournament in GA, wheel in KGA
+
 
 \section{Results and Evaluation}
 The Results section is dedicated to presenting the actual results (i.e. measured and calculated quantities), not to discussing their meaning or interpretation. The results should be summarized using appropriate Tables and Figures (graphs or schematics). Every Figure and Table should have a legend that describes concisely what is contained or shown. Figure legends go below the figure, table legends above the table. Throughout the report, but especially in this section, pay attention to reporting numbers with an appropriate number of significant figures. 
@@ -653,12 +660,12 @@ Sun,  R.,  Tatsimu,  S.,  Zhao,  G.,  Multiagent  Reinforcement  Learning  with 
 \bibitem{venti}
 Chagas De Lima Junior, Francisco \& Neto, Adriao Duarte \& Melo, J.D.. (2010). Hybrid Metaheuristics Using Reinforcement Learning Applied to Salesman Traveling Problem. 10.5772/13343.
 
-\bibitem{ventuno}
-Razali, Noraini Mohd and John Geraghty. “Genetic Algorithm Performance with Different Selection Strategies in Solving TSP.” (2011).
-
 % here k-means citations
 \bibitem{ventidue}
 Steinley, D. (2006), K-means clustering: A half-century synthesis. British Journal of Mathematical and Statistical Psychology, 59: 1-34.
+
+\bibitem{ventuno}
+Razali, Noraini Mohd and John Geraghty. “Genetic Algorithm Performance with Different Selection Strategies in Solving TSP.” (2011).
 
 % here KGA references
 \bibitem{ventitre}
