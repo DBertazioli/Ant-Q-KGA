@@ -27,6 +27,7 @@
 	- https://gist.github.com/NicolleLouis/d4f88d5bd566298d4279bcb69934f51d
 	- http://www.theprojectspot.com/tutorial-post/applying-a-genetic-algorithm-to-the-travelling-salesman-problem/5
 	- https://towardsdatascience.com/evolution-of-a-salesman-a-complete-genetic-algorithm-tutorial-for-python-6fe5d2b3ca35
+	- https://pdfs.semanticscholar.org/f5d7/e26f21603c13dfe8e412106127039a547edb.pdf?_ga=2.103435456.1909448.1560840090-74532791.1560196406 [genetic with different selection startegies]
 
 ## Genomic hybrid
 	- https://ieeexplore.ieee.org/document/5178938/keywords#keywords
