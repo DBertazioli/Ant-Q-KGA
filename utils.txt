@@ -21,6 +21,8 @@
 	- https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1468-0394.2004.00265.x #phe-Q learning #could be the same as the previous, check it out 
 	- https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=973515 #another multi-agent like phe-Q alg
 	
+## K-means ref:
+	- https://onlinelibrary.wiley.com/doi/full/10.1348/000711005X48266
 
 ## GA ref:
 	- https://gist.github.com/turbofart/3428880
@@ -35,6 +37,7 @@
 	- https://www.researchgate.net/publication/221909672_Hybrid_Metaheuristics_Using_Reinforcement_Learning_Applied_to_Salesman_Traveling_Problem
 	- https://ieeexplore.ieee.org/abstract/document/4531202
 	- https://ieeexplore.ieee.org/document/7603158 [k-means with GA]
+	- http://eprints.iisc.ernet.in/2937/ [other k-means with GA]
 	
 ## GA with RL
 	- https://github.com/mpatacchiola/dissecting-reinforcement-learning (RL with GA but useful to better understand GA)
