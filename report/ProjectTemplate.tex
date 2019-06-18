@@ -248,6 +248,7 @@ The decision policy is based on following a probability distribution of the type
 
 \begin{equation}
 p_{ij}^k=  \frac{[\tau_{ij}]^{\alpha}[\eta_{ij}]^{\beta}}{\sum_{l \in N_i^k} ~  [\tau_{il}]^{\alpha}[\eta_{il}]^{\beta}} ~~~\rm{if} ~j \in N_i^k
+\label{eq:prob-aco}
 \end{equation}
 
 where 
@@ -285,7 +286,8 @@ However  the entity of  pheromone  update and  it's weight on how the search wil
 \end{itemize}
 \end{itemize}
 
-(FIXME: fix pseudocode)
+The pseudocode of the ACO solution is presented in Tab.~\ref{tab:aco-pseudo}.
+
 \begin{table}
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
@@ -293,14 +295,19 @@ However  the entity of  pheromone  update and  it's weight on how the search wil
 \unskip \textbf{Algorithm 2} Ant Colony Optimization \\
 [.25\normalbaselineskip]
 \textbf{Main Algorithm}\\[.25\normalbaselineskip]
+{\footnotesize 0:} initialize best\_dist and best\_path to None\\
 {\footnotesize 1:} \textbf{for} generation \textbf{in} generations: \\
-{\footnotesize 2:} \quad create n\_ants artificial ants \\
+{\footnotesize 2:} \quad create n\_ants artificial ants  \\
 {\footnotesize 3:} \quad \textbf{for} one\_ant \textbf{in} ants: \\
-{\footnotesize 4:} \qquad make\_path \\
-{\footnotesize 5:} \qquad compute\_path\_length \\
+{\footnotesize 4:} \qquad make a single ant path (see Make path)\\
+{\footnotesize 5:} \qquad compute the path length \\
 {\footnotesize 6:} \qquad update best\_dist and best\_path \\
-{\footnotesize 7:} \quad update pheromon matrix (local for child process) \\
-{\footnotesize 8:} \textbf{return} best\_dist, best\_sol \\
+{\footnotesize 7:} \quad update the pheromon matrix \\
+\quad (local update only for child processes) \\
+{\footnotesize 8:} \quad every a certain n of iterations:\\
+\quad update the global pheromone matrix \\
+\quad (shared in MPI environment among master\&child.)\\
+{\footnotesize 9:} \textbf{return} best\_dist, best\_sol \\
 [.25\normalbaselineskip]
 \textbf{Make path}\\[.25\normalbaselineskip]
 {\footnotesize 1:} start from a vertex \\
@@ -310,24 +317,26 @@ However  the entity of  pheromone  update and  it's weight on how the search wil
 {\footnotesize 4:} \quad list the neighbors \\
 {\footnotesize 5:} \quad list the not yet visited neighb \\
 {\footnotesize 6:} \quad calculate the probability of choosing a vertex \\
-{\footnotesize 7:} \quad choice the vertex according to probability \\
-{\footnotesize 8:} \quad add the vertex to the passed list \\
+\quad (according to eq.~\ref{eq:prob-aco})\\
+{\footnotesize 7:} \quad choose the vertex according to probability \\
+{\footnotesize 8:} \quad add the choosen vertex to the visited list \\
 {\footnotesize 9:} \quad return the chosen vertex id \\
 [.25\normalbaselineskip]
-\textbf{Update pheromon matrix}\\[.25\normalbaselineskip]
-{\footnotesize 1:} \textbf{evaporate pheromon} \\
-{\footnotesize 2:} \textbf{for} ant \textbf{in} ant\_colony : \\
-{\footnotesize 3:} \quad \textbf{for} each vertex of one\_ant\_path : \\
-{\footnotesize 4:} \qquad pheromon\_matrix.increase(c\_v, n\_v,+1) \\
+\textbf{Local update pheromon matrix}\\[.25\normalbaselineskip]
+{\footnotesize 1:} \textbf{for} ant \textbf{in} ant\_colony : \\
+{\footnotesize 2:} \quad \textbf{for} each vertex of one\_ant\_path : \\
+{\footnotesize 3:} \qquad increase pheromon\_matrix between current \\
+\qquad ~~and next vertex of a $\Delta \tau$ (according to eq.~\ref{eq:aco-update})\\
 [.25\normalbaselineskip]
-\textbf{Update pheromon matrix}\\[.25\normalbaselineskip]
-{\footnotesize 1:} gather from MPI env all the pm matrix \\
+\textbf{Global update pheromon matrix (parallelism)}\\[.25\normalbaselineskip]
+{\footnotesize 1:} gather from MPI env all the pheromone matrices\\
 {\footnotesize 2:} \textbf{if} process is the parent process (rank==0): \\
 {\footnotesize 3:}\quad for each element average over the n\_cores matrices. \\
-{\footnotesize 4:} broadcast obtained pm matrix to the child process \\
+{\footnotesize 4:} broadcast obtained pheromone matrix to the other \\
+\quad processes \\
 \bottomrule
 \end{tabular}
-\caption{Ant Colony pseudocode}
+\caption{\label{tab:aco-pseudo}Ant Colony pseudocode}
 \end{table}
  
 \subsection{Ant-Q Metaheuristic}
@@ -387,6 +396,12 @@ In particular, equation \ref{eq:aco-update} is changed into the following:
 \label{eq:antq-eq}
 \end{equation} 
 (FIXME: fix eq punctuation everywhere)
+The next action (what next node connecting to) is chosen according to:
+\begin{equation}
+s = \begin{cases} arg~max_{a \in J_k(s)} [Q(s,a)]^\alpha [\eta(s,a)]^\beta & \mbox{if } q \leq q_0 \\ S & \mbox{otherwise } \end{cases} 
+\label{eq:antq-choice}
+\end{equation}
+where correspondingly to equation \ref{eq:prob-aco}, $\eta$ is an heuristic value associated with the inverse of distance between a pair of nodes, and $\alpha~, \beta$ are weight-parameters for the interaction.
 
 Comparing equation~\ref{eq:antq-eq} to to the Q-learning update rule \ref{eq:q-eq} , it is worth to notice that :
 \begin{itemize}
@@ -399,12 +414,82 @@ Comparing equation~\ref{eq:antq-eq} to to the Q-learning update rule \ref{eq:q-e
 \end{equation}
 is used for the pheromon matrix update (namely a local update) during each path construction (of each ant), and it does not include the delayed reward $\Delta \tau_{ij}$,
 \item $\Delta \tau_{ij}$ is calculated according to the solution quality, as anticipated circa equation \ref{eq:delta-tau}, and assigned in a ``delayed" mode: thus the value of $\Delta \tau_{ij}$  for all $i$ and $j$ will be $0$ while the ants  apply  the  update  rule \ref{eq:localupd}  during  their  construction  of the  current solution. 
-Therefore, the update rule \ref{eq:antq-eq}	 is reapplied at the completion of the current solution, but with the value of the next transition considered to be equal to zero. (thus uploading only with $\Delta \tau_{ij}$.
+Therefore, the update rule \ref{eq:antq-eq}	 is reapplied at the completion of the current solution, but with the value of the next transition considered to be equal to zero. (thus uploading only with $\Delta \tau_{ij}$:
+\begin{equation}
+\tau_{ij}= (1-\alpha) \tau_{ij} + \alpha(\Delta\tau_{ij}) 
+\label{eq:antq-delay}
+\end{equation}
 
 \item still according to \cite{undici} \cite{diciotto} $\Delta \tau_{ij}$ can be updated with an iteration  best  rule (update every single colony iteration) or  global  best (update based on the global best value.
 \end{itemize}
 
 Notice that many other attempts were made in the direction of hybridizing ACO and reinforcement learning based algorithms, some particularly interesting and successful, such as \cite{quattordici},\cite{quindici},\cite{sedici}. However, due to the few time available, we could head our force in implementing only the in-detail-described Ant-Q.
+
+The pseudocode regarding our implementation of such an hybrid metaheuristic is reported in Tab.~\ref{tab:antq-pseudo}
+
+\begin{table}
+\centering
+\begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
+\toprule
+\unskip \textbf{Algorithm 2} Ant-Q algorithm\\
+[.25\normalbaselineskip]
+\textbf{Main Algorithm}\\[.25\normalbaselineskip]
+{\footnotesize 0:} initialize best\_dist and best\_path to None\\
+{\footnotesize 1:} \textbf{for} generation \textbf{in} generations: \\
+{\footnotesize 2:} \quad create n\_ants artificial ants  \\
+{\footnotesize 3:} \quad \textbf{for} one\_ant \textbf{in} ants: \\
+{\footnotesize 4:} \qquad make a single ant path (see Make path)\\
+{\footnotesize 5:} \qquad compute the path length \\
+{\footnotesize 6:} \qquad update best\_dist and best\_path \\
+{\footnotesize 7:} \qquad update ph. matrix with delayed rewards\\
+\qquad ~~~(according to eq.~\ref{eq:antq-delay})\\
+{\footnotesize 8:} \quad update the global pheromone matrix \\
+\quad ~~(shared in MPI environment among master\&child.)\\
+{\footnotesize 9:} \textbf{return} best\_dist, best\_sol \\
+[.25\normalbaselineskip]
+\textbf{Make path}\\[.25\normalbaselineskip]
+{\footnotesize 1:} start from a vertex \\
+{\footnotesize 2:} add start vertex to visited nodes \\
+[.25\normalbaselineskip]
+{\footnotesize 3:} \textbf{for} each remaining vertex: \\
+{\footnotesize 4:} \quad list the neighbors \\
+{\footnotesize 5:} \quad list the not yet visited neighb \\
+{\footnotesize 6:} \quad generate a random number $q \in \{0,1\}$\\
+{\footnotesize 7:} \quad if q < q\_0: (threshold)\\
+{\footnotesize 8:} \qquad select next vertex according to eq.~\ref{eq:antq-choice}\\
+{\footnotesize 9:} \quad else: \\
+{\footnotesize 10:}\qquad calculate the probability of choosing a vertex \\
+{\footnotesize 11:}\qquad (according to eq.~\ref{eq:prob-aco})\\
+{\footnotesize 12:} \qquad choose the vertex according to probability \\
+{\footnotesize 13:} \quad add the choosen vertex to the visited list \\
+{\footnotesize 14:} \quad give local rewards (local update pheromone matrix) \\
+{\footnotesize 15:} \quad return the chosen vertex id \\
+[.25\normalbaselineskip]
+\textbf{Local update pheromone matrix}\\[.25\normalbaselineskip]
+{\footnotesize 1:} \textbf{for} ant \textbf{in} ant\_colony : \\
+{\footnotesize 2:} \quad \textbf{for} each vertex of one\_ant\_path : \\
+{\footnotesize 3:} \qquad increase pheromon\_matrix between current \\
+\qquad ~~and next vertex of a $\Delta \tau$ (according to eq.~\ref{eq:antq-eq})\\
+[.25\normalbaselineskip]
+\textbf{Global update pheromon matrix (parallelism)}\\[.25\normalbaselineskip]
+{\footnotesize 1:} gather from MPI env all the pheromone matrices\\
+{\footnotesize 2:} \textbf{if} process is the parent process (rank==0): \\
+{\footnotesize 3:}\quad for each element average over the n\_cores matrices. \\
+{\footnotesize 4:} broadcast obtained pheromone matrix to the other \\
+\quad processes \\
+\bottomrule
+\end{tabular}
+\caption{\label{tab:antq-pseudo}Ant-Q pseudocode}
+\end{table}
+
+\paragraph{Parallel Implementation:} since both the ACO and Ant-Q are memory and computational-expensive, we suggest a parallel implementation of each algorithm.
+
+The type of proposed algorithm is naturally easy to code in a parallel implementation, being enough to split the total number of ants into a number of sets (called \textit{n\_ants\_per\_core} in the code) of ants that will be distributed on each single core.
+
+Thus, a parent process initializes the algorithm, creating n\_core childs each operating on a "personal" memory area. 
+Thus, every child has its own data structures, in particular its own pheromone matrix. 
+The MPI/OpenMPI\footnote{\url{https://www.open-mpi.org/}} \footnote{a nice introduction to MPI basic usage: \url{https://princetonuniversity.github.io/PUbootcamp/sessions/parallel-programming/Intro_PP_bootcamp_2018.pdf}} software (in partiicular mpi4py\footnote{https://mpi4py.readthedocs.io/en/stable/}, a pythonic Api for OpenMPI) is used to host a shared pheromone matrix which will be updated according to the pseudocode in tab.~\ref{tab:aco-pseudo},\ref{tab:antq-pseudo} (as a mean-matrix), and which every ``local" matrix will be update to after every iteration, so that every artificial ant in every child process will ``feel" a as similar as possible pheromone effect.
+
 
 \section{Datasets}
 The datasets used in this work are taken from  \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/tsp/}, a large source of TSP datasets largely cited in literature. 
