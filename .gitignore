@@ -7,3 +7,5 @@
 *.toc
 *.gz
 *.log
+*.bib
+*.dvi
