@@ -42,6 +42,7 @@
 \usepackage{tabto}
 \usepackage{systeme, mathtools}
 \usepackage[margin=3cm]{geometry}
+\usepackage{enumitem}
 
 \renewcommand{\floatpagefraction}{.9}
 %\usepackage[autostyle]{csquotes}
@@ -423,31 +424,6 @@ This process, according to the evolutionary theory (Darwinism), should lead afte
 %At the beginning of a run of a genetic algorithm, a large population of random chromosomes is created. Each one, when decoded, will represent a different solution to the problem at hand. Some of the advantages of a GA (R. Haupt & S. E. Haupt 2004) include the following: • It optimizes with continuous or discrete variables;• Does not require derivative information;• Simultaneously searches through wide sampling of the cost surface;• Deals with a large number of variables and is well suited for parallel computers;• Optimizes variables with extremely complex cost surfaces (they can jump out of alocal minimum);• Provides a list of optimum variables, not just a single solution;• May encode the variables so that the optimization is done with the encodedvariables; and• Works with numerically generated data, experimental data, or analyticalfunctions.A typical genetic algorithm presents the following operators:• Crossover - this operator is used to vary the population of the chromosomes fromone generation to the next. It selects the two fittest chromosomes in the populationand produces a number of offspring. There are several crossover techniques; in thiswork, we will use the one-point crossover.• Selection - this operator replicates the most successful solutions found in apopulation at a rate proportional to their relative quality, which is determined bythe fitness function. In this paper we will use the roulette wheel selection techniquefor this operator.• Mutation - used to maintain genetic diversity from one generation of a populationof chromosomes to the next. It selects a position of an offspring chromosome withsmall probability and changes the value based on the problem model; for example,in this work, the mutation operator modifies the offspring chromosome simply bychanging the position of a gene.
 The pseudo code of the standard genetic algorithm is summarized in the Tab.~\ref{Tab: GA pseudocode}, where Tm is the mutation rate that determines the rate at which the mutation operator is applied, Tp is the population size (number of
 chromosomes) and MaxG the number of generations used in the experiment\cite{venti}.
-% maybe better in methodological approach
-As said evolutionary algorithms like \textit{Genetic algorithm} uses operators inspired by natural selection such as reproduction, mutation, recombination and selection.
-\textit{Genetic algorithm} is very customizable in every component; in this work we have focused our attention on the selection part.
-In particular we tried to apply the following selection strategies \cite{ventuno}:
-\begin{itemize}
-\item roulette-wheel selection;
-\item tournament selection.
-\end{itemize}
-The \textbf{roulette-wheel} selection consists in giving a weight to each chromosomes (the individuals in our population) and this weight corresponds to a portion of a roulette wheel.
-In this way chromosomes with higher fitness will have higher weight and a larger portion of the wheel.
-\begin{equation}
-p_i = \frac{f_i}{\sum_{j = 1}^n f_j}
-\end{equation}
-Spinning the wheel for different times allows selecting the individuals for the next generation.
-Finally, the roulette wheel is nothing more than a weighted sort mechanism.
-
-The \textbf{tournament} selection, instead, consists in randomly selecting a group of individuals from the larger population and taking only the one with the highest fitness. 
-The number of individuals competing in each tournament is commonly set to 2 but in this work we implemented a variable tournament dimension for each iteration.
-
-The other elements, however, have been kept standard.
-Among these we remember:
-\begin{itemize}
-\item \textbf{crossover:} we applied the simplest crossover strategy called \textit{single-point};
-\item \textbf{mutation:} we applied the simplest mutation version called \textit{point mutation}, with a mutation probability described by a \textbf{mutation rate}.
-\end{itemize}
 \begin{table}
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
@@ -511,8 +487,8 @@ Running the GA algorithm on smaller portion of original data allows to improve p
 Eventually all those clusters could be handled parallel.
 The result of this step is tours $T_1,T_2,\dots,T_k$ for clusters $C_1,C_2,…,C_k$.
 \paragraph{Inter-group connection:}
-In the last step, what we have obtained is the shortest path between the given vertices in each cluster.
-With the aim of reconstruct the whole shortest path we need to connect properly every cluster to the others.
+In the last step, what we obtain is the shortest path between the given vertices in each cluster.
+With the aim to reconstruct the whole shortest path we need to connect properly every cluster to the others.
 Connect two clusters determine which edges will be deleted from the adjacent shortest path among each cluster, and which edges will be linked for combining two adjacent clusters into one. 
 Assuming $i$ and $j$ are two closest vertices between two clusters $G_i$ and $G_j$ for $G_i,i−1$ and $i+1$ are two adjacent vertices of $i$, and the same to $G_j,j−1$ and $j+1$ are two adjacent vertices of $j$. 
 Given $G_i$ and $G_j$, in order to combine the two clusters into one, we need to select two vertices $i \in i′$ and $j \in j'$ for deleting and linking edges.
@@ -552,7 +528,17 @@ The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{v
 \section{Datasets}
 The datasets used in this work are taken from  \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/tsp/}, a large source of TSP datasets largely cited in literature. 
 There are datasets of variable dimension and for everyone is also available the optimal solution so that is possible for us to compare our results with the optimal one. 
-Every solution is available at \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}. Every dataset is composed by a list of ``\textit{cities}" with two coordinates points; the only preprocessing we applied was to compute a matrix containing the distance between every point and the other ones.
+Every solution is available at \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}. Every dataset is composed by a list of ``\textit{cities}" with two coordinates points; the only preprocessing we apply is to compute a matrix containing the distance between every point and the other ones.
+
+In particular we use 5 datasets of different dimension:
+\begin{itemize}[noitemsep]
+\item dj38
+\item berlin52
+\item ch130
+\item d198
+\item pr1002
+\end{itemize}
+We have choosen these datasets because they are very used and largely cited in literature allowing us to compare our results with others.
 \section{The Methodological Approach}
 %This is the central and most important section of the report. Its objective must be to show, with linearity and clarity, the steps that have led to the definition of a decision model. The description of the working hypotheses, confirmed or denied, can be found in this section together with the description of the subsequent refining processes of the models. Comparisons between different models (e.g. heuristics vs. optimal models) in terms of quality of solutions, their explainability and execution times are welcome. 
 %Do not attempt to describe all the code in the system, and do not include large pieces of code in this section, use pseudo-code where necessary. Complete source code should be provided separately (in Appendixes, as separated material or as a link to an on-line repo). Instead pick out and describe just the pieces of code which, for example:
@@ -569,7 +555,32 @@ Every solution is available at \url{https://wwwproxy.iwr.uni-heidelberg.de/group
 Regarding the Ant-Family blabla
 
 \subsection{Evolutionary Algorithms}
-Our implementation of the genetic blabla
+%Our implementation of the genetic blabla
+% maybe better in methodological approach
+As said evolutionary algorithms like \textit{Genetic algorithm} uses operators inspired by natural selection such as reproduction, mutation, recombination and selection.
+\textit{Genetic algorithm} is very customizable in every component; in this work we have focused our attention on the selection part.
+In particular we tried to apply the following selection strategies \cite{ventuno}:
+\begin{itemize}
+\item roulette-wheel selection;
+\item tournament selection.
+\end{itemize}
+The \textbf{roulette-wheel} selection consists in giving a weight to each chromosomes (the individuals in our population) and this weight corresponds to a portion of a roulette wheel.
+In this way chromosomes with higher fitness will have higher weight and a larger portion of the wheel.
+\begin{equation}
+p_i = \frac{f_i}{\sum_{j = 1}^n f_j}
+\end{equation}
+Spinning the wheel for different times allows selecting the individuals for the next generation.
+Finally, the roulette wheel is nothing more than a weighted sort mechanism.
+
+The \textbf{tournament} selection, instead, consists in randomly selecting a group of individuals from the larger population and taking only the one with the highest fitness. 
+The number of individuals competing in each tournament is commonly set to 2 but in this work we implemented a variable tournament dimension for each iteration.
+
+The other elements, however, have been kept standard.
+Among these we remember:
+\begin{itemize}
+\item \textbf{crossover:} we applied the simplest crossover strategy called \textit{single-point};
+\item \textbf{mutation:} we applied the simplest mutation version called \textit{point mutation}, with a mutation probability described by a \textbf{mutation rate}.
+\end{itemize}
 
 
 \section{Results and Evaluation}
