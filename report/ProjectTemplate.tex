@@ -212,7 +212,7 @@ The pseudocode of the ACO solution is presented in Tab.~\ref{tab:aco-pseudo}.
 \scalebox{0.8}{
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
-\unskip \textbf{Algorithm 1} Ant Colony Optimization \\
+\unskip \textbf{Algorithm 2} Ant Colony Optimization \\
 [.25\normalbaselineskip]
 \textbf{Main Algorithm}\\[.25\normalbaselineskip]
 {\footnotesize 0:} initialize best\_dist and best\_path to None\\
@@ -343,7 +343,7 @@ Therefore, the update rule eq.~(\ref{eq:antq-eq}) is reapplied at the completion
 \item still according to \cite{undici} \cite{diciotto} $\Delta \tau_{ij}$ can be updated with an iteration  best  rule (update every single colony iteration) or  global  best (update based on the global best value.
 \end{itemize}
 
-Notice that many other attempts were made in the direction of hybridizing ACO and reinforcement learning based algorithms, some particularly interesting and successful, such as \cite{quattordici},\cite{quindici},\cite{sedici}. However, due to the few time available, we could head our force in implementing only the in-detail-described Ant-Q.
+Notice that many other attempts were made in the direction of hybridizing ACO and reinforcement learning based algorithms, some particularly interesting and successful, such as \cite{sedici},\cite{quattordici},\cite{quindici}. However, due to the few time available, we could head our force in implementing only the in-detail-described Ant-Q.
 
 The pseudocode regarding our implementation of such an hybrid metaheuristic is reported in Tab.~\ref{tab:antq-pseudo}
 
@@ -428,7 +428,7 @@ chromosomes) and MaxG the number of generations used in the experiment\cite{vent
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
-\unskip \textbf{Algorithm 3} Genetic Algorithm\\
+\unskip \textbf{Algorithm 1} Genetic Algorithm\\
 {\footnotesize 1:} \textbf{procedure} Genetic(Tm,Tp,MaxIt)\\[.25\normalbaselineskip]
 {\footnotesize 2:}\quad $Pop \leftarrow GeneratePopulation(Tp)$ \\
 {\footnotesize 3:}\quad $Pop \leftarrow Evaluation(Pop)$ \\
@@ -466,7 +466,7 @@ and the complete centroid vector for cluster $C_k$ is given by\cite{ventidue}
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
-\unskip \textbf{Algorithm 4} K-Means Algorithm\\
+\unskip \textbf{Algorithm 2} K-Means Algorithm\\
 {\footnotesize 1:} Set the K cluster centers randomly; \\[.25\normalbaselineskip]
 {\footnotesize 2:} \textbf{repeat} \\
 {\footnotesize 3:}\quad \textbf{for} \textit{each vertex} \textbf{do} \\
@@ -507,7 +507,7 @@ The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{v
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
-\unskip \textbf{Algorithm 5} KGA\\
+\unskip \textbf{Algorithm 3} KGA\\
 {\footnotesize 1:} \textbf{input} an TSP;\\[.25\normalbaselineskip]
 {\footnotesize 2:} K-Means is adopted to cluster the TSP into k \textit{sub-problems}\\
 {\footnotesize 3:} \textbf{For} each sub-prob $i=1$ to $k$, do: \\
@@ -607,17 +607,17 @@ Conclusions should summarize the central points made in the Discussion section, 
 %\bibliography{references.bib}
 \newpage
 \begin{thebibliography}{9}
-\bibitem{uno}
-Blum,  C.,  and  Dorigo,  M.  The  Hypercube  framework  for  Ant  Colony  Optimization. In:IEEE Transactions on Systems, Man, and Cybernetics, Vol. 34, No. 2, April 2004. 
+%\bibitem{uno}
+%Blum,  C.,  and  Dorigo,  M.  The  Hypercube  framework  for  Ant  Colony  Optimization. In:IEEE Transactions on Systems, Man, and Cybernetics, Vol. 34, No. 2, April 2004. 
  
-\bibitem{due}
-Buşoniu,  L.,  Schutter,  B.,  and  Babuska  R.  Learning  and  Coordination  in  Dynamic Multiagent  Systems.  Technical  Report  submitted  to  Delft  University  of  Technology,  Delft Center for Systems and Control, Netherlands, October 2005. 
+%\bibitem{due}
+%Buşoniu,  L.,  Schutter,  B.,  and  Babuska  R.  Learning  and  Coordination  in  Dynamic Multiagent  Systems.  Technical  Report  submitted  to  Delft  University  of  Technology,  Delft Center for Systems and Control, Netherlands, October 2005. 
 
-\bibitem{tre}
-Cordon,  O.,  Herrera,  F.,  Fernandez  de  Viana,  I.,  and  Moreno,  L.  A  New  ACO  Model Integrating Evolutionary Computation Concepts: The Best-Worst Ant System. In:  Proc. of ANTS’2000.  From  Ant  Colonies  to  Artificial  Ants:  Second  International  Workshop  on  Ant Algorithms, Brussels, Belgium, September 7-9, pp. 22-29, 2000.
+%\bibitem{tre}
+%Cordon,  O.,  Herrera,  F.,  Fernandez  de  Viana,  I.,  and  Moreno,  L.  A  New  ACO  Model Integrating Evolutionary Computation Concepts: The Best-Worst Ant System. In:  Proc. of ANTS’2000.  From  Ant  Colonies  to  Artificial  Ants:  Second  International  Workshop  on  Ant Algorithms, Brussels, Belgium, September 7-9, pp. 22-29, 2000.
 
-\bibitem{quattro}
-Cordon,  O.,  Herrea,  F.,  and  Stützle,  T.  A  Review  on  The  Ant  Colony  Optimization Metaheuristic:  Basis,  Models  and  New  Trends.  In: Mathware  and  Soft  Computing.  Vol.  9, pp.141-175, 2002.
+%\bibitem{quattro}
+%Cordon,  O.,  Herrea,  F.,  and  Stützle,  T.  A  Review  on  The  Ant  Colony  Optimization Metaheuristic:  Basis,  Models  and  New  Trends.  In: Mathware  and  Soft  Computing.  Vol.  9, pp.141-175, 2002.
 
 \bibitem{cinque}
 Dorigo,  M.,  Maniezzo,  V.,  and  Colorni,  A.  Ant  System:  Optimization  by  a  Colony  of Cooperating Agents. In: IEEE Transactions on Systems, Man, and Cybernetics. Vol. 26, No. 1, 1996.
