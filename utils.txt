@@ -35,6 +35,7 @@
 	- https://www.researchgate.net/publication/221909672_Hybrid_Metaheuristics_Using_Reinforcement_Learning_Applied_to_Salesman_Traveling_Problem
 	- https://ieeexplore.ieee.org/abstract/document/4531202
 	- https://ieeexplore.ieee.org/document/7603158 [k-means with GA]
+	- http://eprints.iisc.ernet.in/2937/ [other k-means with GA]
 	
 ## GA with RL
 	- https://github.com/mpatacchiola/dissecting-reinforcement-learning (RL with GA but useful to better understand GA)
