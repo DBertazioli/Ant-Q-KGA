@@ -112,10 +112,10 @@ The simplest solution is to try all possibilities, but this is also the most tim
 Many solutions use heuristics, which provides probability outcomes. 
 It must be considered that the results are approximate and not always optimal. 
 \paragraph{Our approach:}
-in this project we tried to apply two meta-heuristics named \textit{Ant Colony Optimization} and \textit{Genetic Algorithm}, implementing their "classical" version and a custom one integrating \textit{Reinforcement Learning Algorithm}, namely \textit{Q-learning}.
+in this project we tried to apply two meta-heuristics named \textit{Ant Colony Optimization} and \textit{Genetic Algorithm}, implementing their "classical" version and a custom one integrating \textit{Reinforcement Learning Algorithm}, namely \textit{Q-learning} and \textit{Clustering algorithm}, in particular \textit{K-Means} respectively for the first and the second one.
 
 \section{Theoretical context}
-\subsection{Genetic Algorithms:}
+\subsection{Genetic Algorithm:}
 In this work we focus on two different approaches to the TSP.
 The former is the \textbf{Genetic Algorithm}, which we initially implement in its classical version.
 This algorithm is based on a biological metaphor: the resolution of a problem is seen as a competition among a population whose evolving individuals become better and better candidates solutions over time. 
@@ -125,36 +125,44 @@ Then, in analogy with the biological metaphor (the gene transfer in sexual repro
 This process, according to the evolutionary theory (Darwinism), should lead after a certain number of iterations to a much more fit ensemble of individuals representing "good" candidate solutions to the considered problem.
 
 %At the beginning of a run of a genetic algorithm, a large population of random chromosomes is created. Each one, when decoded, will represent a different solution to the problem at hand. Some of the advantages of a GA (R. Haupt & S. E. Haupt 2004) include the following: • It optimizes with continuous or discrete variables;• Does not require derivative information;• Simultaneously searches through wide sampling of the cost surface;• Deals with a large number of variables and is well suited for parallel computers;• Optimizes variables with extremely complex cost surfaces (they can jump out of alocal minimum);• Provides a list of optimum variables, not just a single solution;• May encode the variables so that the optimization is done with the encodedvariables; and• Works with numerically generated data, experimental data, or analyticalfunctions.A typical genetic algorithm presents the following operators:• Crossover - this operator is used to vary the population of the chromosomes fromone generation to the next. It selects the two fittest chromosomes in the populationand produces a number of offspring. There are several crossover techniques; in thiswork, we will use the one-point crossover.• Selection - this operator replicates the most successful solutions found in apopulation at a rate proportional to their relative quality, which is determined bythe fitness function. In this paper we will use the roulette wheel selection techniquefor this operator.• Mutation - used to maintain genetic diversity from one generation of a populationof chromosomes to the next. It selects a position of an offspring chromosome withsmall probability and changes the value based on the problem model; for example,in this work, the mutation operator modifies the offspring chromosome simply bychanging the position of a gene.
-The pseudo code of the standard genetic algorithm is summarized in the Fig. 2, where Tc is
-the crossover rate or parameter that determines the rate at which the crossover operator is
-applied, Tm is the equivalent for the mutation rate, Tp is the population size (number of
-chromosomes) and MaxG the number of generations used in the experiment.
+The pseudo code of the standard genetic algorithm is summarized in the Tab.~\ref{Tab: GA pseudocode}, where Tm is the mutation rate that determines the rate at which the mutation operator is applied, Tp is the population size (number of
+chromosomes) and MaxG the number of generations used in the experiment\cite{venti}.
+
+As said evolutionary algorithms like \textit{Genetic algorithm} uses operators inspired by natural selection such as reproduction, mutation, recombination and selection.
+\textit{Genetic algorithm} is very customizable in every component; in this work we have focused our attention on the selection part.
+In particular we tried to apply the following selection strategies \cite{ventuno}:
+\begin{itemize}
+\item roulette-wheel selection;
+\item tournament selection.
+\end{itemize}
+The \textbf{roulette-wheel} selection consists in giving a weight to each chromosomes (the individuals in our population) and this weight corresponds to a portion of a roulette wheel.
+In this way chromosomes with higher fitness will have higher weight and a larger portion of the wheel.
+Spinning the wheel for different times allows selecting the individuals for the next generation.
+Finally, the roulette wheel is nothing more than a weighted sort mechanism.
 
 \begin{table}
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
 \unskip \textbf{Algorithm 1} Genetic Algorithm\\
-{\footnotesize 1:} \textbf{procedure} Genetic(Tc,Tm,Tp,MaxIt)\\[.25\normalbaselineskip]
+{\footnotesize 1:} \textbf{procedure} Genetic(Tm,Tp,MaxIt)\\[.25\normalbaselineskip]
 {\footnotesize 2:}\quad $Pop \leftarrow GeneratePopulation(Tp)$ \\
 {\footnotesize 3:}\quad $Pop \leftarrow Evaluation(Pop)$ \\
 {\footnotesize 4:}\quad \textbf{for} $i = 1\dots MaxIt$ \textbf{do} \\
 {\footnotesize 5:}\qquad $Pop \leftarrow Selection(Pop)$ \\
-{\footnotesize 6:}\qquad With probability $Tc$ do: \\
-{\footnotesize 7:}\qquad $Pop \leftarrow Crossover(Pop)$ \\
-{\footnotesize 8:}\qquad $Pop \leftarrow Selection(Pop)$ \\
-{\footnotesize 9:}\qquad With probability $Tm$ do: \\
-{\footnotesize 10:}\qquad $Pop \leftarrow Mutation(Pop)$ \\
-{\footnotesize 11:}\quad \textbf{end for} \\
-{\footnotesize 12:} \quad \textbf{return} the best solution in $Pop$ \\
-{\footnotesize 13:} \textbf{end procedure} \\
+{\footnotesize 6:}\qquad $Pop \leftarrow Crossover(Pop)$ \\
+{\footnotesize 7:}\qquad $Pop \leftarrow Selection(Pop)$ \\
+{\footnotesize 8:}\qquad With probability $Tm$ do: \\
+{\footnotesize 11:}\qquad $Pop \leftarrow Mutation(Pop)$ \\
+{\footnotesize 12:}\quad \textbf{end for} \\
+{\footnotesize 13:} \quad \textbf{return} the best solution in $Pop$ \\
+{\footnotesize 14:} \textbf{end procedure} \\
 \bottomrule
 \end{tabular}
-\caption{Genetic Algorithm pseudocode}
+\caption{\label{Tab: GA pseudocode}Genetic Algorithm pseudocode}
 \end{table}
 
-With the aim to explore a new variation of the standard algorithm, we try to integrate a \textbf{Q-Learning} Algorithm in the genetic procedure in order to provide a better guideline for the initialization of the population and the crossover operation.
-% insert Q-version
+With the aim to explore a new variation of the standard algorithm, we try to integrate a \textbf{Clustering algorithm} named \textit{K-Means} in order to reduce the problem dimension and improve the genetic procedure performance.
 
 \subsection{Ant Colony Optimization:}
 The latter kind of algorithm we implement is the \textbf{Ant Colony Optimization} (ACO) algorithm.
@@ -431,6 +439,11 @@ Sun,  R.,  Tatsimu,  S.,  Zhao,  G.,  Multiagent  Reinforcement  Learning  with 
 \bibitem{quindici}
  Monekosso,  N.,  and  Remagnino,  P.,  The  Analysis  and  Performance  Evaluation  of  the Pheromone-Q-learning Algorithm. In: Expert Systems, Vol.21, No.2, pp.80-91, May 2004. 
 
+%here starts genetic citations
+\bibitem{venti}
+Chagas De Lima Junior, Francisco \& Neto, Adriao Duarte \& Melo, J.D.. (2010). Hybrid Metaheuristics Using Reinforcement Learning Applied to Salesman Traveling Problem. 10.5772/13343.
 
+\bibitem{ventuno}
+Razali, Noraini Mohd and John Geraghty. “Genetic Algorithm Performance with Different Selection Strategies in Solving TSP.” (2011).
 \end{thebibliography}
 \end{document}
