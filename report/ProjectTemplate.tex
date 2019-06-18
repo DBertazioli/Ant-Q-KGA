@@ -41,7 +41,9 @@
 \usepackage{booktabs,array}
 \usepackage{tabto}
 \usepackage{systeme, mathtools}
+\usepackage[margin=3cm]{geometry}
 
+\renewcommand{\floatpagefraction}{.9}
 %\usepackage[autostyle]{csquotes}
 %\MakeOuterQuote{"}
 \begin{document}
@@ -206,6 +208,7 @@ The pseudocode of the ACO solution is presented in Tab.~\ref{tab:aco-pseudo}.
 
 \begin{table}
 \centering
+\scalebox{0.8}{
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
 \unskip \textbf{Algorithm 2} Ant Colony Optimization \\
@@ -218,12 +221,12 @@ The pseudocode of the ACO solution is presented in Tab.~\ref{tab:aco-pseudo}.
 {\footnotesize 4:} \qquad make a single ant path (see Make path)\\
 {\footnotesize 5:} \qquad compute the path length \\
 {\footnotesize 6:} \qquad update best\_dist and best\_path \\
-{\footnotesize 7:} \quad update the pheromon matrix \\
-\quad (local update only for child processes) \\
+{\footnotesize 7:} \quad update the pheromon matrix\\
+\quad ~~ (local update only for child processes, according to eq.~\ref{eq:aco-update}) \\
 {\footnotesize 8:} \quad every a certain n of iterations:\\
-\quad update the global pheromone matrix \\
-\quad (shared in MPI environment among master\&child.)\\
-{\footnotesize 9:} \textbf{return} best\_dist, best\_sol \\
+{\footnotesize 9:} \qquad update the global pheromone matrix\\
+\qquad ~~~(shared in MPI environment among master\&child.)\\
+{\footnotesize 10:} \textbf{return} best\_dist, best\_sol \vspace*{0.2cm}\\
 [.25\normalbaselineskip]
 \textbf{Make path}\\[.25\normalbaselineskip]
 {\footnotesize 1:} start from a vertex \\
@@ -232,17 +235,16 @@ The pseudocode of the ACO solution is presented in Tab.~\ref{tab:aco-pseudo}.
 {\footnotesize 3:} \textbf{for} each remaining vertex: \\
 {\footnotesize 4:} \quad list the neighbors \\
 {\footnotesize 5:} \quad list the not yet visited neighb \\
-{\footnotesize 6:} \quad calculate the probability of choosing a vertex \\
-\quad (according to eq.~\ref{eq:prob-aco})\\
+{\footnotesize 6:} \quad calculate the probability of choosing a vertex (according to eq.~\ref{eq:prob-aco})\\
 {\footnotesize 7:} \quad choose the vertex according to probability \\
 {\footnotesize 8:} \quad add the choosen vertex to the visited list \\
-{\footnotesize 9:} \quad return the chosen vertex id \\
+{\footnotesize 9:} \quad return the chosen vertex id \vspace*{0.2cm}\\
 [.25\normalbaselineskip]
 \textbf{Local update pheromon matrix}\\[.25\normalbaselineskip]
 {\footnotesize 1:} \textbf{for} ant \textbf{in} ant\_colony : \\
 {\footnotesize 2:} \quad \textbf{for} each vertex of one\_ant\_path : \\
-{\footnotesize 3:} \qquad increase pheromon\_matrix between current \\
-\qquad ~~and next vertex of a $\Delta \tau$ (according to eq.~\ref{eq:aco-update})\\
+{\footnotesize 3:} \qquad increase pheromon\_matrix between current and next vertex of $\Delta \tau$\\
+\qquad ~~~(according to eq.~\ref{eq:aco-update}) \vspace*{0.2cm}\\
 [.25\normalbaselineskip]
 \textbf{Global update pheromon matrix (parallelism)}\\[.25\normalbaselineskip]
 {\footnotesize 1:} gather from MPI env all the pheromone matrices\\
@@ -252,6 +254,7 @@ The pseudocode of the ACO solution is presented in Tab.~\ref{tab:aco-pseudo}.
 \quad processes \\
 \bottomrule
 \end{tabular}
+}
 \caption{\label{tab:aco-pseudo}Ant Colony pseudocode}
 \end{table}
  
@@ -294,7 +297,7 @@ however, the policy estimation can be in general a complex problem, and an optim
 \paragraph{Q-Learning}: 
 is  an  off-policy  method, meaning  that  it updates the values  iteratively basing this process on  the  action that  gives  the  maximum  value  (that is, such an algorithm tries to directly  learn $Q^*$  instead  of  learning $Q_\pi$ first). In figure~\ref{fig:q_pseudo} it is shown the pseudocode of the algorithm:  the  agent  uses  a  so called $\epsilon$-greedy  policy,  but  updating the  current  value  estimate  considering the  action  that  provides  the  maximum  value  at  the successor state instead of considering the (current-)policy-suggested action. 
 \begin{figure}
-\includegraphics[scale=0.6]{figs/q_pseudo.png}
+\centering \includegraphics[scale=0.6]{figs/q_pseudo.png}
 \caption{\label{fig:q_pseudo} The pseudo code of a typical Q-learning algorithm implementation.}
 \end{figure}
 
@@ -345,6 +348,7 @@ The pseudocode regarding our implementation of such an hybrid metaheuristic is r
 
 \begin{table}
 \centering
+\scalebox{0.75}{
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
 \unskip \textbf{Algorithm 2} Ant-Q algorithm\\
@@ -395,6 +399,7 @@ The pseudocode regarding our implementation of such an hybrid metaheuristic is r
 \quad processes \\
 \bottomrule
 \end{tabular}
+}
 \caption{\label{tab:antq-pseudo}Ant-Q pseudocode}
 \end{table}
 
