@@ -233,7 +233,7 @@ d_{ij} + d_{i'j'} - d_{ii'} - d_{jj'}\\d_{ij'} + d_{i'j} - d_{ii'} - d_{jj'}
 \end{equation}
 where $i' \in \{i-1; i+1\}, j' \in \{j-1;j+1\}$.
 Following this strategy, the first two clusters are combined into one, then the new generated cluster combines with the third cluster, and so on, step by step. At last, all those clusters are joined into one tour, and the shortest whole traveling tour is derived.
-The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{ventitre},\cite{ventiquattro}.
+The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{ventitre,ventiquattro}.
 \begin{table}
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
@@ -478,7 +478,7 @@ The pseudocode regarding our implementation of such an hybrid metaheuristic is r
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
-\unskip \textbf{Algorithm 2} Ant-Q algorithm\\
+\unskip \textbf{Algorithm 3} Ant-Q algorithm\\
 [.25\normalbaselineskip]
 \textbf{Main Algorithm}\\[.25\normalbaselineskip]
 {\footnotesize 0:} initialize best\_dist and best\_path to None\\
