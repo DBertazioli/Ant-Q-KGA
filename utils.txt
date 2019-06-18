@@ -21,6 +21,8 @@
 	- https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1468-0394.2004.00265.x #phe-Q learning #could be the same as the previous, check it out 
 	- https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=973515 #another multi-agent like phe-Q alg
 	
+## K-means ref:
+	- https://onlinelibrary.wiley.com/doi/full/10.1348/000711005X48266
 
 ## GA ref:
 	- https://gist.github.com/turbofart/3428880
