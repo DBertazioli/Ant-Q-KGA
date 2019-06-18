@@ -41,6 +41,8 @@
 \usepackage{booktabs,array}
 \usepackage{tabto}
 
+%\usepackage[autostyle]{csquotes}
+%\MakeOuterQuote{"}
 \begin{document}
 
 \begin{titlepage}
@@ -122,7 +124,7 @@ This algorithm is based on a biological metaphor: the resolution of a problem is
 A “fitness” function is used to evaluate each individual to decide whether it will contribute to the next
 generation. 
 Then, in analogy with the biological metaphor (the gene transfer in sexual reproduction), a crossover operator is applied in order to generate the next generation of the population.
-This process, according to the evolutionary theory (Darwinism), should lead after a certain number of iterations to a much more fit ensemble of individuals representing "good" candidate solutions to the considered problem.
+This process, according to the evolutionary theory (Darwinism), should lead after a certain number of iterations to a much more fit ensemble of individuals representing ``good" candidate solutions to the considered problem.
 
 %At the beginning of a run of a genetic algorithm, a large population of random chromosomes is created. Each one, when decoded, will represent a different solution to the problem at hand. Some of the advantages of a GA (R. Haupt & S. E. Haupt 2004) include the following: • It optimizes with continuous or discrete variables;• Does not require derivative information;• Simultaneously searches through wide sampling of the cost surface;• Deals with a large number of variables and is well suited for parallel computers;• Optimizes variables with extremely complex cost surfaces (they can jump out of alocal minimum);• Provides a list of optimum variables, not just a single solution;• May encode the variables so that the optimization is done with the encodedvariables; and• Works with numerically generated data, experimental data, or analyticalfunctions.A typical genetic algorithm presents the following operators:• Crossover - this operator is used to vary the population of the chromosomes fromone generation to the next. It selects the two fittest chromosomes in the populationand produces a number of offspring. There are several crossover techniques; in thiswork, we will use the one-point crossover.• Selection - this operator replicates the most successful solutions found in apopulation at a rate proportional to their relative quality, which is determined bythe fitness function. In this paper we will use the roulette wheel selection techniquefor this operator.• Mutation - used to maintain genetic diversity from one generation of a populationof chromosomes to the next. It selects a position of an offspring chromosome withsmall probability and changes the value based on the problem model; for example,in this work, the mutation operator modifies the offspring chromosome simply bychanging the position of a gene.
 The pseudo code of the standard genetic algorithm is summarized in the Tab.~\ref{Tab: GA pseudocode}, where Tm is the mutation rate that determines the rate at which the mutation operator is applied, Tp is the population size (number of
@@ -139,6 +141,7 @@ The \textbf{roulette-wheel} selection consists in giving a weight to each chromo
 In this way chromosomes with higher fitness will have higher weight and a larger portion of the wheel.
 Spinning the wheel for different times allows selecting the individuals for the next generation.
 Finally, the roulette wheel is nothing more than a weighted sort mechanism.
+The \textbf{tournament} selection, instead, consists in randomly selecting a group of individuals from the larger population and taking only the one with the highest fitness
 
 \begin{table}
 \centering
@@ -167,7 +170,7 @@ With the aim to explore a new variation of the standard algorithm, we try to int
 \subsection{Ant Colony Optimization:}
 The latter kind of algorithm we implement is the \textbf{Ant Colony Optimization} (ACO) algorithm.
 
-The procedure draws inspiration from a "real"  Ant  Colony. 
+The procedure draws inspiration from a ``real"  Ant  Colony. 
 In nature, such a system is  known  to  accomplish  some  difficult  tasks,  being beyond  the capabilities  of  a  single  ant,  exploiting the individuals collaborating  with  each  other.  
 
 In particular, ACO algorithm  is based on  foraging  behaviour  of  some  ant species.  
@@ -190,7 +193,7 @@ Thus, the  more ants  follow  a  specific  path,  the  more  likely  that  path 
 ACO  algorithm  makes use  of ant-like  agents  called artificial ants, that construct their   solutions   collaboratively   by   sharing   their experience on the quality of solutions that were generated so far.
 The pheromone trails play  a  leading  role  in  the  utilization  of collective experience.
 The solutions are built iteratively.
-Artificial  ants  have  "memory"  to  store  the  path  they  followed  while  constructing  their solutions.  Exploiting such a memory,  typically (even though depending on the speficic class of ant colony algorithm) artificial  ants  do not deposit  the pheromone until they have constructed their solution. Then, They determine the amount of pheromone according  to  the  quality  of  their  solution  and upload the pheromone matrix (the data structure in which the pheromone amount for each part of the total path is stored). 
+Artificial  ants  have  ``memory"  to  store  the  path  they  followed  while  constructing  their solutions.  Exploiting such a memory,  typically (even though depending on the speficic class of ant colony algorithm) artificial  ants  do not deposit  the pheromone until they have constructed their solution. Then, They determine the amount of pheromone according  to  the  quality  of  their  solution  and upload the pheromone matrix (the data structure in which the pheromone amount for each part of the total path is stored). 
 Automatically, the  paths  belonging  to  better  solutions,  receive  more pheromone.
 
 In iteratively building a solution (a total path) for a single ant, a  local  stochastic  transition  policy  is typically applied, stating how to decide the next node to visit in a graph. Artificial  ants  make  their  decisions  and  transitions  to  their  next  state  in  discrete  time steps, deciding whether to follow the main trails, or to random explore a new path (in our implementation, such a decision is made by a random number generation and imposing a threshold).
@@ -213,7 +216,7 @@ where
 \item $\eta_{ij}$ indicates an heuristic value specified according to the problem (in the TSP case, is equal to $1/d_{ij}$,
 \item  $\tau_{ij}$ is the pheromone quantity on the path between the $i$-th and $j$-th nodes,
 \item $\alpha$ and $\beta$ are the parameters used to set the relative importance of the pheromone trail and the heuristic  value.
-As $\alpha \rightarrow 0$,  the pheromone  track become  less  important  and  the  ants tend  to choose the closest cities, resulting in a much more "greedy" search. 
+As $\alpha \rightarrow 0$,  the pheromone  track become  less  important  and  the  ants tend  to choose the closest cities, resulting in a much more ``greedy" search. 
 Viceversa, when $\beta \rightarrow 0$, heuristic values are almost ignored and only the tracks are considered in the decision making.  
 \end{itemize}
 \item UpdatePheromones:  the   pheromone   trails   are   adjusted   based   on   the   latest iteration of  the  colony search process.  
@@ -321,7 +324,7 @@ The RL problem consists in the agent trying to find the optimal policy $\pi^*$ t
 \begin{equation}
 V^*(s)= max_{a \in A(s)}(Q^{\pi^*}(s,a)
 \end{equation} 
-however, the policy estimation can be in general a complex problem, and an optimal policy can be obtained with various algorithms, such as Policy Iteration and Value Iteration. There are also kind of learning mechanism defined as "off-policy", because they do not exploit a proper policy procedure.
+however, the policy estimation can be in general a complex problem, and an optimal policy can be obtained with various algorithms, such as Policy Iteration and Value Iteration. There are also kind of learning mechanism defined as ``off-policy", because they do not exploit a proper policy procedure.
 
 \paragraph{Q-Learning}: 
 is  an  off-policy  method, meaning  that  it updates the values  iteratively basing this process on  the  action that  gives  the  maximum  value  (that is, such an algorithm tries to directly  learn $Q^*$  instead  of  learning $Q_\pi$ first). In figure~\ref{fig:q_pseudo} it is shown the pseudocode of the algorithm:  the  agent  uses  a  so called $\epsilon$-greedy  policy,  but  updating the  current  value  estimate  considering the  action  that  provides  the  maximum  value  at  the successor state instead of considering the (current-)policy-suggested action. 
@@ -331,7 +334,7 @@ is  an  off-policy  method, meaning  that  it updates the values  iteratively ba
 \end{figure}
 
 \paragraph{Ant-Q Algorithm}:
-one of the core points of this project consists in the implementation of the Ant-Q algorithm, introduced by Gambarella \cite{undici} in collaboration with Dorigo, attempting to ameliorate the "classic" ACO performances.  
+one of the core points of this project consists in the implementation of the Ant-Q algorithm, introduced by Gambarella \cite{undici} in collaboration with Dorigo, attempting to ameliorate the ``classic" ACO performances.  
 
 In this approach, the pheromone update rule  is borrowed from the Q-learning prassi:
 \begin{equation}
@@ -355,7 +358,7 @@ Comparing equation~\ref{eq:antq-eq} to to the Q-learning update rule \ref{eq:q-e
 \label{eq:localupd}
 \end{equation}
 is used for the pheromon matrix update (namely a local update) during each path construction (of each ant), and it does not include the delayed reward $\Delta \tau_{ij}$,
-\item $\Delta \tau_{ij}$ is calculated according to the solution quality, as anticipated circa equation \ref{eq:delta-tau}, and assigned in a "delayed" mode: thus the value of $\Delta \tau_{ij}$  for all $i$ and $j$ will be $0$ while the ants  apply  the  update  rule \ref{eq:localupd}  during  their  construction  of the  current solution. 
+\item $\Delta \tau_{ij}$ is calculated according to the solution quality, as anticipated circa equation \ref{eq:delta-tau}, and assigned in a ``delayed" mode: thus the value of $\Delta \tau_{ij}$  for all $i$ and $j$ will be $0$ while the ants  apply  the  update  rule \ref{eq:localupd}  during  their  construction  of the  current solution. 
 Therefore, the update rule \ref{eq:antq-eq}	 is reapplied at the completion of the current solution, but with the value of the next transition considered to be equal to zero. (thus uploading only with $\Delta \tau_{ij}$.
 
 \item still according to \cite{undici} \cite{diciotto} $\Delta \tau_{ij}$ can be updated with an iteration  best  rule (update every single colony iteration) or  global  best (update based on the global best value.
@@ -366,7 +369,7 @@ Notice that many other attempts were made in the direction of hybridizing ACO an
 \section{Datasets}
 The datasets used in this work are taken from  \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/tsp/}, a large source of TSP datasets largely cited in literature. 
 There are datasets of variable dimension and for everyone is also available the optimal solution so that is possible for us to compare our results with the optimal one. 
-Every solution is available at \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}. Every dataset is composed by a list of \textit{"cities"} with two coordinates points; the only preprocessing we applied was to compute a matrix containing the distance between every point and the other ones.
+Every solution is available at \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}. Every dataset is composed by a list of ``\textit{cities}" with two coordinates points; the only preprocessing we applied was to compute a matrix containing the distance between every point and the other ones.
 \section{The Methodological Approach}
 %This is the central and most important section of the report. Its objective must be to show, with linearity and clarity, the steps that have led to the definition of a decision model. The description of the working hypotheses, confirmed or denied, can be found in this section together with the description of the subsequent refining processes of the models. Comparisons between different models (e.g. heuristics vs. optimal models) in terms of quality of solutions, their explainability and execution times are welcome. 
 %Do not attempt to describe all the code in the system, and do not include large pieces of code in this section, use pseudo-code where necessary. Complete source code should be provided separately (in Appendixes, as separated material or as a link to an on-line repo). Instead pick out and describe just the pieces of code which, for example:
