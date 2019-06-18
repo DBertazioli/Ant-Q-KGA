@@ -141,7 +141,9 @@ The \textbf{roulette-wheel} selection consists in giving a weight to each chromo
 In this way chromosomes with higher fitness will have higher weight and a larger portion of the wheel.
 Spinning the wheel for different times allows selecting the individuals for the next generation.
 Finally, the roulette wheel is nothing more than a weighted sort mechanism.
-The \textbf{tournament} selection, instead, consists in randomly selecting a group of individuals from the larger population and taking only the one with the highest fitness
+The \textbf{tournament} selection, instead, consists in randomly selecting a group of individuals from the larger population and taking only the one with the highest fitness. 
+The number of individuals competing in each tournament is commonly set to 2 but in this work we implemented a a variable dimension of the tournament for each iteration.
+
 
 \begin{table}
 \centering
