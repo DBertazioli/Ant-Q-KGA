@@ -558,30 +558,36 @@ Regarding the Ant-Family blabla
 %Our implementation of the genetic blabla
 % maybe better in methodological approach
 As said evolutionary algorithms like \textit{Genetic algorithm} uses operators inspired by natural selection such as reproduction, mutation, recombination and selection.
-\textit{Genetic algorithm} is very customizable in every component; in this work we have focused our attention on the selection part.
-In particular we tried to apply the following selection strategies \cite{ventuno}:
+\textit{Genetic algorithm} is very customizable in every component; in this work we focus our attention on the selection part.
+In particular we try to apply the following selection strategies \cite{ventuno}:
 \begin{itemize}
 \item roulette-wheel selection;
 \item tournament selection.
 \end{itemize}
 The \textbf{roulette-wheel} selection consists in giving a weight to each chromosomes (the individuals in our population) and this weight corresponds to a portion of a roulette wheel.
-In this way chromosomes with higher fitness will have higher weight and a larger portion of the wheel.
+In this way chromosomes with higher fitness will have higher weight and a larger portion of the wheel
 \begin{equation}
 p_i = \frac{f_i}{\sum_{j = 1}^n f_j}
 \end{equation}
+with $f_i$ as the fitness value for the $i$th individual.
+
 Spinning the wheel for different times allows selecting the individuals for the next generation.
 Finally, the roulette wheel is nothing more than a weighted sort mechanism.
 
 The \textbf{tournament} selection, instead, consists in randomly selecting a group of individuals from the larger population and taking only the one with the highest fitness. 
-The number of individuals competing in each tournament is commonly set to 2 but in this work we implemented a variable tournament dimension for each iteration.
+The number of individuals competing in each tournament is commonly set to 2 but in this work we decide to improve a variable tournament dimension for each iteration.
 
-The other elements, however, have been kept standard.
+The other elements, however, are standard.
+
 Among these we remember:
 \begin{itemize}
-\item \textbf{crossover:} we applied the simplest crossover strategy called \textit{single-point};
-\item \textbf{mutation:} we applied the simplest mutation version called \textit{point mutation}, with a mutation probability described by a \textbf{mutation rate}.
+\item \textbf{crossover:} we apply the simplest crossover strategy called \textit{single-point};
+\item \textbf{mutation:} we apply the simplest mutation version called \textit{point mutation}, with a mutation probability described by a \textbf{mutation rate}.
 \end{itemize}
+The \textit{single-point} crossover is one of the simple crossover technique used for random GA applications. This crossover uses the single point fragmentation of the parents and then combines the parents at the crossover point to create the offspring or child \cite{venticinque}.
 
+The point mutation consist in change each individual gene value according to a certain probability. The method is easy for operating, but it cannot effective control to mutation
+result \cite{ventisei}.
 
 \section{Results and Evaluation}
 The Results section is dedicated to presenting the actual results (i.e. measured and calculated quantities), not to discussing their meaning or interpretation. The results should be summarized using appropriate Tables and Figures (graphs or schematics). Every Figure and Table should have a legend that describes concisely what is contained or shown. Figure legends go below the figure, table legends above the table. Throughout the report, but especially in this section, pay attention to reporting numbers with an appropriate number of significant figures. 
@@ -642,7 +648,7 @@ Sun,  R.,  Tatsimu,  S.,  Zhao,  G.,  Multiagent  Reinforcement  Learning  with 
 
 \bibitem{quindici}
  Monekosso,  N.,  and  Remagnino,  P.,  The  Analysis  and  Performance  Evaluation  of  the Pheromone-Q-learning Algorithm. In: Expert Systems, Vol.21, No.2, pp.80-91, May 2004. 
-
+%%%%%%% theoretical part
 %here starts genetic citations
 \bibitem{venti}
 Chagas De Lima Junior, Francisco \& Neto, Adriao Duarte \& Melo, J.D.. (2010). Hybrid Metaheuristics Using Reinforcement Learning Applied to Salesman Traveling Problem. 10.5772/13343.
@@ -660,5 +666,11 @@ L. Tan, Y. Tan, G. Yun and Y. Wu, "Genetic algorithms based on clustering for tr
 
 \bibitem{ventiquattro}
 Krishna, K and Murty, Narasimha M (1999) Genetic K-Means Algorithm. In: IEEE Transactions on Systems Man And Cybernetics-Part B: Cybernetics, 29 (3). pp. 433-439.
+
+%%%%%%%%% methodological approach
+\bibitem{venticinque}
+A.J. Umbarkar and P.D. Sheth, CROSSOVER OPERATORS IN GENETIC ALGORITHMS: A REVIEW. In: ICTACT JOURNAL ON SOFT COMPUTING, OCTOBER 2015, VOLUME: 06.
+\bibitem{ventisei}
+Suvarna Patil, Manisha Bhende, Comparison and Analysis of Different Mutation Strategies to improve the Performance of Genetic Algorithm. In:  International Journal of Computer Science and Information Technologies, Vol. 5 (3) , 2014, 4669-4673.
 \end{thebibliography}
 \end{document}
