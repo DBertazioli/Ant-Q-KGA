@@ -477,28 +477,28 @@ This choice is explained due to the fact that in our implementation on each core
 %Our implementation of the genetic blabla
 % maybe better in methodological approach
 With reference to sec.~\ref{sec:gen_alg}, the pseudo code of the standard genetic algorithm is summarized in the Tab.~\ref{Tab: GA pseudocode}, where Tm is the mutation rate that determines the rate at which the mutation operator is applied, Tp is the population size (number of
-chromosomes) and MaxG the number of generations used in the experiment\cite{venti}.
+chromosomes) and MaxG the number of generations used in the experiment\cite{venti}. The values for this parameters used in this implementation are discussed in sec.~\ref{sec:results_and_evaluation}.
 \begin{table}
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
 \unskip \textbf{Algorithm} Genetic Algorithm\\
-{\footnotesize 1:} \textbf{procedure} Genetic(Tm,Tp,MaxIt)\\[.25\normalbaselineskip]
+{\footnotesize 1:} \textbf{procedure} Genetic(Tm,Tp,elite\_n,Selection,MaxIt)\\[.25\normalbaselineskip]
 {\footnotesize 2:}\quad $Pop \leftarrow GeneratePopulation(Tp)$ \\
 {\footnotesize 3:}\quad $Pop \leftarrow Evaluation(Pop)$ \\
 {\footnotesize 4:}\quad \textbf{for} $i = 1\dots MaxIt$ \textbf{do} \\
-{\footnotesize 5:}\qquad $Pop \leftarrow Selection(Pop)$ \\
+{\footnotesize 5:}\qquad $Pop \leftarrow Selection(elite\_n~from~Pop)$ \\
 {\footnotesize 6:}\qquad $Pop \leftarrow Crossover(Pop)$ \\
-{\footnotesize 7:}\qquad $Pop \leftarrow Selection(Pop)$ \\
-{\footnotesize 8:}\qquad With probability $Tm$ do: \\
-{\footnotesize 11:}\qquad $Pop \leftarrow Mutation(Pop)$ \\
-{\footnotesize 12:}\quad \textbf{end for} \\
-{\footnotesize 13:} \quad \textbf{return} the best solution in $Pop$ \\
-{\footnotesize 14:} \textbf{end procedure} \\
+{\footnotesize 7:}\qquad With probability $Tm$ do: \\
+{\footnotesize 8:}\qquad $Pop \leftarrow Mutation(Pop)$ \\
+{\footnotesize 9:}\quad \textbf{end for} \\
+{\footnotesize 10:} \quad \textbf{return} the best solution in $Pop$ \\
+{\footnotesize 11:} \textbf{end procedure} \\
 \bottomrule
 \end{tabular}
 \caption{\label{Tab: GA pseudocode}Genetic Algorithm pseudocode}
 \end{table}
+%FIXME: add elitism and selection to spiegazione
 Finally, with the aim to explore a new variation of the standard algorithm, we try to integrate a \textit{Clustering algorithm} named \textit{K-Means} in order to reduce the problem dimension and improve the genetic procedure performance.
 
 As said evolutionary algorithms like \textit{Genetic algorithm} uses operators inspired by natural selection such as reproduction, mutation, recombination and selection.
@@ -580,10 +580,10 @@ d_{ij} + d_{i'j'} - d_{ii'} - d_{jj'}\\d_{ij'} + d_{i'j} - d_{ii'} - d_{jj'}
 where $i' \in \{i-1; i+1\}, j' \in \{j-1;j+1\}$.
 Following this strategy, the first two clusters are combined into one, then the new generated cluster combines with the third cluster, and so on, step by step. At last, all those clusters are joined into one tour, and the shortest whole travelling tour is derived as shown in Fig.~\ref{fig:gconnect}.
 The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{ventitre},\cite{ventiquattro}.
-
+%FIXME ordinare citazioni GA KGA
 \begin{figure}
 \centering \includegraphics[scale=0.9]{figs/inter_group_connection.png}
-\caption{\label{fig:gconnect} The inter-group connection procedure illustrated.}
+\caption{\label{fig:gconnect} The inter-group connection procedure illustrated. Taken from \cite{ventitre}.}
 \end{figure}
 
 \begin{table}
@@ -609,7 +609,7 @@ The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{v
 \end{table}
 
 
-\section{Results and Evaluation}
+\section{Results and Evaluation} \label{sec:results_and_evaluation}
 %The Results section is dedicated to presenting the actual results (i.e. measured and calculated quantities), not to discussing their meaning or interpretation. The results should be summarized using appropriate Tables and Figures (graphs or schematics). Every Figure and Table should have a legend that describes concisely what is contained or shown. Figure legends go below the figure, table legends above the table. Throughout the report, but especially in this section, pay attention to reporting numbers with an appropriate number of significant figures. 
 Each algorithm is tested on every dataset listed in Sec.~(\ref{sec:data}).
 For every algorithm each run consists of five iterated executions, in order to compute the mean and standard deviation of the resulting optimal values. 
@@ -659,7 +659,18 @@ pr1002 (10 it)     & 259054 &          &        &          &             &      
 \caption{\label{tab:antq_results} The resulting Ant-Q performances on the test datasets.}
 \end{table}
 
-Tab.~\ref{tab:ga_results} presents the results of such a testing procedure for the Ga algorithm, whereas Tab.~\ref{tab:kga_results} provides the same information for the KGA approach.
+As regards the secondary part of this work, including GA and KGA, the following implementation details are provided:
+\begin{itemize}
+\item Keeping in mind Tab.~\ref{Tab: GA pseudocode}, mutation rate ($Tm$), is typically set to $Tm = 0.01$. This choice is explained with the aim of limiting an excessive randomization while still maintaining a good trade-off between the exploitation and exploration behaviour.
+\item Population size ($Tp$) is set to $Tp = 300$ for every dataset with classic GA with the exception of \textit{pr1002}, where the dataset dimension would have not allowed such a setting considering the computational limits. In this particular case we take $Tp = 100$. For each dataset used with KGA $Tp = 100$ considering the reduced dimensionality of the sub-problems which such an algorithm is applied to.
+\item The action of elitism mechanism is controlled by a parameter, $elite\_n$,  corresponding to the number of individuals selected due to elitism, taken equal to $10\%$ of $Tp$.
+\item Number of generations ($MaxIt$) is set to $MaxIt = 1000$ in classic GA except for \textit{pr1002} where $MaxIt = 5000$ attempting to achieve a decent performance on such a large dataset. Instead, in KGA a larger value of $MaxIt = 5000$ is used for each dataset still considering the dimensional reduction associated with the clustering.
+\item Number of clusters
+%FIXME: aggiungere n_cluster, elitismo in pseudocode
+%FIXME: check with max 
+\end{itemize}
+
+Tab.~\ref{tab:ga_results} presents the results of such a testing procedure for the GA algorithm, whereas Tab.~\ref{tab:kga_results} provides the same information for the KGA approach.
 
 
 \begin{table}[H]
@@ -698,7 +709,6 @@ pr1002 & 259045 & 379495.87 & 6343.57 & 373865.26 & 46.50 & 44.32 & 4456.37 \\
 }
 \caption{\label{tab:kga_results}The resulting Ant-Q performances on the test datasets.}
 \end{table}
-
 
 \section{Discussion}
 %The discussion section aims at interpreting the results in light of the project's objectives. The most important goal of this section is to interpret the results so that the reader is informed of the insight or answers that the results provide. This section should also present an evaluation of the particular approach taken by the group. For example: Based on the results, how could the experimental procedure be improved? What additional, future work may be warranted? What recommendations can be drawn?
