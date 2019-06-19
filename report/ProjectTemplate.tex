@@ -45,7 +45,7 @@
 %----------------------------------------------------------------------------------------
 \HRule \\[0.4cm]
 %\maketitle
-{ \huge \bfseries An Hybrid Metaheuristic Approach to the Traveling Salesman Problem }\\[0.4cm] % Title of your document
+{ \huge \bfseries An Hybrid Metaheuristic Approach to the Travelling Salesman Problem }\\[0.4cm] % Title of your document
 \HRule \\[1.5cm]
  
 %----------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ The ABSTRACT is not a part of the body of the report itself. Rather, the abstrac
 %The introduction should provide a clear statement of the problem posed by the project, and why the problem is of interest. It should reflect the scenario, if available. If needed, the introduction also needs to present background information so that the reader can understand the significance of the problem. A brief summary of the hypotheses and the approach your group used to solve the problem should be given, possibly also including a concise introduction to theory or concepts used later to analyze and to discuss the results.
 \paragraph{The problem:}
 the travelling salesman problem (TSP) is an algorithmic problem tasked with finding the shortest route between a set of points and locations that must be visited. 
-In the problem statement, the points are the cities a salesperson might visit. The salesman‘s goal is to keep the distance travelled as low as possible. 
+In the problem statement, the points are the cities a salesperson might visit. The salesman's goal is to keep the distance travelled as low as possible. 
 TSP has been studied for decades and several solutions have been theorized. 
 The simplest solution is to try all possibilities, but this is also the most time consuming and expensive method. 
 Many solutions use heuristics, which provides probability outcomes. 
@@ -117,9 +117,9 @@ The first ACO algorithm, Ant System, was proposed by Dorigo \cite{cinque, sei, s
 It consists in a \textbf{multi-agent} approach that can produce good-quality solutions in a reasonable time for combinatorial optimisation problems \cite{cinque}. 
 The author demonstrate the performance of this algorithm on Travelling Salesman  Problem  (TSP) \cite{sei}. 
 
-Regarding the basic mechanism of ACO, here follows a quick biological explaination.
-Ant species are almost blind, thus they interact with the environment and communicate with each  other  expliting the hormones  they  release.  
-In partiuclar some  ant  species use a special kind of hormone called \textbf{pheromone}: they lay pheromone trails on the paths they explore, these traces act as stimuli and other ants belonging to the colony are attracted to follow  the  paths  that  have  relatively  more  tracked.  
+Regarding the basic mechanism of ACO, here follows a quick biological explanation.
+Ant species are almost blind, thus they interact with the environment and communicate with each  other  exploiting the hormones  they  release.  
+In particular some  ant  species use a special kind of hormone called \textbf{pheromone}: they lay pheromone trails on the paths they explore, these traces act as stimuli and other ants belonging to the colony are attracted to follow  the  paths  that  have  relatively  more  tracked.  
 Due to this mechanism, an individual who is following a  path  because of the  pheromone  trail  also reinforces  it  by  dropping its  own pheromone  too.  
 
 Thus, the  more ants  follow  a  specific  path,  the  more  likely  that  path  becomes  to  be  followed  by  the  ants  in the colony \cite{ cinque,otto, nove}.  
@@ -179,7 +179,7 @@ is  an  off-policy  method, meaning  that  it updates the values  iteratively ba
 \paragraph{Ant-Q Algorithm}:
 one of the core points of this project consists in the implementation of the Ant-Q algorithm, introduced by Gambardella \cite{undici} in collaboration with Dorigo, attempting to ameliorate the ``classic" ACO performances.  
 
-In this approach, the pheromone update rule  is borrowed from the Q-learning prassi:
+In this approach, the pheromone update rule  is borrowed from the Q-learning praxis:
 \begin{equation}
 Q(s,a) \leftarrow (1-\alpha) Q(s,a) + \alpha (r + \gamma [max_{a^{'}} Q(s^{'},a^{'})-Q(s,a)]~.
 \label{eq:q-eq}
@@ -191,7 +191,7 @@ Thus, the Ant-Q algorithm is a crossover between a ``simple" Ant Colony algorith
 \subsubsection{Genetic Algorithm} \label{sec:gen_alg}
 The latter approach we faced along this work is the \textbf{Genetic Algorithm} (GA), which we initially implement in its classical version.
 This algorithm is based on a biological metaphor: the resolution of a problem is seen as a competition among a population whose evolving individuals become better and better candidates solutions over time. 
-A “fitness” function is used to evaluate each individual to decide whether it will contribute to the next
+A ``fitness" function is used to evaluate each individual to decide whether it will contribute to the next
 generation. 
 Then, in analogy with the biological metaphor (the gene transfer in sexual reproduction), a crossover operator is applied in order to generate the next generation of the population.
 This process, according to the evolutionary theory (Darwinism), should lead after a certain number of iterations to a much more fit ensemble of individuals representing ``good" candidate solutions to the considered problem.
@@ -202,14 +202,14 @@ This process, according to the evolutionary theory (Darwinism), should lead afte
 With the aim to improve classic GA performance on big dataset, 
 different hybridization techniques have been created.
 One of these consist in splitting the main problem in multiple sub-problems, with reduced dimension, in order to reach an easier problem form.
-K-Means GA metaheuristic (KGA) shortly consists in cluster the data using a simple clustering method, the K-Means method, apply the GA algorithm on every data cluster, with dimension smaller than the original total data dimension and finally rebuild the final solution starting from the smaller multiple solutions.
+K-Means GA meta-heuristic (KGA) shortly consists in cluster the data using a simple clustering method, the K-Means method, apply the GA algorithm on every data cluster, with dimension smaller than the original total data dimension and finally rebuild the final solution starting from the smaller multiple solutions.
 The K-Means method is shortly described below.
 
 \paragraph{Clustering with K-Means:} At first, specifically for the TSP problem, we need to cluster our cities into close groups with a clustering method.
 
 The \textit{K-Means} method is designed to partition a set of data into \textit{K} classes with \textit{K} chosen as desired.
 This method constructs partitions of the data-matrix so that the squared Euclidean distance between the row vector for any object and the centroid vector of its respective cluster is at least as small as the distances to the centroids of the remaining clusters.
-The centroid of cluster $C_k$ is a point in $P$-dimensional space found by averaging the values on each variable over the objects within the cluster. For instance, the centroid value for $j$th variable in cluster $C_k$ is
+The centroid of cluster $C_k$ is a point in $P$-dimensional space found by averaging the values on each variable over the objects within the cluster. For instance, the centroid value for $j$-th variable in cluster $C_k$ is
 \begin{equation}
 \bar{x}_{j}^{(k)} = \frac{1}{n_k} \sum_{i \in C_k} x_{ij}~,
 \end{equation}
@@ -230,7 +230,7 @@ In particular we use 5 datasets of different dimension:
 \item d198
 \item pr1002
 \end{itemize}
-We have choosen these datasets because they are very used and largely cited in literature allowing us to compare our results with others.
+We have chosen these datasets because they are very used and largely cited in literature allowing us to compare our results with others.
 \section{The Methodological Approach}
 %This is the central and most important section of the report. Its objective must be to show, with linearity and clarity, the steps that have led to the definition of a decision model. The description of the working hypotheses, confirmed or denied, can be found in this section together with the description of the subsequent refining processes of the models. Comparisons between different models (e.g. heuristics vs. optimal models) in terms of quality of solutions, their explainability and execution times are welcome. 
 %Do not attempt to describe all the code in the system, and do not include large pieces of code in this section, use pseudo-code where necessary. Complete source code should be provided separately (in Appendixes, as separated material or as a link to an on-line repo). Instead pick out and describe just the pieces of code which, for example:
@@ -244,8 +244,8 @@ We have choosen these datasets because they are very used and largely cited in l
 %system and how and to what extent you overcame them. Common problems are:
  %difficulties involving existing software.
 \subsection{ACO}
-As introduced in Sec.~(\ref{sec:aco}), Ant Colony Optimisation is a metaheuristic proposed to solve hard optimisation problems. 
-The ACO metaheuristic, from a high-level point of view, is composed of two main stages:
+As introduced in Sec.~(\ref{sec:aco}), Ant Colony Optimisation is a meta-heuristic proposed to solve hard optimisation problems. 
+The ACO meta-heuristic, from a high-level point of view, is composed of two main stages:
 \begin{itemize}
 \item Constructing the single ant solution:
 the  artificial  ants  construct  their  solutions.  The transition policy controls  the  ants’  next step to one of the adjacent nodes. Once the ants have completed  their  path,  the quality  of  the current solution is evaluated,  and used in the next step. 
@@ -266,7 +266,7 @@ In our implementation, we attempted to change the values of those parameters in 
 We experienced that:
 \begin{itemize}
 \item as $\alpha \rightarrow 0$,  the pheromone  track become  less  important  and  the  ants tend  to choose the closest cities, resulting in a much more ``greedy" search;
-\item viceversa, when $\beta \rightarrow 0$, heuristic values are almost ignored and only the tracks are considered in the decision making;  
+\item vice-versa, when $\beta \rightarrow 0$, heuristic values are almost ignored and only the tracks are considered in the decision making;  
 \end{itemize}
 From the little experience we made, it seems quite worth to notice that the optimal setting of those parameters depends on the particular dataset. More in details it might depend on the considered dimension and on the variance associated to the average distance between al the nodes: indeed, with small datasets (let us say having  $n~30$ nodes or less) the ACO seems to better perform when more importance is given on the pheromone effect, since the artificial ants quickly converges to a unique path (thus $\alpha \geq \beta$), whereas whenever a large dataset is considered the pheromone action of guiding artificial ants in their exploration seems to be as relevant as the heuristic value weight, resulting with a optimal configuration being a compromise between those actions (thus it might be better to have $\alpha \sim \beta$.
 
@@ -288,13 +288,13 @@ In our implementation, and following the literature, $\rho$ is taken equal to $0
 \Delta \tau_{ij}= \sum_{k=1}^{m} \Delta \tau_{ij}^k ~,
 \label{eq:delta-tau}
 \end{equation} 
-where $\Delta \tau_{ij}^k$ is the pheromone increase amount deposited by the $k$-th ant, which can be (e.g. in Dorigo initial work) taken either as a constant, or $\Delta \tau_{ij}= 1/L_k$, where $L_k$ is the $k-th$ ant path lenght.
+where $\Delta \tau_{ij}^k$ is the pheromone increase amount deposited by the $k$-th ant, which can be (e.g. in Dorigo initial work) taken either as a constant, or $\Delta \tau_{ij}= 1/L_k$, where $L_k$ is the $k-th$ ant path length.
 
 However  the entity of  pheromone  update and  it's weight on how the search will be biased towards the best solution found so far is an implementation decision.
 
 Note that the summation is extended up to a parameter $m$ representing the number of artificial ants. The value of this parameter is taken to be $m= 4~n$ with $n$ being the number of nodes in the graph. This particular value is a completely experimental value, differing from the classical literature value being $m_{literature}=n$.
 The explanation of such a choice can be found in paragraph~\ref{par:parall}, being related to the parallel implementation.
-\item the following equations can be combinated in:
+\item the following equations can be combined in:
 \begin{equation}
 \tau_{ij}= (1-\rho) \tau_{ij} + \Delta \tau_{ij} ~.
 \label{eq:aco-update}
@@ -319,7 +319,7 @@ The pseudocode of the ACO solution is presented in Tab.~\ref{tab:aco-pseudo}.
 {\footnotesize 4:} \qquad make a single ant path (see Make path)\\
 {\footnotesize 5:} \qquad compute the path length \\
 {\footnotesize 6:} \qquad update best\_dist and best\_path \\
-{\footnotesize 7:} \quad update the pheromon matrix\\
+{\footnotesize 7:} \quad update the pheromone matrix\\
 \quad ~~ (local update only for child processes, according to Eq.~(\ref{eq:aco-update}))\\
 {\footnotesize 8:} \quad every a certain n of iterations:\\
 {\footnotesize 9:} \qquad update the global pheromone matrix\\
@@ -331,20 +331,20 @@ The pseudocode of the ACO solution is presented in Tab.~\ref{tab:aco-pseudo}.
 {\footnotesize 2:} add start vertex to visited nodes \\
 [.25\normalbaselineskip]
 {\footnotesize 3:} \textbf{for} each remaining vertex: \\
-{\footnotesize 4:} \quad list the neighbors \\
+{\footnotesize 4:} \quad list the neighbours \\
 {\footnotesize 5:} \quad list the not yet visited neighb \\
 {\footnotesize 6:} \quad calculate the probability of choosing a vertex (according to Eq.~(\ref{eq:prob-aco}))\\
 {\footnotesize 7:} \quad choose the vertex according to probability \\
-{\footnotesize 8:} \quad add the choosen vertex to the visited list \\
+{\footnotesize 8:} \quad add the chosen vertex to the visited list \\
 {\footnotesize 9:} \quad return the chosen vertex id \vspace*{0.2cm}\\
 [.25\normalbaselineskip]
-\textbf{Local update pheromon matrix}\\[.25\normalbaselineskip]
+\textbf{Local update pheromone matrix}\\[.25\normalbaselineskip]
 {\footnotesize 1:} \textbf{for} ant \textbf{in} ant\_colony : \\
 {\footnotesize 2:} \quad \textbf{for} each vertex of one\_ant\_path : \\
-{\footnotesize 3:} \qquad increase pheromon\_matrix between current and next vertex of $\Delta \tau$\\
+{\footnotesize 3:} \qquad increase pheromone\_matrix between current and next vertex of $\Delta \tau$\\
 \qquad ~~~(according to Eq.~(\ref{eq:aco-update})) \vspace*{0.2cm}\\
 [.25\normalbaselineskip]
-\textbf{Global update pheromon matrix (parallelism)}\\[.25\normalbaselineskip]
+\textbf{Global update pheromone matrix (parallelism)}\\[.25\normalbaselineskip]
 {\footnotesize 1:} gather from MPI env all the pheromone matrices\\
 {\footnotesize 2:} \textbf{if} process is the parent process (rank==0): \\
 {\footnotesize 3:}\quad for each element average over the n\_cores matrices. \\
@@ -385,7 +385,7 @@ Observing Eq.~(\ref{eq:antq-eq}) in relation to the Q-learning update rule Eq.~(
 \tau_{ij}= (1-\alpha) \tau_{ij} + \alpha(\gamma max_{l\in N^k_j}\tau_{jl}) ~,
 \label{eq:localupd}
 \end{equation}
-is used for the pheromon matrix update (namely a local update) during each path construction (of each ant), and it does not include the delayed reward $\Delta \tau_{ij}$,
+is used for the pheromone matrix update (namely a local update) during each path construction (of each ant), and it does not include the delayed reward $\Delta \tau_{ij}$,
 \item $\Delta \tau_{ij}$ is calculated according to the solution quality, as anticipated circa Eq.~(\ref{eq:delta-tau}), and assigned in a ``delayed" mode: thus the value of $\Delta \tau_{ij}$  for all $i$ and $j$ will be $0$ while the ants  apply  the  update  rule Eq.~(\ref{eq:localupd})  during  their  construction  of the  current solution. 
 Therefore, the update rule Eq.~(\ref{eq:antq-eq}) is reapplied at the completion of the current solution, but with the value of the next transition considered to be equal to zero. (thus uploading only with $\Delta \tau_{ij}$:
 \begin{equation}
@@ -398,7 +398,7 @@ Therefore, the update rule Eq.~(\ref{eq:antq-eq}) is reapplied at the completion
 
 Notice that many other attempts were made in the direction of hybridizing ACO and reinforcement learning based algorithms, some particularly interesting and successful, such as \cite{sedici},\cite{quattordici},\cite{quindici}. However, due to the few time available, we could head our force in implementing only the in-detail-described Ant-Q.
 
-The pseudocode regarding our implementation of such an hybrid metaheuristic is reported in Tab.~\ref{tab:antq-pseudo}
+The pseudocode regarding our implementation of such an hybrid meta-heuristic is reported in Tab.~\ref{tab:antq-pseudo}
 
 \begin{table}
 \centering
@@ -426,7 +426,7 @@ The pseudocode regarding our implementation of such an hybrid metaheuristic is r
 {\footnotesize 2:} add start vertex to visited nodes \\
 [.25\normalbaselineskip]
 {\footnotesize 3:} \textbf{for} each remaining vertex: \\
-{\footnotesize 4:} \quad list the neighbors \\
+{\footnotesize 4:} \quad list the neighbours \\
 {\footnotesize 5:} \quad list the not yet visited neighb \\
 {\footnotesize 6:} \quad generate a random number $q \in \{0,1\}$\\
 {\footnotesize 7:} \quad if $q < q_0$: (threshold)\\
@@ -435,17 +435,17 @@ The pseudocode regarding our implementation of such an hybrid metaheuristic is r
 {\footnotesize 10:}\qquad calculate the probability of choosing a vertex \\
 {\footnotesize 11:}\qquad (according to Eq.~(\ref{eq:prob-aco}))\\
 {\footnotesize 12:} \qquad choose the vertex according to probability \\
-{\footnotesize 13:} \quad add the choosen vertex to the visited list \\
+{\footnotesize 13:} \quad add the chosen vertex to the visited list \\
 {\footnotesize 14:} \quad give local rewards (local update pheromone matrix) \\
 {\footnotesize 15:} \quad return the chosen vertex id \\
 [.25\normalbaselineskip]
 \textbf{Local update pheromone matrix}\\[.25\normalbaselineskip]
 {\footnotesize 1:} \textbf{for} ant \textbf{in} ant\_colony : \\
 {\footnotesize 2:} \quad \textbf{for} each vertex of one\_ant\_path : \\
-{\footnotesize 3:} \qquad increase pheromon\_matrix between current \\
+{\footnotesize 3:} \qquad increase pheromone\_matrix between current \\
 \qquad ~~and next vertex of a $\Delta \tau$ (according to Eq.~(\ref{eq:antq-eq}))\\
 [.25\normalbaselineskip]
-\textbf{Global update pheromon matrix (parallelism)}\\[.25\normalbaselineskip]
+\textbf{Global update pheromone matrix (parallelism)}\\[.25\normalbaselineskip]
 {\footnotesize 1:} gather from MPI env all the pheromone matrices\\
 {\footnotesize 2:} \textbf{if} process is the parent process (rank==0): \\
 {\footnotesize 3:}\quad for each element average over the n\_cores matrices. \\
@@ -461,14 +461,14 @@ The pseudocode regarding our implementation of such an hybrid metaheuristic is r
 
 The type of proposed algorithm is naturally easy to code in a parallel implementation, being enough to split the total number of ants into a number of sets (called \textit{n\_ants\_per\_core} in the code) of ants that will be distributed on each single core.
 
-Thus, a parent process initializes the algorithm, creating n\_core childs each operating on a "personal" memory area. 
+Thus, a parent process initializes the algorithm, creating n\_core children each operating on a "personal" memory area. 
 Thus, every child has its own data structures, in particular its own pheromone matrix. 
-The MPI/OpenMPI\footnote{\url{https://www.open-mpi.org/}} \footnote{a nice introduction to MPI basic usage: \url{https://princetonuniversity.github.io/PUbootcamp/sessions/parallel-programming/Intro_PP_bootcamp_2018.pdf}} software (in partiicular mpi4py\footnote{https://mpi4py.readthedocs.io/en/stable/}, a pythonic Api for OpenMPI) is used to host a shared pheromone matrix which will be updated according to the pseudocode in tab.~\ref{tab:aco-pseudo},\ref{tab:antq-pseudo} (as a mean-matrix), and which every ``local" matrix will be update to after every iteration, so that every artificial ant in every child process will ``feel" a as similar as possible pheromone effect.
+The MPI/OpenMPI\footnote{\url{https://www.open-mpi.org/}} \footnote{a nice introduction to MPI basic usage: \url{https://princetonuniversity.github.io/PUbootcamp/sessions/parallel-programming/Intro_PP_bootcamp_2018.pdf}} software (in particular mpi4py\footnote{https://mpi4py.readthedocs.io/en/stable/}, a pythonic Api for OpenMPI) is used to host a shared pheromone matrix which will be updated according to the pseudocode in tab.~\ref{tab:aco-pseudo},\ref{tab:antq-pseudo} (as a mean-matrix), and which every ``local" matrix will be update to after every iteration, so that every artificial ant in every child process will ``feel" a as similar as possible pheromone effect.
 
 As anticipated previously, we made slightly different choice in setting some parameters values:
 \begin{itemize}
 \item in both ACO and Ant-Q implementation, we take $m$, the number of ant agents, to be $m=n\_core\times n$, where $n$ is the number of nodes of the graph and $n_core$ is the number of cores available for running parallel processes.
-This choice is explained due to the fact that in our implementation on each core one child (or the parent) process is running alone, and the initial amout of artificial ants is equally distributed among the cores. Every iteration the pheromone matrix created or locally updated by a process running a single core is globally updated and a pheromone mean matrix is calculated and shared among the other processes. Thus for each node the number of ants for each iteration is the classical $m_{single\_core}=n$, because locally (while constructing the local pheromone matrix) the ant-ant interaction is the classical (and known in literature to be optimal) one;
+This choice is explained due to the fact that in our implementation on each core one child (or the parent) process is running alone, and the initial amount of artificial ants is equally distributed among the cores. Every iteration the pheromone matrix created or locally updated by a process running a single core is globally updated and a pheromone mean matrix is calculated and shared among the other processes. Thus for each node the number of ants for each iteration is the classical $m_{single\_core}=n$, because locally (while constructing the local pheromone matrix) the ant-ant interaction is the classical (and known in literature to be optimal) one;
 \item in Ant-Q, the parameter $\gamma$ is taken to be equal or close to $1$, differently from the main ref.~\cite{undici}. This choice is quite empirical, since we obtained slightly better performances with $\gamma \in [0.9,1]$. For simplicity in producing the final results a value of $\gamma=1$ is taken. A possible explanation of such a choice might be found once again in the parallel implementation: since the global pheromone matrix is the result of an average of the results of $n\_cores$ systems, the future choice taken considering such a matrix (having the role of a Q-table in this circumstances) might be more trustable with respect to the classical situation of a single system sequential implementation. Thus, if this is confirmed, a value of $\gamma \rightarrow 1$ would lead to a better performance.
 \end{itemize}
 
@@ -577,7 +577,7 @@ d_{ij} + d_{i'j'} - d_{ii'} - d_{jj'}\\d_{ij'} + d_{i'j} - d_{ii'} - d_{jj'}
 \label{eq: int-group-conn}
 \end{equation}
 where $i' \in \{i-1; i+1\}, j' \in \{j-1;j+1\}$.
-Following this strategy, the first two clusters are combined into one, then the new generated cluster combines with the third cluster, and so on, step by step. At last, all those clusters are joined into one tour, and the shortest whole traveling tour is derived as shown in Fig.~\ref{fig:gconnect}.
+Following this strategy, the first two clusters are combined into one, then the new generated cluster combines with the third cluster, and so on, step by step. At last, all those clusters are joined into one tour, and the shortest whole travelling tour is derived as shown in Fig.~\ref{fig:gconnect}.
 The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{ventitre},\cite{ventiquattro}.
 
 \begin{figure}
@@ -601,7 +601,7 @@ The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{v
 {\footnotesize 8:} \textbf{End}\\
 {\footnotesize 9:} Seek for the best combining seq $S$ with GA\\
 {\footnotesize 10:} Combine all those shortest path into one tour\\
-{\footnotesize 11:} \textbf{Output} the shortest whole travelig tour.\\
+{\footnotesize 11:} \textbf{Output} the shortest whole travelling tour.\\
 \bottomrule
 \end{tabular}
 \caption{\label{Tab: KGA pseudocode}KGA pseudocode}
@@ -613,7 +613,7 @@ The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{v
 Each algorithm is tested on every dataset listed in Sec.~(\ref{sec:data}).
 For every algorithm each run consists of five iterated executions, in order to compute the mean and standard deviation of the resulting optimal values. 
 
-The performance tests are executed on a machine with quadcore Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz. 
+The performance tests are executed on a machine with quad-core Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz. 
 Every parallel execution exploits all the four cores (thus, $n\_cores=4$).
 
 Each table reported in this section also provide, for each run,the number of iterations for each algorithm, the best value, the averaged displacement (\%) of each solution from the globally optimal value (OptimalTour)\footnote{values taken from \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}}, the percentage displacement (\%) of the best solution found\footnote{i.e. ``\% Best Dist" is calculated as \% Best Dist = $(\rm{OurBestSolution}-\rm{OptimalTour})/\rm{OptimalTour})*100$}, and the averaged cpu-time.
@@ -693,7 +693,6 @@ berlin52 & 7542 & 8879.59 & 446.69 & 8218.95 & 17.74 & 8.98 & 188.05 \\
 ch130 & 6110 & 7790.85 & 312.17 & 7314.08 & 27.51 & 19.71 & 408.72 \\ 
 d198 & 15780 & 24023.86 & 3066.94 & 20830.94 & 52.24 & 32.01 & 1412.78 \\ 
 pr1002 & 259045 & 379495.87 & 6343.57 & 373865.26 & 46.50 & 44.32 & 4456.37 \\ 
-
 \end{tabular}
 }
 \caption{\label{tab:kga_results}The resulting Ant-Q performances on the test datasets.}
@@ -713,7 +712,7 @@ Regarding the ACO and Ant-Q results, the following conclusions can be drawn:
 Thus, the introduction of the Q-learning-like updating rule (eq.~\ref{eq:antq-eq}) seems to improve the performance over the ``simple" ACO. Therefore the hybrid approach performs better than the classic one. 
 This results is in agreement with those of Gambardella and Dorigo in ref.~\cite{undici}.
 
-\item it is worth to notice that one could increase the performances of such algorithms even in case of larger dataset, just providing more computational resources and time. The good news of this approach consist in being able to scale out pretty easly, just by setting up an MPI cluster\footnote{For more info see \url{https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/}} and configuring an hostfile for the parent-children scheduling.
+\item it is worth to notice that one could increase the performances of such algorithms even in case of larger dataset, just providing more computational resources and time. The good news of this approach consist in being able to scale out pretty easily, just by setting up an MPI cluster\footnote{For more info see \url{https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/}} and configuring an host-file for the parent-children scheduling.
 However, for our limited resources, the last runs on large datasets were pretty limited in the number of iterations, thus producing a wider gap with the globally optimal solution.
 \end{itemize}
 
@@ -727,17 +726,17 @@ Going further in comparison, it is worth to make a parallel between the performa
 \section{Conclusions}
 %Conclusions should summarize the central points made in the Discussion section, reinforcing for the reader the value and implications of the work. If the results were not definitive, specific future work that may be needed can be (briefly) described. The conclusions should never contain ``surprises''. Therefore, any conclusions should be based on observations and data already discussed. It is considered extremely bad form to introduce new data in the conclusions.
 
-The main core objective of this work was to implement and test two interesting hybridized metaheuristic approaches to the Travelling Salesman Problem.
+The main core objective of this work was to implement and test two interesting hybridized meta-heuristic approaches to the Travelling Salesman Problem.
 
-The fist approach presented in Sec.~(\ref{sec:aco}) and (\ref{sec:antq}) consisted in developing the Ant Colony Optimization method, and integrating a reinforment learning procedure into the basic structure of such algorithm, producing the so called Ant-Q algorithm.
+The fist approach presented in Sec.~(\ref{sec:aco}) and (\ref{sec:antq}) consisted in developing the Ant Colony Optimization method, and integrating a reinforcement learning procedure into the basic structure of such algorithm, producing the so called Ant-Q algorithm.
 
-The second part reported in Sec.~(\ref{sec:gen_alg}) and (\ref{sec:KGA}) was based on the genetic algorithm, whose classic implementation was improved with the integration of a K-means algorithm and a custom method of obtaining the shortest path by subsequentially joining the clusters.
+The second part reported in Sec.~(\ref{sec:gen_alg}) and (\ref{sec:KGA}) was based on the genetic algorithm, whose classic implementation was improved with the integration of a K-means algorithm and a custom method of obtaining the shortest path by sub-sequentially joining the clusters.
 
 After executing some performance tests of several runs over the datasets presented in Sec.~(\ref{sec:data}), the provided results demonstrate an effective improvement of the hybridized approach with respect to the classic version of each algorithm.
 
 Furthermore, a comparison among the two types of methods can be done. The Ant family seems more likely to be applied on small or medium-sized problems, where it shows the best performances, whereas the evolutionary approach integrated with a clustering procedure is much more performant on large datasets, where it outperforms the classic Genetic implementation, with a reasonable cpu-time. 
 
-On large datasets both the family of algorithms do not obtain greatest results. The KGA utilization seems to be appropriate in order to have a ``decent" sequence, that might be used for example as a starting point of another exploitation-based algorithm. The ACO and the Ant-Q becomes slow on higher dimensions running on four cpu-cores. However, further improvements in this direction could be obtained thanks to the parallel implementation, if a MPI cluster is provided. This would probably allow Ant-Q (in parituclar) to provide a good result even on large-scale problems.
+On large datasets both the family of algorithms do not obtain greatest results. The KGA utilization seems to be appropriate in order to have a ``decent" sequence, that might be used for example as a starting point of another exploitation-based algorithm. The ACO and the Ant-Q becomes slow on higher dimensions running on four cpu-cores. However, further improvements in this direction could be obtained thanks to the parallel implementation, if a MPI cluster is provided. This would probably allow Ant-Q (in particular) to provide a good result even on large-scale problems.
 
 Even further hybridization would be possible to implement, as a future scenario. For instance, it could be interesting to combine the ACO (or even better, the Ant-Q) and the KGA itself, leading to a method similar to that in ref.~\cite{mixed}.
 %\section*{References}
