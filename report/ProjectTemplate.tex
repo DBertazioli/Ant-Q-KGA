@@ -13,6 +13,7 @@
 \usepackage{booktabs,array}
 \usepackage{tabto}
 \usepackage{systeme, mathtools}
+\usepackage{amssymb}
 
 \usepackage[margin=3cm]{geometry}
 \usepackage{enumitem}
@@ -177,7 +178,7 @@ is  an  off-policy  method, meaning  that  it updates the values  iteratively ba
 \end{figure}
 
 \paragraph{Ant-Q Algorithm}:
-one of the core points of this project consists in the implementation of the Ant-Q algorithm, introduced by Gambarella \cite{undici} in collaboration with Dorigo, attempting to ameliorate the ``classic" ACO performances.  
+one of the core points of this project consists in the implementation of the Ant-Q algorithm, introduced by Gambardella \cite{undici} in collaboration with Dorigo, attempting to ameliorate the ``classic" ACO performances.  
 
 In this approach, the pheromone update rule  is borrowed from the Q-learning prassi:
 \begin{equation}
@@ -217,7 +218,7 @@ and the complete centroid vector for cluster $C_k$ is given by \cite{ventidue}
 \begin{equation}
 \bar{x}^{(k)}  = (\bar{x}_1^{(k)},\bar{x}_2^{(k)},\dots,\bar{x}_p^{(k)})~.
 \end{equation}
-\section{Datasets}
+\section{Datasets} \label{sec:data}
 The datasets used in this work are taken from  \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/tsp/}, a large source of TSP datasets largely cited in literature. 
 There are datasets of variable dimension and for everyone is also available the optimal solution so that is possible for us to compare our results with the optimal one. 
 Every solution is available at \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}. Every dataset is composed by a list of ``\textit{cities}" with two coordinates points; the only preprocessing we apply is to compute a matrix containing the distance between every point and the other ones.
@@ -367,7 +368,7 @@ As it was previously stated, Ant-Q borrows the update rule from the Q-learning a
 \label{eq:antq-eq}
 \end{equation}
 where $alpha$ has a role similar to the previous evaporation coefficient $\rho$, and $\gamma$ is the well-known parameter called in RL literature discount rate.
-In literature, in particular in \cite{FIXME} the typical choice of such parameters is $\alpha=0.1$ and $\gamma=0.3$. We adopted this value for $alpha$, whereas we found to be a better choice for our implementation the $\gamma\rightarrow 1$. The better performance of the $\gamma=1$ value in our case might be related to the parallel implementation, as further explained in \ref{par:parall}.
+In literature, in particular in \cite{undici} the typical choice of such parameters is $\alpha=0.1$ and $\gamma=0.3$. We adopted this value for $alpha$, whereas we found to be a better choice for our implementation the $\gamma\rightarrow 1$. The better performance of the $\gamma=1$ value in our case might be related to the parallel implementation, as further explained in \ref{par:parall}.
 
 The next action (what next node connecting to) is chosen according to:
 \begin{equation}
@@ -615,18 +616,57 @@ Dataset            & \multicolumn{7}{c}{ACO}                                    
 \hline
                    & OptimalTour & Mean      & SD     & Best      & \% Avg Dist & \% Best Dist & Avg time (s) \\
 \hline
-Dj38 (1000 it)     & 6656.00     & 6763.03   & 75.16  & 6708.04   & 1.61        & 0.78         & 75.00        \\
-Berlin52 (1000 it) & 7542.00     & 7925.39   & 162.00 & 7677.66   & 5.08        & 1.80         & 320.00       \\
-Ch130 (500 it)     & 6110.00     & 6487.19   & 74.20  & 6385.46   & 6.17        & 4.51         & 9240.00      \\
-D198 (100 it)      & 15780.00    & 17376.23  & 105.81 & 17235.44  & 10.12       & 9.22         & 6540.00      \\
-Pr1002 (10 it)     & 259054.00   & 337976.61 & 833.96 & 337309.96 & 30.47       & 30.21        & 6180.00     
+Dj38 (1000 it)     & 6656    & 6763.03   & 75.16  & 6708.04   & 1.61        & 0.78         & 75\\
+Berlin52 (1000 it) & 7542 & 7925.39   & 162.00 & 7677.66   & 5.08        & 1.80         & 320       \\
+Ch130 (500 it)     & 6110     & 6487.19   & 74.20  & 6385.46   & 6.17        & 4.51         & 9240\\
+D198 (100 it)      & 15780    & 17376.23  & 105.81 & 17235.44  & 10.12       & 9.22         & 6540\\
+Pr1002 (10 it)     & 259054 & 337976.61 & 833.96 & 337309.96 & 30.47       & 30.21        & 6180 
 \end{tabular}
 }
 \caption{\label{tab:aco_results} The resulting ACO performances on the test datasets. }
 \end{table}
-\section{Discussion}
-The discussion section aims at interpreting the results in light of the project's objectives. The most important goal of this section is to interpret the results so that the reader is informed of the insight or answers that the results provide. This section should also present an evaluation of the particular approach taken by the group. For example: Based on the results, how could the experimental procedure be improved? What additional, future work may be warranted? What recommendations can be drawn?
 
+\begin{table}[]
+\scalebox{0.9}{
+\begin{tabular}{l|lllllll}
+Dataset            & \multicolumn{7}{c}{Ant-Q}                                                              \\
+\hline
+                   & OptimalTour & Mean     & SD     & Best     & \% Avg Dist & \% Best Dist & Avg time (s) \\
+\hline
+Dj38 (1000 it)     & 6656 & 6663.99 & 4.16   & 6659.43  & 0.12        & 0.05         & 37       \\
+Berlin52 (1000 it) & 7542 & 7666.17 & 113.87 & 7548.99  & 1.65        & 0.09         & 170       \\
+Ch130 (500 it)     & 6110 & 6491.31 & 70.01  & 6383.42  & 6.24        & 4.47         & 10200\\
+D198 (100 it)      & 15780 & 17075.81 & 39.69  & 17032.75 & 8.21        & 7.94         & 2880\\
+Pr1002 (10 it)     & 259054 &          &        &          &             &              &             
+\end{tabular}
+}
+\caption{\label{tab:antq_results} The resulting Ant-Q performances on the test datasets.}
+\end{table}
+
+
+Each algorithm is tested on every dataset listed in Sec.~(\ref{sec:data}).
+For every algorithm each run consists of five iterated executions, in order to compute the mean and standard deviation of the resulting optimal values. 
+
+Each table reported in this section also provide, for each run,the number of iterations for each algorithm, the best value, the averaged displacement (\%) of each solution from the globally optimal value (OptimalTour)\footnote{values taken from \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}}, the percentage displacement (\%) of the best solution found\footnote{i.e. ``\% Best Dist" is calculated as \% Best Dist = $(\rm{OurBestSolution}-\rm{OptimalTour})/\rm{OptimalTour})*100$}, and the averaged cpu-time.
+
+The average and best displacements are meant to be a sort of quality measure for the performances, whether the average time is taken into account as well.
+
+Tab.~\ref{tab:aco_results} presents the results of such a testing procedure for the ACO algorithm, whereas Tab.~\ref{tab:antq_results} provides the same information for the Ant-Q approach.
+
+\section{Discussion}
+%The discussion section aims at interpreting the results in light of the project's objectives. The most important goal of this section is to interpret the results so that the reader is informed of the insight or answers that the results provide. This section should also present an evaluation of the particular approach taken by the group. For example: Based on the results, how could the experimental procedure be improved? What additional, future work may be warranted? What recommendations can be drawn?
+
+Regarding the ACO and Ant-Q results, the following conclusions can be drawn:
+\begin{itemize}
+\item Both algorithm seems to perform well, with quite good (or at least ``decent" for the largest dataset) average displacements from the globally optimal solution.
+
+\item in general, both algorithms are pretty fast and well performing on small or medium datasets ($n \lesssim 100$), but the execution time becomes pretty important when approaching datasets with $n \gtrsim 100$ nodes. This behaviour is explained considering that Ant family algorithms are multiagent algorithm, and the best practice for an optimal tuning is known to require setting the number of ant agents $m \sim n$, thus the larger the dataset is the more internal iterations the algorithm will be doing.
+
+\item a comparison between the two algorithms can be done in terms of the percentage variation, and it can be clearly stated that the Ant-Q has slightly better performances, especially in providing the best solution and typically having a better average execution time (even though the magnitude order remains similar between the two algorithms).
+Thus, the introduction of the Q-learning-like updating rule (eq.~\ref{eq:antq-eq}) seems to improve the performance over the ``simple" ACO. Therefore the hybrid approach performs better than the classic one. 
+This results is in agreement with those of Gambardella and Dorigo in ref.~\ref{undici}.
+
+\end{itemize}
 
 \section{Conclusions}
 Conclusions should summarize the central points made in the Discussion section, reinforcing for the reader the value and implications of the work. If the results were not definitive, specific future work that may be needed can be (briefly) described. The conclusions should never contain ``surprises''. Therefore, any conclusions should be based on observations and data already discussed. It is considered extremely bad form to introduce new data in the conclusions.
