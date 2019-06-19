@@ -14,6 +14,9 @@
 \usepackage{tabto}
 \usepackage{systeme, mathtools}
 \usepackage{amssymb}
+%\usepackage{varioref}
+\usepackage{float}
+\restylefloat{table}
 
 \usepackage[margin=3cm]{geometry}
 \usepackage{enumitem}
@@ -95,11 +98,9 @@ It must be considered that the results are approximate and not always optimal.
 \paragraph{Our approach:}
 in this project we tried to apply two meta-heuristics named \textit{Ant Colony Optimization} and \textit{Genetic Algorithm}, implementing their "classical" version and a custom one integrating \textit{Reinforcement Learning Algorithm}, namely \textit{Q-learning} and \textit{Clustering algorithm}, in particular \textit{K-Means} respectively for the first and the second one.
 
-\section{Theoretical context}
-In this work we focus on two different approaches to the TSP: implementing some algorithms of the ``Ant-type", and some Evolutionary Algorithms.
-
 \subsection{Ant Family Algorithms}
-The former approach is based on the exploitation of a set of algorithms called ``Ant-Family".
+In this work we focus on two different approaches to the TSP: implementing some algorithms of the ``Ant-type" family, and some Evolutionary Algorithms.
+\\The former approach is based on the exploitation of a set of algorithms called ``Ant-Family".
 \subsubsection{Ant Colony Optimization} \label{sec:aco}
 The first type of ``Ant-like" algorithm we implement is the \textbf{Ant Colony Optimization} (ACO) algorithm.
 
@@ -113,7 +114,7 @@ Since most optimisation problems  might have such a formulation,  those kind of 
 
 The first ACO algorithm, Ant System, was proposed by Dorigo \cite{cinque, sei, sette, otto, nove}.
 
-It consists in a multi-agent approach that can produce good-quality solutions in a reasonable time for combinatorial optimisation problems \cite{cinque}. 
+It consists in a \textbf{multi-agent} approach that can produce good-quality solutions in a reasonable time for combinatorial optimisation problems \cite{cinque}. 
 The author demonstrate the performance of this algorithm on Travelling Salesman  Problem  (TSP) \cite{sei}. 
 
 Regarding the basic mechanism of ACO, here follows a quick biological explaination.
@@ -123,17 +124,15 @@ Due to this mechanism, an individual who is following a  path  because of the  p
 
 Thus, the  more ants  follow  a  specific  path,  the  more  likely  that  path  becomes  to  be  followed  by  the  ants  in the colony \cite{ cinque,otto, nove}.  
 
-ACO  algorithm  makes use  of ant-like  agents  called artificial ants, that construct their   solutions   collaboratively   by   sharing   their experience on the quality of solutions that were generated so far.
+ACO  algorithm  makes use  of ant-like  agents  called \textbf{artificial ants}, that construct their   solutions   collaboratively   by   sharing   their experience on the quality of solutions that were generated so far.
 The pheromone trails play  a  leading  role  in  the  utilization  of collective experience.
 The solutions are built iteratively.
-Artificial  ants  have  ``memory"  to  store  the  path  they  followed  while  constructing  their solutions.  Exploiting such a memory,  typically (even though depending on the speficic class of ant colony algorithm) artificial  ants  do not deposit  the pheromone until they have constructed their solution. Then, They determine the amount of pheromone according  to  the  quality  of  their  solution  and upload the pheromone matrix (the data structure in which the pheromone amount for each part of the total path is stored). 
+Artificial  ants  store  the  path  they  followed  while  constructing  their solutions.  Exploiting such a memory,  typically (even though depending on the specific class of ant colony algorithm) artificial  ants  do not deposit  the pheromone until they have constructed their solution. Then, They determine the amount of pheromone according  to  the  quality  of  their  solution  and upload the pheromone matrix (the data structure in which the pheromone amount for each part of the total path is stored). 
 Automatically, the  paths  belonging  to  better  solutions,  receive  more pheromone.
 
-In iteratively building a solution (a total path) for a single ant, a  local  stochastic  transition  policy  is typically applied, stating how to decide the next node to visit in a graph. Artificial  ants  make  their  decisions  and  transitions  to  their  next  state  in  discrete  time steps, deciding whether to follow the main trails, or to random explore a new path (in our implementation, such a decision is made by a random number generation and imposing a threshold).
+In iteratively building a solution (a total path) for a single ant, a  local  stochastic  transition  policy  is typically applied, establishing how to decide the next node to visit in a graph. Artificial  ants  make  their  decisions  and  transitions  to  their  next  state  in  discrete  time steps, deciding whether to follow the main trails, or to random explore a new path (in our implementation, such a decision is made by a random number generation and imposing a threshold).
 Exploration  is  also encouraged  by  a mechanism of  pheromone  evaporation, which prevents the  colony from  getting  stuck  into a solution  corresponding to a (only) local optimum (note however that in  real  ant  colonies  pheromone evaporation is too slow to be a significant part of their search mechanism).
 
-
- 
 \subsubsection{Ant-Q Metaheuristic}\label{sec:antq}
 In order to better understanding the working mechanism of Ant-Q Metaheuristic and to give deeper insight in our implentation (following \cite{undici} ), let us introduce some theoretical hints for the context.
 \paragraph{Hints on reinforcement learning:}
@@ -143,7 +142,7 @@ It consists of an  \textbf{agent}  who tries to learn how  to  reach  a  goal  b
 There is an evaluation phase where the quality of agent's actions is considered and feedbacks to the agent are given in the form a numerical reward. 
 This type of feedback is known as evaluative feedback: in contrary of supervised learning, here the agent is not explicitly told what action is the best to take  in  a  certain  situation, whereas it should  try  a set of possible actions and learn the best strategy yielding the most reward itself.  
 
-In some cases, the goal state (that is, the agent reaching its objective) can be obtained only after a sequence of actions: as a result the reward is delayed (FIXME: cfr section ant q delayer reward). 
+In some cases, the goal state (that is, the agent reaching its objective) can be obtained only after a sequence of actions: as a result the reward is delayed (this particular feature will be a central part of the implementation that will be presented later in eq.\ref{eq:antq-delay}). 
 
 Summing up, and according to \cite{diciotto}, the  RL  problem  can  be  defined  as  the  problem  of  an agent  interacting  with  a  complex environment trying to maximise its long-run reward over a sequence of discrete time steps.
 
@@ -310,7 +309,7 @@ The pseudocode of the ACO solution is presented in Tab.~\ref{tab:aco-pseudo}.
 \scalebox{0.8}{
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
-\unskip \textbf{Algorithm 2} Ant Colony Optimization \\
+\unskip \textbf{Algorithm} Ant Colony Optimization \\
 [.25\normalbaselineskip]
 \textbf{Main Algorithm}\\[.25\normalbaselineskip]
 {\footnotesize 0:} initialize best\_dist and best\_path to None\\
@@ -406,7 +405,7 @@ The pseudocode regarding our implementation of such an hybrid metaheuristic is r
 \scalebox{0.75}{
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
-\unskip \textbf{Algorithm 2} Ant-Q algorithm\\
+\unskip \textbf{Algorithm} Ant-Q algorithm\\
 [.25\normalbaselineskip]
 \textbf{Main Algorithm}\\[.25\normalbaselineskip]
 {\footnotesize 0:} initialize best\_dist and best\_path to None\\
@@ -482,7 +481,7 @@ chromosomes) and MaxG the number of generations used in the experiment\cite{vent
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
-\unskip \textbf{Algorithm 1} Genetic Algorithm\\
+\unskip \textbf{Algorithm} Genetic Algorithm\\
 {\footnotesize 1:} \textbf{procedure} Genetic(Tm,Tp,MaxIt)\\[.25\normalbaselineskip]
 {\footnotesize 2:}\quad $Pop \leftarrow GeneratePopulation(Tp)$ \\
 {\footnotesize 3:}\quad $Pop \leftarrow Evaluation(Pop)$ \\
@@ -543,7 +542,7 @@ The \textbf{K-Means Genetic Algorithm} (KGA) as mentioned in sec.~\ref{sec:KGA},
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
-\unskip \textbf{Algorithm 2} K-Means Algorithm\\
+\unskip \textbf{Algorithm} K-Means Algorithm\\
 {\footnotesize 1:} Set the K cluster centers randomly; \\[.25\normalbaselineskip]
 {\footnotesize 2:} \textbf{repeat} \\
 {\footnotesize 3:}\quad \textbf{for} \textit{each vertex} \textbf{do} \\
@@ -580,15 +579,18 @@ d_{ij} + d_{i'j'} - d_{ii'} - d_{jj'}\\d_{ij'} + d_{i'j} - d_{ii'} - d_{jj'}
 where $i' \in \{i-1; i+1\}, j' \in \{j-1;j+1\}$.
 Following this strategy, the first two clusters are combined into one, then the new generated cluster combines with the third cluster, and so on, step by step. At last, all those clusters are joined into one tour, and the shortest whole traveling tour is derived as shown in Fig.~\ref{fig:gconnect}.
 The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{ventitre},\cite{ventiquattro}.
+
 \begin{figure}
 \centering \includegraphics[scale=0.9]{figs/inter_group_connection.png}
 \caption{\label{fig:gconnect} The inter-group connection procedure illustrated.}
 \end{figure}
+
 \begin{table}
+\vspace*{1cm}
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
-\unskip \textbf{Algorithm 3} KGA\\
+\unskip \textbf{Algorithm} KGA\\
 {\footnotesize 1:} \textbf{input} an TSP;\\[.25\normalbaselineskip]
 {\footnotesize 2:} K-Means is adopted to cluster the TSP into k \textit{sub-problems}\\
 {\footnotesize 3:} \textbf{For} each sub-prob $i=1$ to $k$, do: \\
@@ -609,7 +611,8 @@ The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{v
 \section{Results and Evaluation}
 %The Results section is dedicated to presenting the actual results (i.e. measured and calculated quantities), not to discussing their meaning or interpretation. The results should be summarized using appropriate Tables and Figures (graphs or schematics). Every Figure and Table should have a legend that describes concisely what is contained or shown. Figure legends go below the figure, table legends above the table. Throughout the report, but especially in this section, pay attention to reporting numbers with an appropriate number of significant figures. 
 
-\begin{table}[]
+\begin{table}[H]
+\centering
 \scalebox{0.9}{
 \begin{tabular}{l|lllllll}
 Dataset            & \multicolumn{7}{c}{ACO}                                                                  \\
@@ -626,7 +629,8 @@ Pr1002 (10 it)     & 259054 & 337976.61 & 833.96 & 337309.96 & 30.47       & 30.
 \caption{\label{tab:aco_results} The resulting ACO performances on the test datasets. }
 \end{table}
 
-\begin{table}[]
+\begin{table}[H]
+\centering
 \scalebox{0.9}{
 \begin{tabular}{l|lllllll}
 Dataset            & \multicolumn{7}{c}{Ant-Q}                                                              \\
@@ -643,6 +647,8 @@ Pr1002 (10 it)     & 259054 &          &        &          &             &      
 \caption{\label{tab:antq_results} The resulting Ant-Q performances on the test datasets.}
 \end{table}
 
+
+
 Each algorithm is tested on every dataset listed in Sec.~(\ref{sec:data}).
 For every algorithm each run consists of five iterated executions, in order to compute the mean and standard deviation of the resulting optimal values. 
 
@@ -655,6 +661,45 @@ The average and best displacements are meant to be a sort of quality measure for
 
 Tab.~\ref{tab:aco_results} presents the results of such a testing procedure for the ACO algorithm, whereas Tab.~\ref{tab:antq_results} provides the same information for the Ant-Q approach.
 
+
+\begin{table}[H]
+\centering
+\scalebox{0.9}{
+\begin{tabular}{l|lllllll}
+
+Dataset            & \multicolumn{7}{c}{GA}                                                              \\
+\hline
+& OptimalTour & Mean & SD & Best & \% Avg Dist & \% Best Dist & Avg time (s) \\ \hline
+dj38 & 6656 & 7032.91 & 574.34 & 6659.43 & 5.66 & 0.05 & 263.32 \\ 
+berlin52 & 7542 & 8095.35 & 167.27 & 7868.72 & 7.34 & 4.33 & 285.81 \\ 
+ch130 & 6110 & 7933.02 & 1041.27 & 6929.81 & 29.84 & 13.42 & 434.95 \\ 
+d198 & 15780 & 27579.73 & 1869.54 & 25537.85 & 74.78 & 61.84 & 603.96 \\ 
+pr1002 & 259045 & 4666413.09 & 12608.57 & 4652556.08 & 1701.39 & 1696.04 & 2640.88 \\ 
+
+\end{tabular}
+}
+\caption{\label{tab:ga_results}The resulting Ant-Q performances on the test datasets.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\scalebox{0.9}{
+\begin{tabular}{l|lllllll}
+
+Dataset            & \multicolumn{7}{c}{KGA}                                                              \\
+\hline
+& OptimalTour & Mean & SD & Best & \% Avg Dist & \% Best Dist & Avg time (s) \\ \hline
+dj38 & 6656 & 9608.77 & 1817.02 & 7720.03 & 44.36 & 15.99 & 140.05 \\ 
+berlin52 & 7542 & 8879.59 & 446.69 & 8218.95 & 17.74 & 8.98 & 188.05 \\ 
+ch130 & 6110 & 7790.85 & 312.17 & 7314.08 & 27.51 & 19.71 & 408.72 \\ 
+d198 & 15780 & 24023.86 & 3066.94 & 20830.94 & 52.24 & 32.01 & 1412.78 \\ 
+pr1002 & 259045 & 379495.87 & 6343.57 & 373865.26 & 46.50 & 44.32 & 4456.37 \\ 
+
+\end{tabular}
+}
+\caption{\label{tab:kga_results}The resulting Ant-Q performances on the test datasets.}
+\end{table}
+
 \section{Discussion}
 %The discussion section aims at interpreting the results in light of the project's objectives. The most important goal of this section is to interpret the results so that the reader is informed of the insight or answers that the results provide. This section should also present an evaluation of the particular approach taken by the group. For example: Based on the results, how could the experimental procedure be improved? What additional, future work may be warranted? What recommendations can be drawn?
 
@@ -664,7 +709,7 @@ Regarding the ACO and Ant-Q results, the following conclusions can be drawn:
 
 \item in general, both algorithms are pretty fast and well performing on small or medium datasets ($n \lesssim 100$), but the execution time becomes pretty important when approaching datasets with $n \gtrsim 100$ nodes. This behaviour is explained considering that Ant family algorithms are multiagent algorithm, and the best practice for an optimal tuning is known to require setting the number of ant agents $m \sim n$, thus the larger the dataset is the more internal iterations the algorithm will be doing.
 
-\item a comparison between the two algorithms can be done in terms of the percentage variation, and it can be clearly stated that the Ant-Q has slightly better performances, especially in providing the best solution and typically having a better average execution time (even though the magnitude order remains similar between the two algorithms).
+\item a comparison between the two algorithms can be done in terms of the percentage variation. Observing the plot in Fig.~\ref{FIXME fig:ant-results} it can be clearly stated that the Ant-Q has slightly better performances, especially in providing the best solution and typically having a better average execution time (even though the magnitude order remains similar between the two algorithms).
 Thus, the introduction of the Q-learning-like updating rule (eq.~\ref{eq:antq-eq}) seems to improve the performance over the ``simple" ACO. Therefore the hybrid approach performs better than the classic one. 
 This results is in agreement with those of Gambardella and Dorigo in ref.~\cite{undici}.
 
