@@ -598,8 +598,24 @@ result \cite{ventisei}.
 Seeing the results in using the different selection techniques we decide to use \textit{tournament} in classical GA and \textit{roulette-wheel} in KGA. In fact the \textit{roulette-wheel} selection implements more the exploitation aspects of GA while the \textit{tournament} selection allow to improve a more exploratory approach, which is exactly what we need working on big permutations \cite{ventisette}.
 
 \section{Results and Evaluation}
-The Results section is dedicated to presenting the actual results (i.e. measured and calculated quantities), not to discussing their meaning or interpretation. The results should be summarized using appropriate Tables and Figures (graphs or schematics). Every Figure and Table should have a legend that describes concisely what is contained or shown. Figure legends go below the figure, table legends above the table. Throughout the report, but especially in this section, pay attention to reporting numbers with an appropriate number of significant figures. 
+%The Results section is dedicated to presenting the actual results (i.e. measured and calculated quantities), not to discussing their meaning or interpretation. The results should be summarized using appropriate Tables and Figures (graphs or schematics). Every Figure and Table should have a legend that describes concisely what is contained or shown. Figure legends go below the figure, table legends above the table. Throughout the report, but especially in this section, pay attention to reporting numbers with an appropriate number of significant figures. 
 
+\begin{table}[]
+\scalebox{0.9}{
+\begin{tabular}{l|lllllll}
+Dataset            & \multicolumn{7}{c}{ACO}                                                                  \\
+\hline
+                   & OptimalTour & Mean      & SD     & Best      & \% Avg Dist & \% Best Dist & Avg time (s) \\
+\hline
+Dj38 (1000 it)     & 6656.00     & 6763.03   & 75.16  & 6708.04   & 1.61        & 0.78         & 75.00        \\
+Berlin52 (1000 it) & 7542.00     & 7925.39   & 162.00 & 7677.66   & 5.08        & 1.80         & 320.00       \\
+Ch130 (500 it)     & 6110.00     & 6487.19   & 74.20  & 6385.46   & 6.17        & 4.51         & 9240.00      \\
+D198 (100 it)      & 15780.00    & 17376.23  & 105.81 & 17235.44  & 10.12       & 9.22         & 6540.00      \\
+Pr1002 (10 it)     & 259054.00   & 337976.61 & 833.96 & 337309.96 & 30.47       & 30.21        & 6180.00     
+\end{tabular}
+}
+\caption{\label{tab:aco_results} The resulting ACO performances on the test datasets. }
+\end{table}
 \section{Discussion}
 The discussion section aims at interpreting the results in light of the project's objectives. The most important goal of this section is to interpret the results so that the reader is informed of the insight or answers that the results provide. This section should also present an evaluation of the particular approach taken by the group. For example: Based on the results, how could the experimental procedure be improved? What additional, future work may be warranted? What recommendations can be drawn?
 
