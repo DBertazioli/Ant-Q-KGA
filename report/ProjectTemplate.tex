@@ -643,9 +643,11 @@ Pr1002 (10 it)     & 259054 &          &        &          &             &      
 \caption{\label{tab:antq_results} The resulting Ant-Q performances on the test datasets.}
 \end{table}
 
-
 Each algorithm is tested on every dataset listed in Sec.~(\ref{sec:data}).
 For every algorithm each run consists of five iterated executions, in order to compute the mean and standard deviation of the resulting optimal values. 
+
+The performance tests are executed on a machine with quadcore Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz. 
+Every parallel execution exploits all the four cores (thus, $n\_cores=4$).
 
 Each table reported in this section also provide, for each run,the number of iterations for each algorithm, the best value, the averaged displacement (\%) of each solution from the globally optimal value (OptimalTour)\footnote{values taken from \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}}, the percentage displacement (\%) of the best solution found\footnote{i.e. ``\% Best Dist" is calculated as \% Best Dist = $(\rm{OurBestSolution}-\rm{OptimalTour})/\rm{OptimalTour})*100$}, and the averaged cpu-time.
 
@@ -664,13 +666,35 @@ Regarding the ACO and Ant-Q results, the following conclusions can be drawn:
 
 \item a comparison between the two algorithms can be done in terms of the percentage variation, and it can be clearly stated that the Ant-Q has slightly better performances, especially in providing the best solution and typically having a better average execution time (even though the magnitude order remains similar between the two algorithms).
 Thus, the introduction of the Q-learning-like updating rule (eq.~\ref{eq:antq-eq}) seems to improve the performance over the ``simple" ACO. Therefore the hybrid approach performs better than the classic one. 
-This results is in agreement with those of Gambardella and Dorigo in ref.~\ref{undici}.
+This results is in agreement with those of Gambardella and Dorigo in ref.~\cite{undici}.
 
+\item it is worth to notice that one could increase the performances of such algorithms even in case of larger dataset, just providing more computational resources and time. The good news of this approach consist in being able to scale out pretty easly, just by setting up an MPI cluster\footnote{For more info see \url{https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/}} and configuring an hostfile for the parent-children scheduling.
+However, for our limited resources, the last runs on large datasets were pretty limited in the number of iterations, thus producing a wider gap with the globally optimal solution.
 \end{itemize}
 
-\section{Conclusions}
-Conclusions should summarize the central points made in the Discussion section, reinforcing for the reader the value and implications of the work. If the results were not definitive, specific future work that may be needed can be (briefly) described. The conclusions should never contain ``surprises''. Therefore, any conclusions should be based on observations and data already discussed. It is considered extremely bad form to introduce new data in the conclusions.
+For as regards the evolutionary approach, the following conclusions are drawn:
+\begin{itemize}
+\item FIXME: kek
+\end{itemize}
 
+Going further in comparison, it is worth to make a parallel between the performance of the Ant-family algorithms and the evolutionary ones. FIXME: kekekek
+
+\section{Conclusions}
+%Conclusions should summarize the central points made in the Discussion section, reinforcing for the reader the value and implications of the work. If the results were not definitive, specific future work that may be needed can be (briefly) described. The conclusions should never contain ``surprises''. Therefore, any conclusions should be based on observations and data already discussed. It is considered extremely bad form to introduce new data in the conclusions.
+
+The main core objective of this work was to implement and test two interesting hybridized metaheuristic approaches to the Travelling Salesman Problem.
+
+The fist approach presented in Sec.~(\ref{sec:aco}) and (\ref{sec:antq}) consisted in developing the Ant Colony Optimization method, and integrating a reinforment learning procedure into the basic structure of such algorithm, producing the so called Ant-Q algorithm.
+
+The second part reported in Sec.~(\ref{sec:gen_alg}) and (\ref{sec:KGA}) was based on the genetic algorithm, whose classic implementation was improved with the integration of a K-means algorithm and a custom method of obtaining the shortest path by subsequentially joining the clusters.
+
+After executing some performance tests of several runs over the datasets presented in Sec.~(\ref{sec:data}), the provided results demonstrate an effective improvement of the hybridized approach with respect to the classic version of each algorithm.
+
+Furthermore, a comparison among the two types of methods can be done. The Ant family seems more likely to be applied on small or medium-sized problems, where it shows the best performances, whereas the evolutionary approach integrated with a clustering procedure is much more performant on large datasets, where it outperforms the classic Genetic implementation, with a reasonable cpu-time. 
+
+On large datasets both the family of algorithms do not obtain greatest results. The KGA utilization seems to be appropriate in order to have a ``decent" sequence, that might be used for example as a starting point of another exploitation-based algorithm. The ACO and the Ant-Q becomes slow on higher dimensions running on four cpu-cores. However, further improvements in this direction could be obtained thanks to the parallel implementation, if a MPI cluster is provided. This would probably allow Ant-Q (in parituclar) to provide a good result even on large-scale problems.
+
+Even further hybridization would be possible to implement, as a future scenario. For instance, it could be interesting to combine the ACO (or even better, the Ant-Q) and the KGA itself, leading to a method similar to that in ref.~\cite{mixed}.
 %\section*{References}
 
 %The references section should contain complete citations following standard form.  The references should be numbered and listed in the order they were cited in the body of the report. In the text of the report, a particular reference can be cited by using a numerical number in brackets as %\cite{Lee2015} that corresponds to its number in the reference list. \LaTeX provides several styles to format the references
@@ -749,5 +773,7 @@ A.J. Umbarkar and P.D. Sheth, CROSSOVER OPERATORS IN GENETIC ALGORITHMS: A REVIE
 Suvarna Patil, Manisha Bhende, Comparison and Analysis of Different Mutation Strategies to improve the Performance of Genetic Algorithm. In:  International Journal of Computer Science and Information Technologies, Vol. 5 (3) , 2014, 4669-4673.
 \bibitem{ventisette}
 Kumar, Rakesh and Jyotishree. “Blending Roulette Wheel Selection \& Rank Selection in Genetic Algorithms.” (2012).
+\bibitem{mixed}
+An Analysis of Ant Colony Clustering Methods: Models, Algorithms and Applications Gong Zhe, Li Dan, An Baoyu, Ou Yangxi, Cui Wei, Niu Xinxin, Xin Yang, \url{https://pdfs.semanticscholar.org/6b8e/36adaa1cbe7781ebac1ff7903dfea492c59a.pdf}
 \end{thebibliography}
 \end{document}
