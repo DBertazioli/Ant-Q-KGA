@@ -610,6 +610,17 @@ The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{v
 
 \section{Results and Evaluation}
 %The Results section is dedicated to presenting the actual results (i.e. measured and calculated quantities), not to discussing their meaning or interpretation. The results should be summarized using appropriate Tables and Figures (graphs or schematics). Every Figure and Table should have a legend that describes concisely what is contained or shown. Figure legends go below the figure, table legends above the table. Throughout the report, but especially in this section, pay attention to reporting numbers with an appropriate number of significant figures. 
+Each algorithm is tested on every dataset listed in Sec.~(\ref{sec:data}).
+For every algorithm each run consists of five iterated executions, in order to compute the mean and standard deviation of the resulting optimal values. 
+
+The performance tests are executed on a machine with quadcore Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz. 
+Every parallel execution exploits all the four cores (thus, $n\_cores=4$).
+
+Each table reported in this section also provide, for each run,the number of iterations for each algorithm, the best value, the averaged displacement (\%) of each solution from the globally optimal value (OptimalTour)\footnote{values taken from \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}}, the percentage displacement (\%) of the best solution found\footnote{i.e. ``\% Best Dist" is calculated as \% Best Dist = $(\rm{OurBestSolution}-\rm{OptimalTour})/\rm{OptimalTour})*100$}, and the averaged cpu-time.
+
+The average and best displacements are meant to be a sort of quality measure for the performances, whether the average time is taken into account as well.
+
+Tab.~\ref{tab:aco_results} presents the results of such a testing procedure for the ACO algorithm, whereas Tab.~\ref{tab:antq_results} provides the same information for the Ant-Q approach.
 
 \begin{table}[H]
 \centering
@@ -619,11 +630,11 @@ Dataset            & \multicolumn{7}{c}{ACO}                                    
 \hline
                    & OptimalTour & Mean      & SD     & Best      & \% Avg Dist & \% Best Dist & Avg time (s) \\
 \hline
-Dj38 (1000 it)     & 6656    & 6763.03   & 75.16  & 6708.04   & 1.61        & 0.78         & 75\\
-Berlin52 (1000 it) & 7542 & 7925.39   & 162.00 & 7677.66   & 5.08        & 1.80         & 320       \\
-Ch130 (500 it)     & 6110     & 6487.19   & 74.20  & 6385.46   & 6.17        & 4.51         & 9240\\
-D198 (100 it)      & 15780    & 17376.23  & 105.81 & 17235.44  & 10.12       & 9.22         & 6540\\
-Pr1002 (10 it)     & 259054 & 337976.61 & 833.96 & 337309.96 & 30.47       & 30.21        & 6180 
+dj38 (1000 it)     & 6656    & 6763.03   & 75.16  & 6708.04   & 1.61        & 0.78         & 75\\
+berlin52 (1000 it) & 7542 & 7925.39   & 162.00 & 7677.66   & 5.08        & 1.80         & 320       \\
+ch130 (500 it)     & 6110     & 6487.19   & 74.20  & 6385.46   & 6.17        & 4.51         & 9240\\
+d198 (100 it)      & 15780    & 17376.23  & 105.81 & 17235.44  & 10.12       & 9.22         & 6540\\
+pr1002 (10 it)     & 259054 & 337976.61 & 833.96 & 337309.96 & 30.47       & 30.21        & 6180 
 \end{tabular}
 }
 \caption{\label{tab:aco_results} The resulting ACO performances on the test datasets. }
@@ -637,29 +648,17 @@ Dataset            & \multicolumn{7}{c}{Ant-Q}                                  
 \hline
                    & OptimalTour & Mean     & SD     & Best     & \% Avg Dist & \% Best Dist & Avg time (s) \\
 \hline
-Dj38 (1000 it)     & 6656 & 6663.99 & 4.16   & 6659.43  & 0.12        & 0.05         & 37       \\
-Berlin52 (1000 it) & 7542 & 7666.17 & 113.87 & 7548.99  & 1.65        & 0.09         & 170       \\
-Ch130 (500 it)     & 6110 & 6491.31 & 70.01  & 6383.42  & 6.24        & 4.47         & 10200\\
-D198 (100 it)      & 15780 & 17075.81 & 39.69  & 17032.75 & 8.21        & 7.94         & 2880\\
-Pr1002 (10 it)     & 259054 &          &        &          &             &              &             
+dj38 (1000 it)     & 6656 & 6663.99 & 4.16   & 6659.43  & 0.12        & 0.05         & 37       \\
+berlin52 (1000 it) & 7542 & 7666.17 & 113.87 & 7548.99  & 1.65        & 0.09         & 170       \\
+ch130 (500 it)     & 6110 & 6491.31 & 70.01  & 6383.42  & 6.24        & 4.47         & 10200\\
+d198 (100 it)      & 15780 & 17075.81 & 39.69  & 17032.75 & 8.21        & 7.94         & 2880\\
+pr1002 (10 it)     & 259054 &          &        &          &             &              &             
 \end{tabular}
 }
 \caption{\label{tab:antq_results} The resulting Ant-Q performances on the test datasets.}
 \end{table}
 
-
-
-Each algorithm is tested on every dataset listed in Sec.~(\ref{sec:data}).
-For every algorithm each run consists of five iterated executions, in order to compute the mean and standard deviation of the resulting optimal values. 
-
-The performance tests are executed on a machine with quadcore Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz. 
-Every parallel execution exploits all the four cores (thus, $n\_cores=4$).
-
-Each table reported in this section also provide, for each run,the number of iterations for each algorithm, the best value, the averaged displacement (\%) of each solution from the globally optimal value (OptimalTour)\footnote{values taken from \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}}, the percentage displacement (\%) of the best solution found\footnote{i.e. ``\% Best Dist" is calculated as \% Best Dist = $(\rm{OurBestSolution}-\rm{OptimalTour})/\rm{OptimalTour})*100$}, and the averaged cpu-time.
-
-The average and best displacements are meant to be a sort of quality measure for the performances, whether the average time is taken into account as well.
-
-Tab.~\ref{tab:aco_results} presents the results of such a testing procedure for the ACO algorithm, whereas Tab.~\ref{tab:antq_results} provides the same information for the Ant-Q approach.
+Tab.~\ref{tab:ga_results} presents the results of such a testing procedure for the Ga algorithm, whereas Tab.~\ref{tab:kga_results} provides the same information for the KGA approach.
 
 
 \begin{table}[H]
@@ -699,6 +698,7 @@ pr1002 & 259045 & 379495.87 & 6343.57 & 373865.26 & 46.50 & 44.32 & 4456.37 \\
 }
 \caption{\label{tab:kga_results}The resulting Ant-Q performances on the test datasets.}
 \end{table}
+
 
 \section{Discussion}
 %The discussion section aims at interpreting the results in light of the project's objectives. The most important goal of this section is to interpret the results so that the reader is informed of the insight or answers that the results provide. This section should also present an evaluation of the particular approach taken by the group. For example: Based on the results, how could the experimental procedure be improved? What additional, future work may be warranted? What recommendations can be drawn?
