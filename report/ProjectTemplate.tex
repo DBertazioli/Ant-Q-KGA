@@ -82,6 +82,7 @@ Massimiliano Perletti - 847548 - m.perletti2@campus.unimib.it\\[1cm] % Your name
 \begin{abstract}
 The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
 The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
+%FIXME: rimemba to fill
 \end{abstract}
 
 \newpage
@@ -92,16 +93,18 @@ The ABSTRACT is not a part of the body of the report itself. Rather, the abstrac
 \paragraph{The problem:}
 the travelling salesman problem (TSP) is an algorithmic problem tasked with finding the shortest route between a set of points and locations that must be visited. 
 In the problem statement, the points are the cities a salesperson might visit. The salesman's goal is to keep the distance travelled as low as possible. 
+
 TSP has been studied for decades and several solutions have been theorized. 
 The simplest solution is to try all possibilities, but this is also the most time consuming and expensive method. 
 Many solutions use heuristics, which provides probability outcomes. 
 It must be considered that the results are approximate and not always optimal. 
 \paragraph{Our approach:}
-in this project we tried to apply two meta-heuristics named \textit{Ant Colony Optimization} and \textit{Genetic Algorithm}, implementing their "classical" version and a custom one integrating \textit{Reinforcement Learning Algorithm}, namely \textit{Q-learning} and \textit{Clustering algorithm}, in particular \textit{K-Means} respectively for the first and the second one.
+in this project we apply two meta-heuristics commonly known as \textit{Ant Colony Optimization} and \textit{Genetic Algorithm}, implementing the "classical" version and a custom one integrating respectively \textit{Reinforcement Learning Algorithm}, namely \textit{Q-learning}, and \textit{Clustering algorithm}, in particular \textit{K-Means}.
 
-\subsection{Ant Family Algorithms}
+\subsection{ACO Family Algorithms}
 In this work we focus on two different approaches to the TSP: implementing some algorithms of the ``Ant-type" family, and some Evolutionary Algorithms.
 \\The former approach is based on the exploitation of a set of algorithms called ``Ant-Family".
+
 \subsubsection{Ant Colony Optimization} \label{sec:aco}
 The first type of ``Ant-like" algorithm we implement is the \textbf{Ant Colony Optimization} (ACO) algorithm.
 
@@ -109,51 +112,53 @@ The procedure draws inspiration from a ``real"  Ant  Colony.
 In nature, such a system is  known  to  accomplish  some  difficult  tasks,  being beyond  the capabilities  of  a  single  ant,  exploiting the individuals collaborating  with  each  other.  
 
 In particular, ACO algorithm  is based on  foraging  behaviour  of  some  ant species.  
-This behaviour  can  be  summed up as  their  ability  to  find  the  shortest  paths between  a source of food  and  their  nest.
-The cooperation  among  the  ants  has inspired researchers to apply a similar collaboration based algorithm to those problems whose   solutions   can   be formulated as a least cost path between an origin and a destination.
-Since most optimisation problems  might have such a formulation,  those kind of algorithms are  pretty interesting.
+This behaviour  can  be  summed up as the ability of an ant colony to find the shortest  paths between  a source of food  and  the nest.
+Cooperation  among  the  ants  has inspired researchers to apply a similar collaboration based algorithm to those problems whose solutions can be formulated as a least cost path between an origin and a destination.
+Since most optimisation problems  admit such a formulation, this family of algorithms reveals to be pretty interesting.
 
-The first ACO algorithm, Ant System, was proposed by Dorigo \cite{cinque, sei, sette, otto, nove}.
+The first ACO algorithm, Ant System, was proposed by Dorigo \cite{cinque, sei, sette, otto, nove} (in different versions).
 
-It consists in a \textbf{multi-agent} approach that can produce good-quality solutions in a reasonable time for combinatorial optimisation problems \cite{cinque}. 
+It consists of a \textbf{multi-agent} approach that can produce good-quality solutions in a reasonable time for combinatorial optimisation problems \cite{cinque}. 
 The author demonstrate the performance of this algorithm on Travelling Salesman  Problem  (TSP) \cite{sei}. 
 
 Regarding the basic mechanism of ACO, here follows a quick biological explanation.
-Ant species are almost blind, thus they interact with the environment and communicate with each  other  exploiting the hormones  they  release.  
-In particular some  ant  species use a special kind of hormone called \textbf{pheromone}: they lay pheromone trails on the paths they explore, these traces act as stimuli and other ants belonging to the colony are attracted to follow  the  paths  that  have  relatively  more  tracked.  
-Due to this mechanism, an individual who is following a  path  because of the  pheromone  trail  also reinforces  it  by  dropping its  own pheromone  too.  
+Ant species are almost blind, thus they interact with the environment and communicate with each  other  exploiting some hormones they produce.  
+In particular some  ant species are associated with a special kind of hormone called \textbf{pheromone}: they lay pheromone trails on the paths they explore, these traces act as stimuli and other ants belonging to the colony are attracted to follow the paths having relatively more tracks.  
+Due to this mechanism, an individual who is following a  path  because of the  pheromone  trail also reinforces  it  by dropping its own pheromone too.  
 
 Thus, the  more ants  follow  a  specific  path,  the  more  likely  that  path  becomes  to  be  followed  by  the  ants  in the colony \cite{ cinque,otto, nove}.  
 
-ACO  algorithm  makes use  of ant-like  agents  called \textbf{artificial ants}, that construct their   solutions   collaboratively   by   sharing   their experience on the quality of solutions that were generated so far.
-The pheromone trails play  a  leading  role  in  the  utilization  of collective experience.
+ACO  algorithm  makes use  of ant-like agents called \textbf{artificial ants}, constructing their solutions collaboratively by sharing their experience related to the quality of solutions reached so far.
+The pheromone trails play  a  leading  role  in  the  exploitation of collective experience.
 The solutions are built iteratively.
-Artificial  ants  store  the  path  they  followed  while  constructing  their solutions.  Exploiting such a memory,  typically (even though depending on the specific class of ant colony algorithm) artificial  ants  do not deposit  the pheromone until they have constructed their solution. Then, They determine the amount of pheromone according  to  the  quality  of  their  solution  and upload the pheromone matrix (the data structure in which the pheromone amount for each part of the total path is stored). 
-Automatically, the  paths  belonging  to  better  solutions,  receive  more pheromone.
+Typically (in the most common implementation) artificial  ants  store  the  path  they  tracked while  constructing  the solutions.  
+Exploiting such a memory, artificial  ants  do not deposit  the pheromone until they have constructed their solution. 
+Then, They determine the amount of pheromone according  to  the  quality  of  their  solution  and upload the pheromone matrix (the data structure in which the pheromone amount for each edge connecting two nodes is stored). 
+Automatically, the paths belonging to better solutions receive  more pheromone.
 
-In iteratively building a solution (a total path) for a single ant, a  local  stochastic  transition  policy  is typically applied, establishing how to decide the next node to visit in a graph. Artificial  ants  make  their  decisions  and  transitions  to  their  next  state  in  discrete  time steps, deciding whether to follow the main trails, or to random explore a new path (in our implementation, such a decision is made by a random number generation and imposing a threshold).
-Exploration  is  also encouraged  by  a mechanism of  pheromone  evaporation, which prevents the  colony from  getting  stuck  into a solution  corresponding to a (only) local optimum (note however that in  real  ant  colonies  pheromone evaporation is too slow to be a significant part of their search mechanism).
+In iteratively building a solution (a total path) for a single ant, a local stochastic  transition policy is typically applied, establishing how to decide the next node to visit in a graph according to a probability distribution. Artificial  ants  make  their  decisions  and  transitions  to  their  next  state  in  discrete  time steps, deciding whether to follow the main trails, or to random explore a new path (in our implementation, such a decision is made by a threshold check over a random number generation).
+Exploration is also encouraged  by a mechanism of  pheromone  evaporation, which prevents the  colony from  getting stuck into a solution corresponding to a (only) local optimum \footnote{However, notice that in real ant colonies pheromone evaporation is too slow to be a significant part of their search mechanism.}.
 
 \subsubsection{Ant-Q Metaheuristic}\label{sec:antq}
-In order to better understanding the working mechanism of Ant-Q Metaheuristic and to give deeper insight in our implentation (following \cite{undici} ), let us introduce some theoretical hints for the context.
+In order to favor a better understanding of the working mechanism of Ant-Q Metaheuristic (presented in details in Sec.~(\ref{sec:met-antq}) and to give deeper insight in our implentation (following \cite{undici} ), let us introduce some theoretical hints about the context.
 \paragraph{Hints on reinforcement learning:}
 Reinforcement  Learning  (RL)  is  an  (almost) unsupervised  learning  approach.
 
-It consists of an  \textbf{agent}  who tries to learn how  to  reach  a  goal  by  a continuous interaction with  the environment. 
+It consists of an  \textbf{agent}  who tries to learn how to reach a goal by continuously interacting with  the environment. 
 There is an evaluation phase where the quality of agent's actions is considered and feedbacks to the agent are given in the form a numerical reward. 
-This type of feedback is known as evaluative feedback: in contrary of supervised learning, here the agent is not explicitly told what action is the best to take  in  a  certain  situation, whereas it should  try  a set of possible actions and learn the best strategy yielding the most reward itself.  
+This type of feedback is known as \textbf{evaluative feedback}: in contrary of supervised learning, here the agent is not explicitly told what action is the best to take in a  certain  situation, instead it should try a set of possible actions and learn the best strategy, i.e. the one yielding the most \textbf{reward} itself.  
 
-In some cases, the goal state (that is, the agent reaching its objective) can be obtained only after a sequence of actions: as a result the reward is delayed (this particular feature will be a central part of the implementation that will be presented later in eq.\ref{eq:antq-delay}). 
+In some cases, the goal state (that is, the agent reaching its objective) cannot be obtained immediately, but only after a set of actions: as a result the reward is delayed\footnote{This particular feature will be a central part of the implementation that will be presented later in eq.\ref{eq:antq-delay}.}. 
 
-Summing up, and according to \cite{diciotto}, the  RL  problem  can  be  defined  as  the  problem  of  an agent  interacting  with  a  complex environment trying to maximise its long-run reward over a sequence of discrete time steps.
+Summing up, the  RL  problem  can  be  defined according to \cite{diciotto} as  the  problem  of  an agent  interacting  with  a  complex environment trying to maximise its long-run reward over a sequence of discrete time steps.
 
 The agent follows a \textbf{policy} to decide on its action according to the current state and conditions. 
-
-This policy is typically a  stochastic  function ($\pi(s,a)$) that  indicates a probability  of  choosing an action $a$ given a state $s$.
+This policy is typically a  stochastic  function ($\pi(s,a)$) indicating a probability  of  choosing an action $a$ given a state $s$.
 Notice that agent has the possibility to change its initial policy  according  to  new experiences  in order to  achieve  optimal cumulative  reward  over  time.  
 
 The  value  of  a  state $V_\pi(s)$  is  defined  as  the  expected  cumulative reward that  will  be  obtained starting from a state $s$ and acting according to the current policy $\pi$. 
 In the same way, the value of  a pair state-action($Q_\pi(s,a)$) is  the  expected  return  obtained starting  from  $s$  with  action $a$  and  then following  the policy. 
+
 In formulas, $V$ is defined as:
 \begin{equation}
 V^\pi(s)=E_\pi \{ \sum_i \gamma^i r_{t+1, i+1 ~ | s_t=s } \}~,
@@ -161,33 +166,34 @@ V^\pi(s)=E_\pi \{ \sum_i \gamma^i r_{t+1, i+1 ~ | s_t=s } \}~,
 
 and accordingly:
 \begin{equation}
-Q^\pi(s,a)=E_\pi \{ \sum_i \gamma^i r_{t+1, i+1 ~|~ s_t=s,~ a_t=a } \}~.
+Q^\pi(s,a)=E_\pi \{ \sum_i \gamma^i r_{t+1, i+1 ~|~ s_t=s,~ a_t=a } \}~,
 \end{equation}
+where $r_t+1$ is the reward associated with the $t-th$ transition between system states $s_t$ and $s_t+1$.
 
-The RL problem consists in the agent trying to find the optimal policy $\pi^*$ that maximizes the value  functions, obtaining thus:
+The RL problem consists of the agent trying to find the optimal policy $\pi^*$ that maximizes the value  functions, obtaining:
 \begin{equation}
-V^*(s)= max_{a \in A(s)}(Q^{\pi^*}(s,a)~.
+V^{\pi^*}(s)= max_{a \in A(s)}(Q^{\pi^*}(s,a)~.
 \end{equation} 
-However, the policy estimation can be in general a complex problem, and an optimal policy can be obtained with various algorithms, such as Policy Iteration and Value Iteration. There are also kind of learning mechanism defined as ``off-policy", because they do not exploit a proper policy procedure.
+However, the policy estimation can be in general a complex problem, and an optimal policy, where it exists, can be obtained with various algorithms, such as Policy Iteration and Value Iteration. There are also kind of learning mechanism defined as ``off-policy", because they do not exploit a proper a-priori policy procedure.
 
-\paragraph{Q-Learning}: 
-is  an  off-policy  method, meaning  that  it updates the values  iteratively basing this process on  the  action that  gives  the  maximum  value  (that is, such an algorithm tries to directly  learn $Q^*$  instead  of  learning $Q_\pi$ first). In figure~\ref{fig:q_pseudo} it is shown the pseudocode of the algorithm:  the  agent  uses  a  so called $\epsilon$-greedy  policy,  but  updating the  current  value  estimate  considering the  action  that  provides  the  maximum  value  at  the successor state instead of considering the (current-)policy-suggested action. 
+\paragraph{Q-Learning:} 
+is  an  off-policy  method, meaning  that  it updates the Q-values iteratively basing this process on  the  action that  gives  the  maximum  value  (that is, such an algorithm tries to directly  learn $Q^*$  instead  of  learning $Q_\pi$ first). Fig.~(\ref{fig:q_pseudo}) shows the pseudocode of the algorithm:  the  agent  uses  a  so called $\epsilon$-greedy  policy,  but  updates the  current  Q-value  estimate  considering the  action  that  provides  the  maximum  value  at  the successor state instead of considering the (current-)policy-suggested action. 
 \begin{figure}
 \centering \includegraphics[scale=0.6]{figs/q_pseudo.png}
 \caption{\label{fig:q_pseudo} The pseudo code of a typical Q-learning algorithm implementation.}
 \end{figure}
 
-\paragraph{Ant-Q Algorithm}:
-one of the core points of this project consists in the implementation of the Ant-Q algorithm, introduced by Gambardella \cite{undici} in collaboration with Dorigo, attempting to ameliorate the ``classic" ACO performances.  
+\paragraph{Ant-Q Algorithm:}
+one of the core points of this project consists of the implementation of the Ant-Q algorithm, introduced by Gambardella in collaboration with Dorigo\cite{undici}, while attempting to ameliorate the ``classic" ACO performances.  
 
-In this approach, the pheromone update rule  is borrowed from the Q-learning praxis:
+In this approach, the pheromone update rule is borrowed from the Q-learning praxis:
 \begin{equation}
 Q(s,a) \leftarrow (1-\alpha) Q(s,a) + \alpha (r + \gamma [max_{a^{'}} Q(s^{'},a^{'})-Q(s,a)]~.
 \label{eq:q-eq}
 \end{equation}
 
-Thus, the Ant-Q algorithm is a crossover between a ``simple" Ant Colony algorithm and a Q-learning algorithm. The basic structure belongs to the Ant family, whereas the update rule as well as the decision schedule for exploring the nodes (that is, the modality an artificial ant selects the next node to visit, starting from a given node) is imported from the cited reinforcement learning algorithm.
-
+Thus, the Ant-Q algorithm is a crossover between a ``simple" Ant Colony algorithm and a Q-learning algorithm. 
+The basic structure belongs to the Ant family, whereas the update rule as well as the decision schedule for exploring the nodes (that is, the modality an artificial ant selects the next node to visit, starting from a given node) is imported from the cited reinforcement learning algorithm.
 \subsection{Evolutionary Algorithms}
 \subsubsection{Genetic Algorithm} \label{sec:gen_alg}
 The latter approach we faced along this work is the \textbf{Genetic Algorithm} (GA), which we initially implement in its classical version.
@@ -195,15 +201,13 @@ This algorithm is based on a biological metaphor: the resolution of a problem is
 A ``fitness" function is used to evaluate each individual to decide whether it will contribute to the next
 generation. 
 Then, in analogy with the biological metaphor (the gene transfer in sexual reproduction), a crossover operator is applied in order to generate the next generation of the population.
-This process, according to the evolutionary theory (Darwinism), should lead after a certain number of iterations to a much more fit ensemble of individuals representing ``good" candidate solutions to the considered problem.
-
-%At the beginning of a run of a genetic algorithm, a large population of random chromosomes is created. Each one, when decoded, will represent a different solution to the problem at hand. Some of the advantages of a GA (R. Haupt & S. E. Haupt 2004) include the following: • It optimizes with continuous or discrete variables;• Does not require derivative information;• Simultaneously searches through wide sampling of the cost surface;• Deals with a large number of variables and is well suited for parallel computers;• Optimizes variables with extremely complex cost surfaces (they can jump out of alocal minimum);• Provides a list of optimum variables, not just a single solution;• May encode the variables so that the optimization is done with the encodedvariables; and• Works with numerically generated data, experimental data, or analyticalfunctions.A typical genetic algorithm presents the following operators:• Crossover - this operator is used to vary the population of the chromosomes fromone generation to the next. It selects the two fittest chromosomes in the populationand produces a number of offspring. There are several crossover techniques; in thiswork, we will use the one-point crossover.• Selection - this operator replicates the most successful solutions found in apopulation at a rate proportional to their relative quality, which is determined bythe fitness function. In this paper we will use the roulette wheel selection techniquefor this operator.• Mutation - used to maintain genetic diversity from one generation of a populationof chromosomes to the next. It selects a position of an offspring chromosome withsmall probability and changes the value based on the problem model; for example,in this work, the mutation operator modifies the offspring chromosome simply bychanging the position of a gene.
+This process, in analogy to the evolutionary theory (Darwinism), should lead after a certain number of iterations to a much more fit ensemble of individuals representing ``good" candidate solutions to the considered problem.
 
 \subsubsection{K-Means GA Metaheuristic} \label{sec:KGA}
-With the aim to improve classic GA performance on big dataset, 
-different hybridization techniques have been created.
-One of these consist in splitting the main problem in multiple sub-problems, with reduced dimension, in order to reach an easier problem form.
-K-Means GA meta-heuristic (KGA) shortly consists in cluster the data using a simple clustering method, the K-Means method, apply the GA algorithm on every data cluster, with dimension smaller than the original total data dimension and finally rebuild the final solution starting from the smaller multiple solutions.
+With the aim of improve classic GA performance on big dataset, different hybridization techniques have been created.
+One of these consists of splitting the main problem in multiple sub-problems, reduced in dimensions, in order to reach an simplified form for the general problem.
+
+K-Means GA meta-heuristic (KGA) briefly consists of three stages: aggregate data using a simple clustering method, the K-Means method, apply the GA algorithm on every data cluster, with dimension smaller than the original total data dimension and finally rebuild the final solution starting from the smaller multiple solutions.
 The K-Means method is shortly described below.
 
 \paragraph{Clustering with K-Means:} At first, specifically for the TSP problem, we need to cluster our cities into close groups with a clustering method.
@@ -232,6 +236,7 @@ In particular we use 5 datasets of different dimension:
 \item pr1002
 \end{itemize}
 We have chosen these datasets because they are very used and largely cited in literature allowing us to compare our results with others.
+%got till here @DB
 \section{The Methodological Approach}
 %This is the central and most important section of the report. Its objective must be to show, with linearity and clarity, the steps that have led to the definition of a decision model. The description of the working hypotheses, confirmed or denied, can be found in this section together with the description of the subsequent refining processes of the models. Comparisons between different models (e.g. heuristics vs. optimal models) in terms of quality of solutions, their explainability and execution times are welcome. 
 %Do not attempt to describe all the code in the system, and do not include large pieces of code in this section, use pseudo-code where necessary. Complete source code should be provided separately (in Appendixes, as separated material or as a link to an on-line repo). Instead pick out and describe just the pieces of code which, for example:
@@ -359,7 +364,7 @@ The pseudocode of the ACO solution is presented in Tab.~\ref{tab:aco-pseudo}.
 \end{table}
 
 
-\subsection{Ant-Q}
+\subsection{Ant-Q}\label{sec:met-antq}
 
 In this subsection some more details, with respect to what anticipated in Sec.~\ref{sec:antq}, will be given, and the implementation of the Ant-Q algorithm will be discussed. 
 s
@@ -377,7 +382,7 @@ s = \begin{cases} arg~max_{a \in J_k(s)} [Q(s,a)]^\alpha [\eta(s,a)]^\beta & \mb
 \label{eq:antq-choice}
 \end{equation}
 where, correspondingly to Eq.~(\ref{eq:prob-aco}), $\eta$ is an heuristic value associated to the inverse of distance between a pair of nodes, and $\alpha~, \beta$ are parameters for the relative importance of pheromone effects (given by $Q \approx \tau$) and the distance measure (indeed $\eta \sim 1/d$).
-The $q_0$ value is analogous to the $\epsilon_0$ parameter in the well known $\epsilon$-greedy reinforment learning policy. Following this analogy, the $q$ variable is simply taken as a random number. When the condition $q<q_0$ is not met, a decision process correspondent to Eq.~\ref{eq:prob-aco} applies. In this work, following the main reference \cite{undici}, this parameter is taken as $q_0=0.9$ (minor tuning attemps were made, not leading to an apparently better setting).
+The $q_0$ value is analogous to the $\epsilon_0$ parameter in the well known $\epsilon$-greedy reinforment learning policy. Following this analogy, the $q$ variable is simply taken as a random number. When the condition $q<q_0$ is not met, a decision process correspondent to Eq.~\ref{eq:prob-aco} applies. In this work, following the main reference \cite{undici}, this parameter is taken as $q_0=0.9$ (minor tuning attempts were made, not leading to an apparently better setting).
 
 Observing Eq.~(\ref{eq:antq-eq}) in relation to the Q-learning update rule Eq.~(\ref{eq:q-eq}), we underline how much similar the Ant-Q pheromone matrix is compared to a ``standard" $Q$ table. Indeed, it is worth to notice that:
 \begin{itemize}
@@ -501,7 +506,7 @@ chromosomes), elite\_n is the number of individuals selected with the Selection 
 \end{tabular}
 \caption{\label{Tab: GA pseudocode}Genetic Algorithm pseudocode}
 \end{table}
-Finally, with the aim to explore a new variation of the standard algorithm, we try to integrate a \textit{Clustering algorithm} named \textit{K-Means} in order to reduce the problem dimension and improve the genetic procedure performance.
+Finally, with the aim of explore a new variation of the standard algorithm, we try to integrate a \textit{Clustering algorithm} named \textit{K-Means} in order to reduce the problem dimension and improve the genetic procedure performance.
 
 As said evolutionary algorithms like \textit{Genetic algorithm} uses operators inspired by natural selection such as reproduction, mutation, recombination and selection.
 \textit{Genetic algorithm} is very customizable in every component; in this work we focus our attention on the selection part.
@@ -510,7 +515,7 @@ In particular we try to apply the following selection strategies \cite{ventuno}:
 \item roulette-wheel selection;
 \item tournament selection.
 \end{itemize}
-The \textbf{roulette-wheel} selection consists in giving a weight to each chromosomes (the individuals in our population) and this weight corresponds to a portion of a roulette wheel.
+The \textbf{roulette-wheel} selection consists of giving a weight to each chromosomes (the individuals in our population) and this weight corresponds to a portion of a roulette wheel.
 In this way chromosomes with higher fitness will have higher weight and a larger portion of the wheel
 \begin{equation}
 p_i = \frac{f_i}{\sum_{j = 1}^n f_j} ~,
@@ -520,7 +525,7 @@ with $f_i$ as the fitness value for the $i$th individual.
 Spinning the wheel for different times allows selecting the individuals for the next generation.
 Finally, the roulette wheel is nothing more than a weighted sort mechanism.
 
-The \textbf{tournament} selection, instead, consists in randomly selecting a group of individuals from the larger population and taking only the one with the highest fitness. 
+The \textbf{tournament} selection, instead, consists of randomly selecting a group of individuals from the larger population and taking only the one with the highest fitness. 
 The number of individuals competing in each tournament is commonly set to 2 but in this work we decide to improve a variable tournament dimension for each iteration.
 
 The other elements, however, are standard.
@@ -532,7 +537,7 @@ Among these we remember:
 \end{itemize}
 The \textit{single-point} crossover is one of the simple crossover technique used for random GA applications. This crossover uses the single point fragmentation of the parents and then combines the parents at the crossover point to create the offspring or child \cite{venticinque}.
 
-The \textit{point mutation} consist in change each individual gene value according to a certain probability. The method is easy for operating, but it cannot effective control to mutation
+The \textit{point mutation} consists of change each individual gene value according to a certain probability. The method is easy for operating, but it cannot effective control to mutation
 result \cite{ventisei}.
 %tournament in GA, wheel in KGA
 
@@ -567,11 +572,11 @@ Eventually all those clusters could be handled parallel.
 The result of this step is tours $T_1,T_2,\dots,T_k$ for clusters $C_1,C_2,…,C_k$.
 \paragraph{Inter-group connection:}
 In the last step, what we obtain is the shortest path between the given vertices in each cluster.
-With the aim to reconstruct the whole shortest path we need to connect properly every cluster to the others.
+With the aim of reconstruct the whole shortest path we need to connect properly every cluster to the others.
 Connect two clusters determine which edges will be deleted from the adjacent shortest path among each cluster, and which edges will be linked for combining two adjacent clusters into one. 
 Assuming $i$ and $j$ are two closest vertices between two clusters $G_i$ and $G_j$ for $G_i,i−1$ and $i+1$ are two adjacent vertices of $i$, and the same to $G_j,j−1$ and $j+1$ are two adjacent vertices of $j$. 
 Given $G_i$ and $G_j$, in order to combine the two clusters into one, we need to select two vertices $i \in i′$ and $j \in j'$ for deleting and linking edges.
-With the aim to apply this strategy we refer to Eq.~(\ref{eq: int-group-conn}) 
+With the aim of apply this strategy we refer to Eq.~(\ref{eq: int-group-conn}) 
 \begin{equation}
 \{i^*,j^*\} = \mathrm{arg min}_{i',j'} 
 \begin{cases}
@@ -730,7 +735,7 @@ pr1002 & 259045 & 379495.87 & 6343.57 & 373865.26 & 46.50 & 44.32 & 4456 \\
 
 Regarding the ACO and Ant-Q results, the following conclusions can be drawn:
 \begin{itemize}
-\item Both algorithm seems to perform well, with quite good (or at least ``decent" for the largest dataset) average displacements from the globally optimal solution.
+\item Both algorithms seem to perform well, with quite good (or at least ``decent" for the largest dataset) average percentage displacements from the globally optimal solution.
 
 \item in general, both algorithms are pretty fast and well performing on small or medium datasets ($n \lesssim 100$), but the execution time becomes pretty important when approaching datasets with $n \gtrsim 100$ nodes. This behaviour is explained considering that Ant family algorithms are multiagent algorithm, and the best practice for an optimal tuning is known to require setting the number of ant agents $m \sim n$, thus the larger the dataset is the more internal iterations the algorithm will be doing.
 
@@ -739,7 +744,7 @@ Regarding the ACO and Ant-Q results, the following conclusions can be drawn:
 Thus, the introduction of the Q-learning-like updating rule (Eq.~\ref{eq:antq-eq}) seems to improve the performance over the ``simple" ACO. Therefore the hybrid approach performs better than the classic one. 
 This results is in agreement with those of Gambardella and Dorigo in Ref.~\cite{undici}.
 
-\item it is worth to notice that one could increase the performances of such algorithms even in case of larger dataset, just providing more computational resources and time. The good news of this approach consist in being able to scale out pretty easily, just by setting up an MPI cluster\footnote{For more info see \url{https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/}} and configuring an host-file for the parent-children scheduling.
+\item it is worth to notice that one could increase the performances of such algorithms even in case of larger dataset, just providing more computational resources and time. The good news of this approach consists of being able to scale out pretty easily, just by setting up an MPI cluster\footnote{For more info see \url{https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/}} and configuring an host-file for the parent-children scheduling.
 However, for our limited resources, the last runs on large datasets were pretty limited in the number of iterations, thus producing a wider gap with the globally optimal solution.
 \end{itemize}
 In regard to  the evolutionary approach, GA and KGA in particular for this work, the following conclusions are drawn:
@@ -763,7 +768,7 @@ Going further in comparison, it is worth to make a parallel between the performa
 
 The main core objective of this work was to implement and test two interesting hybridized meta-heuristic approaches to the Travelling Salesman Problem.
 
-The fist approach presented in Sec.~(\ref{sec:aco}) and (\ref{sec:antq}) consisted in developing the Ant Colony Optimization method, and integrating a reinforcement learning procedure into the basic structure of such algorithm, producing the so called Ant-Q algorithm.
+The fist approach presented in Sec.~(\ref{sec:aco}) and (\ref{sec:antq}) consisted of developing the Ant Colony Optimization method, and integrating a reinforcement learning procedure into the basic structure of such algorithm, producing the so called Ant-Q algorithm.
 
 The second part reported in Sec.~(\ref{sec:gen_alg}) and (\ref{sec:KGA}) was based on the genetic algorithm, whose classic implementation was improved with the integration of a K-means algorithm and a custom method of obtaining the shortest path by sub-sequentially joining the clusters.
 
