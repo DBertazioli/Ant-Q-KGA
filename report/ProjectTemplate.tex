@@ -485,19 +485,11 @@ chromosomes) and MaxG the number of generations used in the experiment\cite{vent
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
 \unskip \textbf{Algorithm} Genetic Algorithm\\
-<<<<<<< HEAD
 {\footnotesize 1:} \textbf{procedure} Genetic(Tm, Tp, elite\_n, Selection, MaxGen)\\[.25\normalbaselineskip]
 {\footnotesize 2:}\quad $Pop \leftarrow GeneratePopulation(Tp)$ \\
 {\footnotesize 3:}\quad $Pop \leftarrow Evaluation(Pop)$ \\
 {\footnotesize 4:}\quad \textbf{for} $i = 1\dots MaxGen$ \textbf{do} \\
 {\footnotesize 5:}\qquad $Pop \leftarrow Selection(elite\_n~from~Pop)$ \\
-=======
-{\footnotesize 1:} \textbf{procedure} Genetic(Tm,Tp,MaxIt)\\[.25\normalbaselineskip]
-{\footnotesize 2:}\quad $Pop \leftarrow GeneratePopulation(Tp)$ \\
-{\footnotesize 3:}\quad $Pop \leftarrow Evaluation(Pop)$ \\
-{\footnotesize 4:}\quad \textbf{for} $i = 1\dots MaxIt$ \textbf{do} \\
-{\footnotesize 5:}\qquad $Pop \leftarrow Selection(Pop)$ \\
->>>>>>> f8fc82487b758ca5643df2573201d23e5f3d1068
 {\footnotesize 6:}\qquad $Pop \leftarrow Crossover(Pop)$ \\
 {\footnotesize 7:}\qquad $Pop \leftarrow Selection(Pop)$ \\
 {\footnotesize 8:}\qquad With probability $Tm$ do: \\
@@ -589,12 +581,9 @@ d_{ij} + d_{i'j'} - d_{ii'} - d_{jj'}\\d_{ij'} + d_{i'j} - d_{ii'} - d_{jj'}
 \end{equation}
 where $i' \in \{i-1; i+1\}, j' \in \{j-1;j+1\}$.
 Following this strategy, the first two clusters are combined into one, then the new generated cluster combines with the third cluster, and so on, step by step. At last, all those clusters are joined into one tour, and the shortest whole travelling tour is derived as shown in Fig.~\ref{fig:gconnect}.
-<<<<<<< HEAD
-The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{ventitre},\cite{ventiquattro}. It is worth to underline that, in order to achieve better performance from the inter-group connection operation, we use the GA also to find the shortest path between the clusters \textit{centroids}. This allow to improve the final result and restricts the number of intersections through the path.
-=======
-The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{ventitre},\cite{ventiquattro}.
 
->>>>>>> f8fc82487b758ca5643df2573201d23e5f3d1068
+The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{ventitre},\cite{ventiquattro}. It is worth to underline that, in order to achieve better performance from the inter-group connection operation, we use the GA also to find the shortest path between the clusters \textit{centroids}. This allow to improve the final result and restricts the number of intersections through the path.
+
 \begin{figure}
 \centering \includegraphics[scale=0.9]{figs/inter_group_connection.png}
 \caption{\label{fig:gconnect} The inter-group connection procedure illustrated.}
@@ -673,7 +662,6 @@ pr1002 (10 it)     & 259054 &          &        &          &             &      
 \caption{\label{tab:antq_results} The resulting Ant-Q performances on the test datasets.}
 \end{table}
 
-<<<<<<< HEAD
 As regards the secondary part of this work, including GA and KGA, the following implementation details are provided:
 \begin{itemize}
 \item Keeping in mind Tab.~\ref{Tab: GA pseudocode}, mutation rate ($Tm$), is typically set to $Tm = 0.01$. 
@@ -698,10 +686,6 @@ The $k$ dimensions are chose referring to the datasets' points shape.
 \item it is worth to notice that KGA in addition to the number of generations into each cluster, has a number of iterations also to determine the optimal path between clusters' centroids as mentioned in Sec.~\ref{sec:KGA}. This parameter is set to $1000$ for each dataset regardless the clusters' number. This is due to the will to equal compare the algorithm's performance for each dataset.
 \end{itemize}
 Finally, Tab.~\ref{tab:ga_results} presents the results of such a testing procedure for the GA algorithm, whereas Tab.~\ref{tab:kga_results} provides the same information for the KGA approach.
-=======
-Tab.~\ref{tab:ga_results} presents the results of such a testing procedure for the Ga algorithm, whereas Tab.~\ref{tab:kga_results} provides the same information for the KGA approach.
->>>>>>> f8fc82487b758ca5643df2573201d23e5f3d1068
-
 
 \begin{table}[H]
 \centering
@@ -751,18 +735,13 @@ Regarding the ACO and Ant-Q results, the following conclusions can be drawn:
 \item in general, both algorithms are pretty fast and well performing on small or medium datasets ($n \lesssim 100$), but the execution time becomes pretty important when approaching datasets with $n \gtrsim 100$ nodes. This behaviour is explained considering that Ant family algorithms are multiagent algorithm, and the best practice for an optimal tuning is known to require setting the number of ant agents $m \sim n$, thus the larger the dataset is the more internal iterations the algorithm will be doing.
 
 \item a comparison between the two algorithms can be done in terms of the percentage variation. Observing the plot in Fig.~\ref{FIXME fig:ant-results} it can be clearly stated that the Ant-Q has slightly better performances, especially in providing the best solution and typically having a better average execution time (even though the magnitude order remains similar between the two algorithms).
-<<<<<<< HEAD
+
 Thus, the introduction of the Q-learning-like updating rule (Eq.~\ref{eq:antq-eq}) seems to improve the performance over the ``simple" ACO. Therefore the hybrid approach performs better than the classic one. 
 This results is in agreement with those of Gambardella and Dorigo in Ref.~\cite{undici}.
-=======
-Thus, the introduction of the Q-learning-like updating rule (eq.~\ref{eq:antq-eq}) seems to improve the performance over the ``simple" ACO. Therefore the hybrid approach performs better than the classic one. 
-This results is in agreement with those of Gambardella and Dorigo in ref.~\cite{undici}.
->>>>>>> f8fc82487b758ca5643df2573201d23e5f3d1068
 
 \item it is worth to notice that one could increase the performances of such algorithms even in case of larger dataset, just providing more computational resources and time. The good news of this approach consist in being able to scale out pretty easily, just by setting up an MPI cluster\footnote{For more info see \url{https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/}} and configuring an host-file for the parent-children scheduling.
 However, for our limited resources, the last runs on large datasets were pretty limited in the number of iterations, thus producing a wider gap with the globally optimal solution.
 \end{itemize}
-<<<<<<< HEAD
 For as regards the evolutionary approach, GA and KGA in particular for this work, the following conclusions are drawn:
 \begin{itemize}
 \item Both algorithms perform well but, due to their nature, they require a large amount of iteration i.e. time, to reach good performance in terms of average displacements from the globally optimal solution.
@@ -774,15 +753,6 @@ Going further in comparison, it is worth to make a parallel between the performa
 \begin{itemize}
 \item FIXME:kekekeke
 \end{itemize}
-=======
-
-For as regards the evolutionary approach, the following conclusions are drawn:
-\begin{itemize}
-\item FIXME: kek
-\end{itemize}
-
-Going further in comparison, it is worth to make a parallel between the performance of the Ant-family algorithms and the evolutionary ones. FIXME: kekekek
->>>>>>> f8fc82487b758ca5643df2573201d23e5f3d1068
 
 \section{Conclusions}
 %Conclusions should summarize the central points made in the Discussion section, reinforcing for the reader the value and implications of the work. If the results were not definitive, specific future work that may be needed can be (briefly) described. The conclusions should never contain ``surprises''. Therefore, any conclusions should be based on observations and data already discussed. It is considered extremely bad form to introduce new data in the conclusions.
