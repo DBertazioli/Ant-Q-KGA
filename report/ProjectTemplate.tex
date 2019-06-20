@@ -241,6 +241,8 @@ In particular we select 5 datasets of different dimension:
 Such a choice because they are often used and largely cited in literature. %allowing us to compare our results with others.%FIXME: le comparazioni con la letteratura non le mettiamo (?).
 Those datasets will be used to test the performance of our implementations.
 %got till here @DB
+\vfill
+\newpage
 \section{The Methodological Approach}
 %This is the central and most important section of the report. Its objective must be to show, with linearity and clarity, the steps that have led to the definition of a decision model. The description of the working hypotheses, confirmed or denied, can be found in this section together with the description of the subsequent refining processes of the models. Comparisons between different models (e.g. heuristics vs. optimal models) in terms of quality of solutions, their explainability and execution times are welcome. 
 %Do not attempt to describe all the code in the system, and do not include large pieces of code in this section, use pseudo-code where necessary. Complete source code should be provided separately (in Appendixes, as separated material or as a link to an on-line repo). Instead pick out and describe just the pieces of code which, for example:
@@ -257,7 +259,7 @@ Those datasets will be used to test the performance of our implementations.
 As introduced in Sec.~(\ref{sec:aco}), Ant Colony Optimisation is a meta-heuristic proposed to solve hard optimisation problems. 
 The ACO meta-heuristic, from a high-level point of view, is composed of two main stages:
 \begin{itemize}
-\item Constructing the single ant solution:
+\item \textbf{Construct a single ant solution}:
 the  artificial  ants  construct  their  solutions.  The transition policy controls  the  ants’  next step to one of the adjacent nodes. Once the ants have completed  their  path,  the quality  of  the current solution is evaluated,  and used in the next step. 
 The decision policy is based on following a probability distribution of the type \cite{cinque}:
 
@@ -283,18 +285,17 @@ From the little experience we made, it seems quite worth to notice that the opti
 
 In the presented results $\alpha,~\beta$ are fixed and equals to their most stable values taken from the literature (mostly from \cite{cinque, sei}, but): $alpha=1$ and $\beta=3$.
 \end{itemize}
-\item Update the pheromone matrix:  the   pheromone   trails   are   adjusted   based   on   the   latest iteration of  the  colony search process.  
+\item \textbf{Update the pheromone matrix}:  the   pheromone   trails   are   adjusted   considering the latest iteration of the colony search process.  
 Two different updates happen: 
 \begin{itemize}
-\item the pheromone  evaporates according to the equation:
+\item the pheromone evaporates according to the equation:
 \begin{equation}
 \tau_{ij}= (1-\rho) \tau_{ij} ~,
 \end{equation} 
 where $\rho$ is the evaporation coefficient.
-In our implementation, and following the literature, $\rho$ is taken equal to $0.9$,
+In our implementation, and following the literature, $\rho$ is taken equal to $0.5$. Such a value should represent a compromise between exploring and exploiting the panorama of possible solutions;
 
-\item new pheromone is deposited on the followed path.  The  amount  of  pheromone  to  deposit  is  typically decided  according  to  the  quality  of  the particular  solutions  that  each  path  belongs  to:
-
+\item new pheromone is deposited on the followed path. The  amount  of  pheromone  to  deposit  is  typically decided  according  to  the  quality  of  the particular  solutions  that  each  path  belongs  to:
 \begin{equation}
 \Delta \tau_{ij}= \sum_{k=1}^{m} \Delta \tau_{ij}^k ~,
 \label{eq:delta-tau}
@@ -313,7 +314,7 @@ The explanation of such a choice can be found in paragraph~\ref{par:parall}, bei
 \end{itemize}
 \end{itemize}
 
-The pseudocode of the ACO solution is presented in Tab.~\ref{tab:aco-pseudo}.
+The \textbf{pseudocode} of the ACO solution is presented in Tab.~\ref{tab:aco-pseudo}.
 
 \begin{table}
 \centering
@@ -370,22 +371,22 @@ The pseudocode of the ACO solution is presented in Tab.~\ref{tab:aco-pseudo}.
 
 \subsection{Ant-Q}\label{sec:met-antq}
 
-In this subsection some more details, with respect to what anticipated in Sec.~\ref{sec:antq}, will be given, and the implementation of the Ant-Q algorithm will be discussed. 
-s
+In this subsection some more details about what anticipated in Sec.~\ref{sec:antq} will be given, and the implementation of the Ant-Q algorithm will be discussed. 
+
 As it was previously stated, Ant-Q borrows the update rule from the Q-learning algorithm. Thus,  Eq.~(\ref{eq:aco-update}) changes as the following: 
 \begin{equation}
 \tau_{ij}= (1-\alpha) \tau_{ij} + \alpha( \Delta \tau_{ij} + \gamma max_{l\in N^k_j}\tau_{jl}) ~,
 \label{eq:antq-eq}
 \end{equation}
 where $alpha$ has a role similar to the previous evaporation coefficient $\rho$, and $\gamma$ is the well-known parameter called in RL literature discount rate.
-In literature, in particular in \cite{undici} the typical choice of such parameters is $\alpha=0.1$ and $\gamma=0.3$. We adopted this value for $alpha$, whereas we found to be a better choice for our implementation the $\gamma\rightarrow 1$. The better performance of the $\gamma=1$ value in our case might be related to the parallel implementation, as further explained in \ref{par:parall}.
+In literature, in particular in \cite{undici} the typical choice of such parameters is $\alpha=0.1$ and $\gamma=0.3$. We adopted this value for $alpha$, whereas we found to be a better choice for our implementation to have $\gamma\rightarrow 1$. The better performance of the $\gamma=1$ value in our case might be related to the parallel implementation, as further explained in Sec.\ref{par:parall}.
 
 The next action (what next node connecting to) is chosen according to:
 \begin{equation}
-s = \begin{cases} arg~max_{a \in J_k(s)} [Q(s,a)]^\alpha [\eta(s,a)]^\beta & \mbox{if } q \leq q_0 \\ S & \mbox{otherwise } \end{cases} ~,
+s = \begin{cases} arg~max_{a \in J_k(s)} [Q(s,a)]^\delta [\eta(s,a)]^\beta & \mbox{if } q \leq q_0 \\ S & \mbox{otherwise } \end{cases} ~,
 \label{eq:antq-choice}
 \end{equation}
-where, correspondingly to Eq.~(\ref{eq:prob-aco}), $\eta$ is an heuristic value associated to the inverse of distance between a pair of nodes, and $\alpha~, \beta$ are parameters for the relative importance of pheromone effects (given by $Q \approx \tau$) and the distance measure (indeed $\eta \sim 1/d$).
+where, correspondingly to Eq.~(\ref{eq:prob-aco}), $\eta$ is an heuristic value associated to the inverse of distance between a pair of nodes, and $\delta~, \beta$ are parameters for the relative importance of pheromone effects (given by $Q \approx \tau$) and the distance measure (indeed $\eta \sim 1/d$).
 The $q_0$ value is analogous to the $\epsilon_0$ parameter in the well known $\epsilon$-greedy reinforment learning policy. Following this analogy, the $q$ variable is simply taken as a random number. When the condition $q<q_0$ is not met, a decision process correspondent to Eq.~\ref{eq:prob-aco} applies. In this work, following the main reference \cite{undici}, this parameter is taken as $q_0=0.9$ (minor tuning attempts were made, not leading to an apparently better setting).
 
 Observing Eq.~(\ref{eq:antq-eq}) in relation to the Q-learning update rule Eq.~(\ref{eq:q-eq}), we underline how much similar the Ant-Q pheromone matrix is compared to a ``standard" $Q$ table. Indeed, it is worth to notice that:
@@ -743,7 +744,7 @@ Regarding the ACO and Ant-Q results, the following conclusions can be drawn:
 
 \item in general, both algorithms are pretty fast and well performing on small or medium datasets ($n \lesssim 100$), but the execution time becomes pretty important when approaching datasets with $n \gtrsim 100$ nodes. This behaviour is explained considering that Ant family algorithms are multiagent algorithm, and the best practice for an optimal tuning is known to require setting the number of ant agents $m \sim n$, thus the larger the dataset is the more internal iterations the algorithm will be doing.
 
-\item a comparison between the two algorithms can be done in terms of the percentage variation. Observing the plot in Fig.~\ref{FIXME fig:ant-results} it can be clearly stated that the Ant-Q has slightly better performances, especially in providing the best solution and typically having a better average execution time (even though the magnitude order remains similar between the two algorithms).
+\item a comparison between the two algorithms can be done in terms of the percentage variation. Observing the plot in Fig.~\ref{fig:aco-comparison} it can be clearly stated that the Ant-Q has slightly but systematically better performances, especially in providing the best solution and typically having a better average execution time (even though the magnitude order remains similar between the two algorithms).
 
 Thus, the introduction of the Q-learning-like updating rule (Eq.~\ref{eq:antq-eq}) seems to improve the performance over the ``simple" ACO. Therefore the hybrid approach performs better than the classic one. 
 This results is in agreement with those of Gambardella and Dorigo in Ref.~\cite{undici}.
@@ -763,8 +764,13 @@ Going further in comparison, it is worth to make a parallel between the performa
 \item FIXME:kekekeke
 \end{itemize}
 \begin{figure}
+\centering \includegraphics[scale=0.5]{figs/ACO_Ant-Q_avg_best.png}
+\caption{\label{fig:aco-comparison} Percentage variation between AVG and Best ACO and Ant-Q results.}
+\end{figure}
+
+\begin{figure}
 \centering \includegraphics[scale=0.5]{figs/GA_KGA_avg_best.png}
-\caption{\label{fig:GA_KGA_performance} Percentage variation between AVG and Best GA and KGA algorithm solutions for each dataset.}
+\caption{\label{fig:GA_KGA_performance} Percentage variation between AVG and Best GA and KGA results.}
 \end{figure}
 
 \section{Conclusions}
