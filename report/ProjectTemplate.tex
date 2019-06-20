@@ -262,6 +262,7 @@ where
 
 \item $\eta_{ij}$ indicates an heuristic value specified according to the problem; in the TSP case, we considered it to be $1/d_{ij}$, coherently with the choice of \cite{cinque}.
 \item  $\tau_{ij}$ is the pheromone quantity on the path between the $i$-th and $j$-th nodes,
+\item $N_i^k$ the neighbourhood region of the k-th ant.
 \item $\alpha$ and $\beta$ are the parameters used to set the relative importance of the pheromone trail and the heuristic  value.
 In our implementation, we attempted to change the values of those parameters in order to explore a set of possible configurations. 
 We experienced that:
@@ -376,6 +377,7 @@ s = \begin{cases} arg~max_{a \in J_k(s)} [Q(s,a)]^\alpha [\eta(s,a)]^\beta & \mb
 \label{eq:antq-choice}
 \end{equation}
 where, correspondingly to Eq.~(\ref{eq:prob-aco}), $\eta$ is an heuristic value associated to the inverse of distance between a pair of nodes, and $\alpha~, \beta$ are parameters for the relative importance of pheromone effects (given by $Q \approx \tau$) and the distance measure (indeed $\eta \sim 1/d$).
+The $q_0$ value is analogous to the $\epsilon_0$ parameter in the well known $\epsilon$-greedy reinforment learning policy. Following this analogy, the $q$ variable is simply taken as a random number. When the condition $q<q_0$ is not met, a decision process correspondent to Eq.~\ref{eq:prob-aco} applies. In this work, following the main reference \cite{undici}, this parameter is taken as $q_0=0.9$ (minor tuning attemps were made, not leading to an apparently better setting).
 
 Observing Eq.~(\ref{eq:antq-eq}) in relation to the Q-learning update rule Eq.~(\ref{eq:q-eq}), we underline how much similar the Ant-Q pheromone matrix is compared to a ``standard" $Q$ table. Indeed, it is worth to notice that:
 \begin{itemize}
