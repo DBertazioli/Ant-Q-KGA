@@ -17,7 +17,7 @@
 %\usepackage{varioref}
 \usepackage{float}
 \restylefloat{table}
-
+\usepackage[toc,page]{appendix}
 \usepackage[margin=3cm]{geometry}
 \usepackage{enumitem}
 
@@ -80,8 +80,11 @@ Massimiliano Perletti - 847548 - m.perletti2@campus.unimib.it\\[1cm] % Your name
 \end{titlepage}
 \vspace*{5cm}
 \begin{abstract}
-The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
-The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
+In order to try to approach a non-linear optimization problem, especially a combinatorial one, and the state-of-the-art in metaheuristics and hybridization, the travelling salesman problem (TSP), in particular the symmetric version, was chosen, together with two specific algorithms: Ant Colony and Genetic Algorithm.
+Our main goal is to apply this two algorithms on TSP, with the aim of obtain good performances referring to the abundant literature concerning these specific algorithms. After that, our objective is try to improve an hybrid version of each algorithm, in particular implementing Ant Colony with elements of Reinforcement Learning i.e. Q-Learning algorithm, while Genetic Algorithm with techniques of dimensionality reduction, such as clustering.
+%FIXME: giusto un tentativo, non so se vi possa piacere l'impostazione.
+%The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
+%The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
 %FIXME: rimemba to fill
 \end{abstract}
 
@@ -238,7 +241,7 @@ In particular we select 5 datasets of different dimension:
 \item d198
 \item pr1002
 \end{itemize}
-Such a choice because they are often used and largely cited in literature. %allowing us to compare our results with others.%FIXME: le comparazioni con la letteratura non le mettiamo (?).
+Such a choice because they are often used and largely cited in literature.
 Those datasets will be used to test the performance of our implementations.
 \vfill
 \newpage
@@ -588,7 +591,7 @@ d_{ij} + d_{i'j'} - d_{ii'} - d_{jj'}\\d_{ij'} + d_{i'j} - d_{ii'} - d_{jj'}
 \end{cases}
 \label{eq: int-group-conn}
 \end{equation}
-where $i' \in \{i-1; i+1\}, j' \in \{j-1;j+1\}$ as in \cite{ventitre}. %FIXME: @faber check  cit
+where $i' \in \{i-1; i+1\}, j' \in \{j-1;j+1\}$ as in \cite{ventitre}.
 
 Following this strategy, the first two clusters are combined together forming a new supercluster,which combines with a third cluster, and so on, step by step. 
 At last, all those clusters are joined into one tour, and the shortest whole travelling tour is derived as shown in Fig.~\ref{fig:gconnect}.
@@ -766,7 +769,12 @@ In regard to  the evolutionary approach, GA and KGA in particular for this work,
 \end{itemize}
 Going further in comparison, it is worth to make a parallel between the performance of the Ant-family algorithms and the evolutionary ones:
 \begin{itemize}
-\item FIXME:kekekeke
+\item As shown in Fig.~(\ref{fig:aco-comparison},\ref{fig:GA_KGA_performance}) the ACO and Ant-Q algorithms seems achieve better performance than GA and KGA on small and medium-size datasets. 
+This is probably due to the nature of this algorithms.
+While Ant family algorithms use a "brute-force" approach, evolutionary algorithms works on entire permutations and this prevents them from achieving good results;
+\item Always referring to the figures already mentioned, but especially to Tab.~(\ref{tab:aco_results},\ref{tab:antq_results},\ref{tab:ga_results},\ref{tab:kga_results}) where is possible to see also the information about times required for each algorithm to reach their respective results, Evolutionary family algorithms appears good for exploratory works on large datasets especially in absence of high performance hardware.
+In fact GA for small and KGA for larger datasets, represents a good solution for initial approach to a combinatorial problem, in order to save computational time in order to achieve pretty good approximate solutions, maybe with the aim to find a good starting point for another algorithm.
+Instead, if the aim is to try to find the global optimal solution, and especially in condition to have powerful hardware and enough time, then Ant family algorithms are more suited.
 \end{itemize}
 \begin{figure}
 \centering \includegraphics[scale=0.5]{figs/ACO_Ant-Q_avg_best.png}
