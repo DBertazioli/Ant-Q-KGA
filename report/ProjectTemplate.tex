@@ -502,12 +502,11 @@ With reference to Sec.~\ref{sec:gen_alg}, the pseudo code of the standard geneti
 {\footnotesize 4:}\quad \textbf{for} $i = 1\dots MaxGen$ \textbf{do} \\
 {\footnotesize 5:}\qquad $Pop \leftarrow Selection(elite\_n~from~Pop)$ \\
 {\footnotesize 6:}\qquad $Pop \leftarrow Crossover(Pop)$ \\
-{\footnotesize 7:}\qquad $Pop \leftarrow Selection(Pop)$ \\
-{\footnotesize 8:}\qquad With probability $Tm$ do: \\
-{\footnotesize 11:}\qquad $Pop \leftarrow Mutation(Pop)$ \\
-{\footnotesize 12:}\quad \textbf{end for} \\
-{\footnotesize 13:} \quad \textbf{return} the best solution in $Pop$ \\
-{\footnotesize 14:} \textbf{end procedure} \\
+{\footnotesize 7:}\qquad With probability $Tm$ do: \\
+{\footnotesize 8:}\qquad $Pop \leftarrow Mutation(Pop)$ \\
+{\footnotesize 9:}\quad \textbf{end for} \\
+{\footnotesize 10:} \quad \textbf{return} the best solution in $Pop$ \\
+{\footnotesize 11:} \textbf{end procedure} \\
 \bottomrule
 \end{tabular}
 \caption{\label{Tab: GA pseudocode}Genetic Algorithm pseudocode}
