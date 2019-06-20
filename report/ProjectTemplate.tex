@@ -54,9 +54,9 @@
 
 \large
 \emph{Authors:}\\
-Dario Bertazioli-847761-d.bertazioli@campus.unimib.it \\   % Your name
-Fabrizio D'Intinosante-838866-f.dintinosante@campus.unimib.it \\
-Massimiliano Perletti-847548-m.perletti2@campus.unimib.it\\[1cm] % Your name
+Dario Bertazioli - 847761 - d.bertazioli@campus.unimib.it \\   % Your name
+Fabrizio D'Intinosante - 838866 - f.dintinosante@campus.unimib.it \\
+Massimiliano Perletti - 847548 - m.perletti2@campus.unimib.it\\[1cm] % Your name
 % If you don't want a supervisor, uncomment the two lines below and remove the section above
 %\Large \emph{Author:}\\
 %John \textsc{Smith}\\[3cm] % Your name
@@ -466,20 +466,20 @@ The type of proposed algorithm is naturally easy to code in a parallel implement
 
 Thus, a parent process initializes the algorithm, creating n\_core children each operating on a "personal" memory area. 
 Thus, every child has its own data structures, in particular its own pheromone matrix. 
-The MPI/OpenMPI\footnote{\url{https://www.open-mpi.org/}} \footnote{a nice introduction to MPI basic usage: \url{https://princetonuniversity.github.io/PUbootcamp/sessions/parallel-programming/Intro_PP_bootcamp_2018.pdf}} software (in particular mpi4py\footnote{https://mpi4py.readthedocs.io/en/stable/}, a pythonic Api for OpenMPI) is used to host a shared pheromone matrix which will be updated according to the pseudocode in tab.~\ref{tab:aco-pseudo},\ref{tab:antq-pseudo} (as a mean-matrix), and which every ``local" matrix will be update to after every iteration, so that every artificial ant in every child process will ``feel" a as similar as possible pheromone effect.
+The MPI/OpenMPI\footnote{\url{https://www.open-mpi.org/}} \footnote{a nice introduction to MPI basic usage: \url{https://princetonuniversity.github.io/PUbootcamp/sessions/parallel-programming/Intro_PP_bootcamp_2018.pdf}} software (in particular mpi4py\footnote{https://mpi4py.readthedocs.io/en/stable/}, a pythonic Api for OpenMPI) is used to host a shared pheromone matrix which will be updated according to the pseudocode in Tab.~\ref{tab:aco-pseudo},\ref{tab:antq-pseudo} (as a mean-matrix), and which every ``local" matrix will be update to after every iteration, so that every artificial ant in every child process will ``feel" a as similar as possible pheromone effect.
 
 As anticipated previously, we made slightly different choice in setting some parameters values:
 \begin{itemize}
 \item in both ACO and Ant-Q implementation, we take $m$, the number of ant agents, to be $m=n\_core\times n$, where $n$ is the number of nodes of the graph and $n_core$ is the number of cores available for running parallel processes.
 This choice is explained due to the fact that in our implementation on each core one child (or the parent) process is running alone, and the initial amount of artificial ants is equally distributed among the cores. Every iteration the pheromone matrix created or locally updated by a process running a single core is globally updated and a pheromone mean matrix is calculated and shared among the other processes. Thus for each node the number of ants for each iteration is the classical $m_{single\_core}=n$, because locally (while constructing the local pheromone matrix) the ant-ant interaction is the classical (and known in literature to be optimal) one;
-\item in Ant-Q, the parameter $\gamma$ is taken to be equal or close to $1$, differently from the main ref.~\cite{undici}. This choice is quite empirical, since we obtained slightly better performances with $\gamma \in [0.9,1]$. For simplicity in producing the final results a value of $\gamma=1$ is taken. A possible explanation of such a choice might be found once again in the parallel implementation: since the global pheromone matrix is the result of an average of the results of $n\_cores$ systems, the future choice taken considering such a matrix (having the role of a Q-table in this circumstances) might be more trustable with respect to the classical situation of a single system sequential implementation. Thus, if this is confirmed, a value of $\gamma \rightarrow 1$ would lead to a better performance.
+\item in Ant-Q, the parameter $\gamma$ is taken to be equal or close to $1$, differently from the main Ref.~\cite{undici}. This choice is quite empirical, since we obtained slightly better performances with $\gamma \in [0.9,1]$. For simplicity in producing the final results a value of $\gamma=1$ is taken. A possible explanation of such a choice might be found once again in the parallel implementation: since the global pheromone matrix is the result of an average of the results of $n\_cores$ systems, the future choice taken considering such a matrix (having the role of a Q-table in this circumstances) might be more trustable with respect to the classical situation of a single system sequential implementation. Thus, if this is confirmed, a value of $\gamma \rightarrow 1$ would lead to a better performance.
 \end{itemize}
 
 \subsection{GA} \label{sec:methodological_GA}
 %Our implementation of the genetic blabla
 % maybe better in methodological approach
-With reference to sec.~\ref{sec:gen_alg}, the pseudo code of the standard genetic algorithm is summarized in the Tab.~\ref{Tab: GA pseudocode}, where Tm is the mutation rate that determines the rate at which the mutation operator is applied, Tp is the population size (number of
-chromosomes) and MaxG the number of generations used in the experiment\cite{venti}.
+With reference to Sec.~\ref{sec:gen_alg}, the pseudo code of the standard genetic algorithm is summarized in the Tab.~\ref{Tab: GA pseudocode}, where Tm is the mutation rate that determines the rate at which the mutation operator is applied, Tp is the population size (number of
+chromosomes), elite\_n is the number of individuals selected with the Selection machanism, based on the fitness function value, that have to be saved for the new generation without mutation in order to preserve good individuals and MaxG the number of generations used in the experiment\cite{venti}.
 \begin{table}
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
@@ -538,7 +538,7 @@ result \cite{ventisei}.
 
 Seeing the results in using the different selection techniques we decide to use \textit{tournament} in classical GA and \textit{roulette-wheel} in KGA. In fact the \textit{roulette-wheel} selection implements more the exploitation aspects of GA while the \textit{tournament} selection allow to improve a more exploratory approach, which is exactly what we need working on big permutations \cite{ventisette}.
 \subsection{KGA}
-The \textbf{K-Means Genetic Algorithm} (KGA) as mentioned in sec.~\ref{sec:KGA}, is composed by different phases described below.
+The \textbf{K-Means Genetic Algorithm} (KGA) as mentioned in Sec.~\ref{sec:KGA}, is composed by different phases described below.
 
 \paragraph{K-Means Clustering:} The first step consist of create an ordinary number of clusters using the K-Means clustering algorithm, which pseudocode is presented in Tab:~\ref{Tab: K-Means pseudocode}.
 \begin{table}
@@ -703,7 +703,7 @@ pr1002 & 259045 & 4666413.09 & 12608.57 & 4652556.08 & 1701.39 & 1696.04 & 2641 
 
 \end{tabular}
 }
-\caption{\label{tab:ga_results}The resulting Ant-Q performances on the test datasets.}
+\caption{\label{tab:ga_results}The resulting GA performances on the test datasets.}
 \end{table}
 
 \begin{table}[H]
@@ -721,7 +721,7 @@ d198 & 15780 & 24023.86 & 3066.94 & 20830.94 & 52.24 & 32.01 & 1413 \\
 pr1002 & 259045 & 379495.87 & 6343.57 & 373865.26 & 46.50 & 44.32 & 4456 \\ 
 \end{tabular}
 }
-\caption{\label{tab:kga_results}The resulting Ant-Q performances on the test datasets.}
+\caption{\label{tab:kga_results}The resulting KGA performances on the test datasets.}
 \end{table}
 
 
@@ -742,7 +742,7 @@ This results is in agreement with those of Gambardella and Dorigo in Ref.~\cite{
 \item it is worth to notice that one could increase the performances of such algorithms even in case of larger dataset, just providing more computational resources and time. The good news of this approach consist in being able to scale out pretty easily, just by setting up an MPI cluster\footnote{For more info see \url{https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/}} and configuring an host-file for the parent-children scheduling.
 However, for our limited resources, the last runs on large datasets were pretty limited in the number of iterations, thus producing a wider gap with the globally optimal solution.
 \end{itemize}
-For as regards the evolutionary approach, GA and KGA in particular for this work, the following conclusions are drawn:
+In regard to  the evolutionary approach, GA and KGA in particular for this work, the following conclusions are drawn:
 \begin{itemize}
 \item Both algorithms perform well but, due to their nature, they require a large amount of iteration i.e. time, to reach good performance in terms of average displacements from the globally optimal solution.
 \item both algorithms are rather slow, especially if compared in terms of ratio between time and displacements from the optimal solution in average.
@@ -773,7 +773,7 @@ Furthermore, a comparison among the two types of methods can be done. The Ant fa
 
 On large datasets both the family of algorithms do not obtain greatest results. The KGA utilization seems to be appropriate in order to have a ``decent" sequence, that might be used for example as a starting point of another exploitation-based algorithm. The ACO and the Ant-Q becomes slow on higher dimensions running on four cpu-cores. However, further improvements in this direction could be obtained thanks to the parallel implementation, if a MPI cluster is provided. This would probably allow Ant-Q (in particular) to provide a good result even on large-scale problems.
 
-Even further hybridization would be possible to implement, as a future scenario. For instance, it could be interesting to combine the ACO (or even better, the Ant-Q) and the KGA itself, leading to a method similar to that in ref.~\cite{mixed}.
+Even further hybridization would be possible to implement, as a future scenario. For instance, it could be interesting to combine the ACO (or even better, the Ant-Q) and the KGA itself, leading to a method similar to that in Ref.~\cite{mixed}.
 %\section*{References}
 
 %The references section should contain complete citations following standard form.  The references should be numbered and listed in the order they were cited in the body of the report. In the text of the report, a particular reference can be cited by using a numerical number in brackets as %\cite{Lee2015} that corresponds to its number in the reference list. \LaTeX provides several styles to format the references
@@ -818,6 +818,10 @@ Gambardella, L. M. and Dorigo, M. Ant-Q: A Reinforcement Learning Approach to th
 \bibitem{diciotto}
 Sutton,  R.  S.,  and  Barto,  A.  G. Reinforcement  Learning:  An  Introduction.  MIT  Press, Cambridge, MA, 1998.
 
+% here k-means citations
+\bibitem{ventidue}
+Steinley, D. (2006), K-means clustering: A half-century synthesis. British Journal of Mathematical and Statistical Psychology, 59: 1-34.
+
 \bibitem{sedici}
 Sun,  R.,  Tatsimu,  S.,  Zhao,  G.,  Multiagent  Reinforcement  Learning  with  an  Improved Ant  Colony  System.  In:IEEE  Transactions  on  Systems,  Man,  and  Cybernetics,  Vol.3, pp.1612-1617, 2001.
 \bibitem{quattordici}
@@ -831,12 +835,18 @@ Sun,  R.,  Tatsimu,  S.,  Zhao,  G.,  Multiagent  Reinforcement  Learning  with 
 \bibitem{venti}
 Chagas De Lima Junior, Francisco \& Neto, Adriao Duarte \& Melo, J.D.. (2010). Hybrid Metaheuristics Using Reinforcement Learning Applied to Salesman Traveling Problem. 10.5772/13343.
 
-% here k-means citations
-\bibitem{ventidue}
-Steinley, D. (2006), K-means clustering: A half-century synthesis. British Journal of Mathematical and Statistical Psychology, 59: 1-34.
 
 \bibitem{ventuno}
 Razali, Noraini Mohd and John Geraghty. “Genetic Algorithm Performance with Different Selection Strategies in Solving TSP.” (2011).
+
+%%%%%%%%% methodological approach
+\bibitem{venticinque}
+A.J. Umbarkar and P.D. Sheth, Crossover Operators in genetic algorithms: a review. In: Ictact journal of soft computing, October 2015, Vol: 06.
+\bibitem{ventisei}
+Suvarna Patil, Manisha Bhende, Comparison and Analysis of Different Mutation Strategies to improve the Performance of Genetic Algorithm. In:  International Journal of Computer Science and Information Technologies, Vol. 5 (3) , 2014, 4669-4673.
+\bibitem{ventisette}
+Kumar, Rakesh and Jyotishree. “Blending Roulette Wheel Selection \& Rank Selection in Genetic Algorithms.” (2012).
+
 
 % here KGA references
 \bibitem{ventitre}
@@ -845,13 +855,6 @@ L. Tan, Y. Tan, G. Yun and Y. Wu, "Genetic algorithms based on clustering for tr
 \bibitem{ventiquattro}
 Krishna, K and Murty, Narasimha M (1999) Genetic K-Means Algorithm. In: IEEE Transactions on Systems Man And Cybernetics-Part B: Cybernetics, 29 (3). pp. 433-439.
 
-%%%%%%%%% methodological approach
-\bibitem{venticinque}
-A.J. Umbarkar and P.D. Sheth, CROSSOVER OPERATORS IN GENETIC ALGORITHMS: A REVIEW. In: ICTACT JOURNAL ON SOFT COMPUTING, OCTOBER 2015, VOLUME: 06.
-\bibitem{ventisei}
-Suvarna Patil, Manisha Bhende, Comparison and Analysis of Different Mutation Strategies to improve the Performance of Genetic Algorithm. In:  International Journal of Computer Science and Information Technologies, Vol. 5 (3) , 2014, 4669-4673.
-\bibitem{ventisette}
-Kumar, Rakesh and Jyotishree. “Blending Roulette Wheel Selection \& Rank Selection in Genetic Algorithms.” (2012).
 \bibitem{mixed}
 An Analysis of Ant Colony Clustering Methods: Models, Algorithms and Applications Gong Zhe, Li Dan, An Baoyu, Ou Yangxi, Cui Wei, Niu Xinxin, Xin Yang, \url{https://pdfs.semanticscholar.org/6b8e/36adaa1cbe7781ebac1ff7903dfea492c59a.pdf}
 \end{thebibliography}
