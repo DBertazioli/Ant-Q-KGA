@@ -207,14 +207,15 @@ This process, in analogy to the evolutionary theory (Darwinism), should lead aft
 With the aim of improve classic GA performance on big dataset, different hybridization techniques have been created.
 One of these consists of splitting the main problem in multiple sub-problems, reduced in dimensions, in order to reach an simplified form for the general problem.
 
-K-Means GA meta-heuristic (KGA) briefly consists of three stages: aggregate data using a simple clustering method, the K-Means method, apply the GA algorithm on every data cluster, with dimension smaller than the original total data dimension and finally rebuild the final solution starting from the smaller multiple solutions.
+K-Means GA meta-heuristic (KGA) briefly consists of three stages: aggregate data using a simple clustering method, the K-Means method, apply the GA algorithm on every data cluster, with a path dimension smaller than the original, and finally rebuild the final solution starting from the smaller multiple solutions.
 The K-Means method is shortly described below.
 
-\paragraph{Clustering with K-Means:} At first, specifically for the TSP problem, we need to cluster our cities into close groups with a clustering method.
+\paragraph{Clustering with K-Means:} 
+At first, specifically for the TSP problem, we need to cluster our cities into close groups with a clustering method.
 
 The \textit{K-Means} method is designed to partition a set of data into \textit{K} classes with \textit{K} chosen as desired.
-This method constructs partitions of the data-matrix so that the squared Euclidean distance between the row vector for any object and the centroid vector of its respective cluster is at least as small as the distances to the centroids of the remaining clusters.
-The centroid of cluster $C_k$ is a point in $P$-dimensional space found by averaging the values on each variable over the objects within the cluster. For instance, the centroid value for $j$-th variable in cluster $C_k$ is
+This method constructs some partitions of the data-matrix so that the squared Euclidean distance between the row vector for any object and the centroid vector of its respective cluster is at least as small as the distances to the centroids of the remaining clusters.
+The centroid of cluster $C_k$ is a point in a $P$-dimensional space obtained by averaging the values on each variable over the objects within the cluster. For instance, the centroid value for $j$-th variable in cluster $C_k$ is
 \begin{equation}
 \bar{x}_{j}^{(k)} = \frac{1}{n_k} \sum_{i \in C_k} x_{ij}~,
 \end{equation}
@@ -222,12 +223,14 @@ and the complete centroid vector for cluster $C_k$ is given by \cite{ventidue}
 \begin{equation}
 \bar{x}^{(k)}  = (\bar{x}_1^{(k)},\bar{x}_2^{(k)},\dots,\bar{x}_p^{(k)})~.
 \end{equation}
-\section{Datasets} \label{sec:data}
-The datasets used in this work are taken from  \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/tsp/}, a large source of TSP datasets largely cited in literature. 
-There are datasets of variable dimension and for everyone is also available the optimal solution so that is possible for us to compare our results with the optimal one. 
-Every solution is available at \url{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}. Every dataset is composed by a list of ``\textit{cities}" with two coordinates points; the only preprocessing we apply is to compute a matrix containing the distance between every point and the other ones.
 
-In particular we use 5 datasets of different dimension:
+\section{Datasets} \label{sec:data}
+The datasets used in this work are taken from  \href{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/tsp/}{TSP-lib}, a large source of TSP datasets largely cited in literature. 
+There are datasets of variable dimension and for everyone is also available the optimal solution so that is possible for us to compare our results with the optimal one. 
+Every solution is available at the following \href{https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/STSP.html}{link}. 
+Every dataset is composed of a list of ``\textit{cities}" associated with $2D$ coordinates; the only preprocessing we apply is to compute a matrix containing the distance between every point and the other ones.
+
+In particular we select 5 datasets of different dimension:
 \begin{itemize}[noitemsep]
 \item dj38
 \item berlin52
@@ -235,7 +238,8 @@ In particular we use 5 datasets of different dimension:
 \item d198
 \item pr1002
 \end{itemize}
-We have chosen these datasets because they are very used and largely cited in literature allowing us to compare our results with others.
+Such a choice because they are often used and largely cited in literature. %allowing us to compare our results with others.%FIXME: le comparazioni con la letteratura non le mettiamo (?).
+Those datasets will be used to test the performance of our implementations.
 %got till here @DB
 \section{The Methodological Approach}
 %This is the central and most important section of the report. Its objective must be to show, with linearity and clarity, the steps that have led to the definition of a decision model. The description of the working hypotheses, confirmed or denied, can be found in this section together with the description of the subsequent refining processes of the models. Comparisons between different models (e.g. heuristics vs. optimal models) in terms of quality of solutions, their explainability and execution times are welcome. 
@@ -301,7 +305,7 @@ However  the entity of  pheromone  update and  it's weight on how the search wil
 
 Note that the summation is extended up to a parameter $m$ representing the number of artificial ants. The value of this parameter is taken to be $m= 4~n$ with $n$ being the number of nodes in the graph. This particular value is a completely experimental value, differing from the classical literature value being $m_{literature}=n$.
 The explanation of such a choice can be found in paragraph~\ref{par:parall}, being related to the parallel implementation.
-\item the following equations can be combined in:
+\item the previous equations can be combined together obtaining:
 \begin{equation}
 \tau_{ij}= (1-\rho) \tau_{ij} + \Delta \tau_{ij} ~.
 \label{eq:aco-update}
@@ -543,7 +547,7 @@ result \cite{ventisei}.
 
 Seeing the results in using the different selection techniques we decide to use \textit{tournament} in classical GA and \textit{roulette-wheel} in KGA. In fact the \textit{roulette-wheel} selection implements more the exploitation aspects of GA while the \textit{tournament} selection allow to improve a more exploratory approach, which is exactly what we need working on big permutations \cite{ventisette}.
 \subsection{KGA}
-The \textbf{K-Means Genetic Algorithm} (KGA) as mentioned in Sec.~\ref{sec:KGA}, is composed by different phases described below.
+The \textbf{K-Means Genetic Algorithm} (KGA) as mentioned in Sec.~\ref{sec:KGA}, is composed of different phases described below.
 
 \paragraph{K-Means Clustering:} The first step consist of create an ordinary number of clusters using the K-Means clustering algorithm, which pseudocode is presented in Tab:~\ref{Tab: K-Means pseudocode}.
 \begin{table}
