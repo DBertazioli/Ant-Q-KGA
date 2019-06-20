@@ -240,7 +240,6 @@ In particular we select 5 datasets of different dimension:
 \end{itemize}
 Such a choice because they are often used and largely cited in literature. %allowing us to compare our results with others.%FIXME: le comparazioni con la letteratura non le mettiamo (?).
 Those datasets will be used to test the performance of our implementations.
-%got till here @DB
 \vfill
 \newpage
 \section{The Methodological Approach}
@@ -386,12 +385,12 @@ The next action (what next node connecting to) is chosen according to:
 s = \begin{cases} arg~max_{a \in J_k(s)} [Q(s,a)]^\delta [\eta(s,a)]^\beta & \mbox{if } q \leq q_0 \\ S & \mbox{otherwise } \end{cases} ~,
 \label{eq:antq-choice}
 \end{equation}
-where, correspondingly to Eq.~(\ref{eq:prob-aco}), $\eta$ is an heuristic value associated to the inverse of distance between a pair of nodes, and $\delta~, \beta$ are parameters for the relative importance of pheromone effects (given by $Q \approx \tau$) and the distance measure (indeed $\eta \sim 1/d$).
-The $q_0$ value is analogous to the $\epsilon_0$ parameter in the well known $\epsilon$-greedy reinforment learning policy. Following this analogy, the $q$ variable is simply taken as a random number. When the condition $q<q_0$ is not met, a decision process correspondent to Eq.~\ref{eq:prob-aco} applies. In this work, following the main reference \cite{undici}, this parameter is taken as $q_0=0.9$ (minor tuning attempts were made, not leading to an apparently better setting).
+where, correspondingly to Eq.~(\ref{eq:prob-aco}), $\eta$ is an heuristic value associated to the inverse of distance between a pair of nodes, and $\delta~, \beta$ are parameters for the relative importance of pheromone effects (given by $Q \approx \tau$) and the distance measure (indeed $\eta \sim 1/d$). Accordingly to \cite{undici}, it is taken $\delta=1$ and $\beta=2$.
+The $q_0$ parameter is analogous to $\epsilon_0$  in the well known $\epsilon$-greedy reinforment learning policy. Following this analogy, the $q$ variable is simply taken as a random number. When the condition $q<q_0$ is not met, a decision process correspondent to Eq.~(\ref{eq:prob-aco}) applies. In this work, following the main reference \cite{undici}, this parameter is taken as $q_0=0.9$ (minor tuning attempts were made, not leading to an apparently better setting).
 
-Observing Eq.~(\ref{eq:antq-eq}) in relation to the Q-learning update rule Eq.~(\ref{eq:q-eq}), we underline how much similar the Ant-Q pheromone matrix is compared to a ``standard" $Q$ table. Indeed, it is worth to notice that:
+Observing Eq.~(\ref{eq:antq-eq}) in relation to the Q-learning update rule Eq.~(\ref{eq:q-eq}), we underline how much similar the Ant-Q pheromone matrix is compared to a ``standard" $Q$-table. Indeed, it is worth to notice that:
 \begin{itemize}
-\item  eq~(\ref{eq:antq-eq})  updates the pheromone  value  of  the  transition  ($i$, $j$)  according to the  pheromone  value  of  the  next transition  ($j$, $ l$),
+\item  Eq~(\ref{eq:antq-eq})  updates the pheromone  value  of  the  transition  ($i$, $j$)  according to the  pheromone  value  of  the  next transition  ($j$, $ l$),
 \item Eq.~(\ref{eq:antq-eq}) uses  the second part of Eq.~(\ref{eq:q-eq}) (known as TD Error) to  weight the  pheromone  quantity associated  to  the current  edge  with  a learning  rate $\alpha$  and  a discount  rate $\gamma$, 
 \item the equation 
 \begin{equation}
@@ -400,7 +399,7 @@ Observing Eq.~(\ref{eq:antq-eq}) in relation to the Q-learning update rule Eq.~(
 \end{equation}
 is used for the pheromone matrix update (namely a local update) during each path construction (of each ant), and it does not include the delayed reward $\Delta \tau_{ij}$,
 \item $\Delta \tau_{ij}$ is calculated according to the solution quality, as anticipated circa Eq.~(\ref{eq:delta-tau}), and assigned in a ``delayed" mode: thus the value of $\Delta \tau_{ij}$  for all $i$ and $j$ will be $0$ while the ants  apply  the  update  rule Eq.~(\ref{eq:localupd})  during  their  construction  of the  current solution. 
-Therefore, the update rule Eq.~(\ref{eq:antq-eq}) is reapplied at the completion of the current solution, but with the value of the next transition considered to be equal to zero. (thus uploading only with $\Delta \tau_{ij}$:
+Therefore, the update rule Eq.~(\ref{eq:antq-eq}) is reapplied at the completion of the current solution, but with the value of the next transition considered to be equal to zero. (thus updating only by $\Delta \tau_{ij}$):
 \begin{equation}
 \tau_{ij}= (1-\alpha) \tau_{ij} + \alpha(\Delta\tau_{ij}) ~,
 \label{eq:antq-delay}
@@ -409,7 +408,7 @@ Therefore, the update rule Eq.~(\ref{eq:antq-eq}) is reapplied at the completion
 \item still according to \cite{undici} \cite{diciotto} $\Delta \tau_{ij}$ can be updated with an iteration  best  rule (update every single colony iteration) or  global  best (update based on the global best value.
 \end{itemize}
 
-Notice that many other attempts were made in the direction of hybridizing ACO and reinforcement learning based algorithms, some particularly interesting and successful, such as \cite{sedici},\cite{quattordici},\cite{quindici}. However, due to the few time available, we could head our force in implementing only the in-detail-described Ant-Q.
+Notice that many other attempts were made in the direction of hybridizing ACO and reinforcement learning based algorithms, some particularly interesting and successful, such as \cite{sedici},\cite{quattordici},\cite{quindici}. However, due to the few time available, we could head our forces in implementing only the in-detail-described Ant-Q.
 
 The pseudocode regarding our implementation of such an hybrid meta-heuristic is reported in Tab.~\ref{tab:antq-pseudo}
 
@@ -472,10 +471,10 @@ The pseudocode regarding our implementation of such an hybrid meta-heuristic is 
 
 \paragraph{Parallel Implementation:}\label{par:parall} since both the ACO and Ant-Q are memory and computational-expensive, we suggest a parallel implementation of each algorithm.
 
-The type of proposed algorithm is naturally easy to code in a parallel implementation, being enough to split the total number of ants into a number of sets (called \textit{n\_ants\_per\_core} in the code) of ants that will be distributed on each single core.
+The type of proposed algorithm is naturally easy to parallelelize, since it is enough to split the total number of ants into subsets (called \textit{n\_ants\_per\_core} in the code) of ants that will be distributed on each single core.
 
 Thus, a parent process initializes the algorithm, creating n\_core children each operating on a "personal" memory area. 
-Thus, every child has its own data structures, in particular its own pheromone matrix. 
+Every child has its own data structures, in particular its own pheromone matrix. 
 The MPI/OpenMPI\footnote{\url{https://www.open-mpi.org/}} \footnote{a nice introduction to MPI basic usage: \url{https://princetonuniversity.github.io/PUbootcamp/sessions/parallel-programming/Intro_PP_bootcamp_2018.pdf}} software (in particular mpi4py\footnote{https://mpi4py.readthedocs.io/en/stable/}, a pythonic Api for OpenMPI) is used to host a shared pheromone matrix which will be updated according to the pseudocode in Tab.~\ref{tab:aco-pseudo},\ref{tab:antq-pseudo} (as a mean-matrix), and which every ``local" matrix will be update to after every iteration, so that every artificial ant in every child process will ``feel" a as similar as possible pheromone effect.
 
 As anticipated previously, we made slightly different choice in setting some parameters values:
@@ -488,8 +487,7 @@ This choice is explained due to the fact that in our implementation on each core
 \subsection{GA} \label{sec:methodological_GA}
 %Our implementation of the genetic blabla
 % maybe better in methodological approach
-With reference to Sec.~\ref{sec:gen_alg}, the pseudo code of the standard genetic algorithm is summarized in the Tab.~\ref{Tab: GA pseudocode}, where Tm is the mutation rate that determines the rate at which the mutation operator is applied, Tp is the population size (number of
-chromosomes), elite\_n is the number of individuals selected with the Selection machanism, based on the fitness function value, that have to be saved for the new generation without mutation in order to preserve good individuals and MaxG the number of generations used in the experiment\cite{venti}.
+With reference to Sec.~\ref{sec:gen_alg}, the pseudo code of the standard genetic algorithm is summarized in the Tab.~\ref{Tab: GA pseudocode}, where $T_m$ is the mutation rate that determines the rate at which the mutation operator is applied, $T_p$ is the population size (number of chromosomes), $elite\_n$ is the number of individuals selected with the Selection mechanism, based on the fitness function value, that have to be saved for the new generation without mutation in order to preserve good individuals and $MaxG$ the number of generations used in the experiment\cite{venti}.
 \begin{table}
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
@@ -511,16 +509,17 @@ chromosomes), elite\_n is the number of individuals selected with the Selection 
 \end{tabular}
 \caption{\label{Tab: GA pseudocode}Genetic Algorithm pseudocode}
 \end{table}
-Finally, with the aim of explore a new variation of the standard algorithm, we try to integrate a \textit{Clustering algorithm} named \textit{K-Means} in order to reduce the problem dimension and improve the genetic procedure performance.
 
-As said evolutionary algorithms like \textit{Genetic algorithm} uses operators inspired by natural selection such as reproduction, mutation, recombination and selection.
-\textit{Genetic algorithm} is very customizable in every component; in this work we focus our attention on the selection part.
-In particular we try to apply the following selection strategies \cite{ventuno}:
+Finally, aiming to explore a new variation of the standard algorithm, we try to integrate the \textit{K-Means} clustering algorithm in order to reduce the problem dimensionality and hoping to improve the performances of the  genetic procedure.
+
+As mentioned, evolutionary algorithms like \textit{Genetic algorithm} use operators inspired by natural selection such as reproduction, mutation, recombination and selection.
+\textit{Genetic algorithm} is quite customizable in every component; in this work we focus our attention on the selection part.
+In particular we experiment the implementation of the following selection strategies \cite{ventuno}:
 \begin{itemize}
 \item roulette-wheel selection;
 \item tournament selection.
 \end{itemize}
-The \textbf{roulette-wheel} selection consists of giving a weight to each chromosomes (the individuals in our population) and this weight corresponds to a portion of a roulette wheel.
+The \textbf{roulette-wheel} selection consists of giving a weight to each chromosomes (the individuals in our population), with each weight corresponding to a portion of a roulette wheel.
 In this way chromosomes with higher fitness will have higher weight and a larger portion of the wheel
 \begin{equation}
 p_i = \frac{f_i}{\sum_{j = 1}^n f_j} ~,
@@ -528,29 +527,28 @@ p_i = \frac{f_i}{\sum_{j = 1}^n f_j} ~,
 with $f_i$ as the fitness value for the $i$th individual.
 
 Spinning the wheel for different times allows selecting the individuals for the next generation.
-Finally, the roulette wheel is nothing more than a weighted sort mechanism.
+Eventually, the roulette wheel is nothing more than a weighted sort mechanism.
 
-The \textbf{tournament} selection, instead, consists of randomly selecting a group of individuals from the larger population and taking only the one with the highest fitness. 
-The number of individuals competing in each tournament is commonly set to 2 but in this work we decide to improve a variable tournament dimension for each iteration.
+The \textbf{tournament} selection, instead, consists of randomly selecting a group of individuals from the larger population and taking only the ones with the highest fitness values. 
+The number of individuals competing in each tournament is commonly set to $2$ but in this work we decide to implement a variable tournament dimension for each iteration.
 
 The other elements, however, are standard.
-
 Among these we remember:
 \begin{itemize}
-\item \textbf{crossover:} we apply the simplest crossover strategy called \textit{single-point};
-\item \textbf{mutation:} we apply the simplest mutation version called \textit{point mutation}, with a mutation probability described by a \textbf{mutation rate}.
+\item \textbf{crossover:} the simplest crossover strategy called \textit{single-point} is applied;
+\item \textbf{mutation:} the basic mutation version called \textit{point mutation}, with a mutation probability described by a \textbf{mutation rate}, is applied.
 \end{itemize}
 The \textit{single-point} crossover is one of the simple crossover technique used for random GA applications. This crossover uses the single point fragmentation of the parents and then combines the parents at the crossover point to create the offspring or child \cite{venticinque}.
 
-The \textit{point mutation} consists of change each individual gene value according to a certain probability. The method is easy for operating, but it cannot effective control to mutation
-result \cite{ventisei}.
+The \textit{point mutation} consists of change each individual gene value according to a certain probability. 
+The method is easy in its implementation, but it cannot effective control the mutation results \cite{ventisei}.
 %tournament in GA, wheel in KGA
 
-Seeing the results in using the different selection techniques we decide to use \textit{tournament} in classical GA and \textit{roulette-wheel} in KGA. In fact the \textit{roulette-wheel} selection implements more the exploitation aspects of GA while the \textit{tournament} selection allow to improve a more exploratory approach, which is exactly what we need working on big permutations \cite{ventisette}.
+Having seen the results provided by the different selection techniques, we decide to use \textit{tournament} in classical GA and \textit{roulette-wheel} in KGA. In fact the \textit{roulette-wheel} selection implements more the exploitation aspects of GA while the \textit{tournament} selection allow to improve a more exploratory approach, which is exactly what we need when working on big permutations \cite{ventisette}.
 \subsection{KGA}
 The \textbf{K-Means Genetic Algorithm} (KGA) as mentioned in Sec.~\ref{sec:KGA}, is composed of different phases described below.
 
-\paragraph{K-Means Clustering:} The first step consist of create an ordinary number of clusters using the K-Means clustering algorithm, which pseudocode is presented in Tab:~\ref{Tab: K-Means pseudocode}.
+\paragraph{K-Means Clustering:} The first step consists of create an ordinary number of clusters using the K-Means clustering algorithm, which pseudocode is presented in Tab:~\ref{Tab: K-Means pseudocode}.
 \begin{table}
 \centering
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
@@ -572,16 +570,17 @@ The \textbf{K-Means Genetic Algorithm} (KGA) as mentioned in Sec.~\ref{sec:KGA},
 \paragraph{Intra-group evolution operation:}
 The aim of the intra-group evolution operation is to find the shortest path for the given vertices in each cluster.
 GA is performed in each cluster aiming to obtain an approximate solution by a couple of genetic operations like selection, crossover, and mutation.
-Running the GA algorithm on smaller portion of original data allows to improve performance and reach better solutions.
-Eventually all those clusters could be handled parallel.
-The result of this step is tours $T_1,T_2,\dots,T_k$ for clusters $C_1,C_2,…,C_k$.
+Running the GA algorithm on smaller portion of original data allows to improve time performances and reach better solutions.
+Eventually all those clusters could be handled in parallel.
+The result of this step is the creation of tours $T_1,T_2,\dots,T_k$ for each cluster  $C_1,C_2,…,C_k$.
+
 \paragraph{Inter-group connection:}
-In the last step, what we obtain is the shortest path between the given vertices in each cluster.
-With the aim of reconstruct the whole shortest path we need to connect properly every cluster to the others.
-Connect two clusters determine which edges will be deleted from the adjacent shortest path among each cluster, and which edges will be linked for combining two adjacent clusters into one. 
-Assuming $i$ and $j$ are two closest vertices between two clusters $G_i$ and $G_j$ for $G_i,i−1$ and $i+1$ are two adjacent vertices of $i$, and the same to $G_j,j−1$ and $j+1$ are two adjacent vertices of $j$. 
-Given $G_i$ and $G_j$, in order to combine the two clusters into one, we need to select two vertices $i \in i′$ and $j \in j'$ for deleting and linking edges.
-With the aim of apply this strategy we refer to Eq.~(\ref{eq: int-group-conn}) 
+In the previous step, the shortest path between the given vertices in each cluster is obtained.
+With the aim of reconstructing the whole shortest path we need to properly connect every cluster to the others.
+by connect two clusters, one should determine which edges will be deleted from the adjacent shortest path among each cluster, and which edges will be linked for combining two adjacent clusters into one.
+ 
+Assume that $i \in G_i$ and $j \in G_j$ are two closest vertices between two clusters $G_i$ and $G_j$, consider $i−1,~i+1 \in G_i$ to be two adjacent vertices of the vertex $i$, and $j−1,j+1 \in G_j$ to be two adjacent vertices of the vertex $j$. 
+Given $G_i$ and $G_j$, in order to combine the two clusters into a single one, we need to select two vertices $i^*$ and $j^*$ for deleting and linking edges, according to Eq.~(\ref{eq: int-group-conn}) 
 \begin{equation}
 \{i^*,j^*\} = \mathrm{arg min}_{i',j'} 
 \begin{cases}
@@ -589,10 +588,14 @@ d_{ij} + d_{i'j'} - d_{ii'} - d_{jj'}\\d_{ij'} + d_{i'j} - d_{ii'} - d_{jj'}
 \end{cases}
 \label{eq: int-group-conn}
 \end{equation}
-where $i' \in \{i-1; i+1\}, j' \in \{j-1;j+1\}$.
-Following this strategy, the first two clusters are combined into one, then the new generated cluster combines with the third cluster, and so on, step by step. At last, all those clusters are joined into one tour, and the shortest whole travelling tour is derived as shown in Fig.~\ref{fig:gconnect}.
+where $i' \in \{i-1; i+1\}, j' \in \{j-1;j+1\}$ as in \cite{ventitre}. %FIXME: @faber check  cit
 
-The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{ventitre},\cite{ventiquattro}. It is worth to underline that, in order to achieve better performance from the inter-group connection operation, we use the GA also to find the shortest path between the clusters \textit{centroids}. This allow to improve the final result and restricts the number of intersections through the path.
+Following this strategy, the first two clusters are combined together forming a new supercluster,which combines with a third cluster, and so on, step by step. 
+At last, all those clusters are joined into one tour, and the shortest whole travelling tour is derived as shown in Fig.~\ref{fig:gconnect}.
+
+The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} inspired by\cite{ventitre},\cite{ventiquattro}. 
+It is worth to underline that, in order to achieve better performance from the inter-group connection operation, we use the GA also to find the shortest path between the clusters \textit{centroids}. 
+This allows to improve the final result and restricts the number of intersections through the path.
 
 \begin{figure}
 \centering \includegraphics[scale=0.9]{figs/inter_group_connection.png}
@@ -621,10 +624,12 @@ The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{v
 \caption{\label{Tab: KGA pseudocode}KGA pseudocode}
 \end{table}
 
-
+%got till here @DB
+%\vfill
+%\newpage
 \section{Results and Evaluation}
 %The Results section is dedicated to presenting the actual results (i.e. measured and calculated quantities), not to discussing their meaning or interpretation. The results should be summarized using appropriate Tables and Figures (graphs or schematics). Every Figure and Table should have a legend that describes concisely what is contained or shown. Figure legends go below the figure, table legends above the table. Throughout the report, but especially in this section, pay attention to reporting numbers with an appropriate number of significant figures. 
-Each algorithm is tested on every dataset listed in Sec.~(\ref{sec:data}).
+Each algorithm is tested on every dataset listed in Sec.~\ref{sec:data}.
 For every algorithm each run consists of five iterated executions, in order to compute the mean and standard deviation of the resulting optimal values. 
 
 The performance tests are executed on a machine with quad-core Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz. 
@@ -757,7 +762,7 @@ In regard to  the evolutionary approach, GA and KGA in particular for this work,
 \item Both algorithms perform well but, due to their nature, they require a large amount of iteration i.e. time, to reach good performance in terms of average displacements from the globally optimal solution.
 \item both algorithms are rather slow, especially if compared in terms of ratio between time and displacements from the optimal solution in average.
 \item comparing the two algorithms in terms of percentage variation is possible observing Fig.~\ref{fig:GA_KGA_performance}. GA seems to be more efficient on small dataset while KGA seems to suffer not in finding the optimal solutions for the sub-problems but in reconstruct the total optimal solution linking the sub-problems ones. This is due to the linking mechanism that could cause a small distortion for each linking operation causing its accumulation and amplification. Indeed bigger the dataset is, more efficient seems to become KGA compared with GA; where GA seems to substantially diverge from the optimal solution, KGA improve his performance as the problem dimension grows.
-\item it is worth to notice that both algorithms' performance could be improved with a fine parameters tuning and providing more computational resources on a larger amount of time, maybe implementing a parallel computation approach. 
+\item it is worth to notice that both algorithms performance could be improved with a fine parameters tuning and providing more computational resources on a larger amount of time, maybe implementing a parallel computation approach. 
 \end{itemize}
 Going further in comparison, it is worth to make a parallel between the performance of the Ant-family algorithms and the evolutionary ones:
 \begin{itemize}
