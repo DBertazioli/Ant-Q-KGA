@@ -473,7 +473,7 @@ This choice is explained due to the fact that in our implementation on each core
 \item in Ant-Q, the parameter $\gamma$ is taken to be equal or close to $1$, differently from the main ref.~\cite{undici}. This choice is quite empirical, since we obtained slightly better performances with $\gamma \in [0.9,1]$. For simplicity in producing the final results a value of $\gamma=1$ is taken. A possible explanation of such a choice might be found once again in the parallel implementation: since the global pheromone matrix is the result of an average of the results of $n\_cores$ systems, the future choice taken considering such a matrix (having the role of a Q-table in this circumstances) might be more trustable with respect to the classical situation of a single system sequential implementation. Thus, if this is confirmed, a value of $\gamma \rightarrow 1$ would lead to a better performance.
 \end{itemize}
 
-\subsection{GA}
+\subsection{GA} \label{sec:methodological_GA}
 %Our implementation of the genetic blabla
 % maybe better in methodological approach
 With reference to Sec.~\ref{sec:gen_alg}, the pseudo code of the standard genetic algorithm is summarized in the Tab.~\ref{Tab: GA pseudocode}, where Tm is the mutation rate that determines the rate at which the mutation operator is applied, Tp is the population size (number of
@@ -483,10 +483,10 @@ chromosomes), elite\_n is the number of individuals selected with the Selection 
 \begin{tabular}{@{}>{\hspace{3em}}p{.8\linewidth}@{}}
 \toprule
 \unskip \textbf{Algorithm} Genetic Algorithm\\
-{\footnotesize 1:} \textbf{procedure} Genetic(Tm, Tp, elite\_n, Selection, MaxIt)\\[.25\normalbaselineskip]
+{\footnotesize 1:} \textbf{procedure} Genetic(Tm, Tp, elite\_n, Selection, MaxGen)\\[.25\normalbaselineskip]
 {\footnotesize 2:}\quad $Pop \leftarrow GeneratePopulation(Tp)$ \\
 {\footnotesize 3:}\quad $Pop \leftarrow Evaluation(Pop)$ \\
-{\footnotesize 4:}\quad \textbf{for} $i = 1\dots MaxIt$ \textbf{do} \\
+{\footnotesize 4:}\quad \textbf{for} $i = 1\dots MaxGen$ \textbf{do} \\
 {\footnotesize 5:}\qquad $Pop \leftarrow Selection(elite\_n~from~Pop)$ \\
 {\footnotesize 6:}\qquad $Pop \leftarrow Crossover(Pop)$ \\
 {\footnotesize 7:}\qquad With probability $Tm$ do: \\
@@ -579,8 +579,7 @@ d_{ij} + d_{i'j'} - d_{ii'} - d_{jj'}\\d_{ij'} + d_{i'j} - d_{ii'} - d_{jj'}
 \end{equation}
 where $i' \in \{i-1; i+1\}, j' \in \{j-1;j+1\}$.
 Following this strategy, the first two clusters are combined into one, then the new generated cluster combines with the third cluster, and so on, step by step. At last, all those clusters are joined into one tour, and the shortest whole travelling tour is derived as shown in Fig.~\ref{fig:gconnect}.
-The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{ventitre},\cite{ventiquattro}.
-%FIXME ordinare citazioni GA KGA
+The whole process of the KGA is listed in Tab.~\ref{Tab: KGA pseudocode} \cite{ventitre},\cite{ventiquattro}. It is worth to underline that, in order to achieve better performance from the inter-group connection operation, we use the GA also to find the shortest path between the clusters \textit{centroids}. This allow to improve the final result and restricts the number of intersections through the path.
 \begin{figure}
 \centering \includegraphics[scale=0.9]{figs/inter_group_connection.png}
 \caption{\label{fig:gconnect} The inter-group connection procedure illustrated. Taken from \cite{ventitre}.}
@@ -664,22 +663,23 @@ As regards the secondary part of this work, including GA and KGA, the following 
 \item Keeping in mind Tab.~\ref{Tab: GA pseudocode}, mutation rate ($Tm$), is typically set to $Tm = 0.01$. 
 This choice is explained with the aim of limiting an excessive randomization while still maintaining a good trade-off between the exploitation and exploration behaviour.
 \item Population size ($Tp$) is set to $Tp = 300$ for every dataset with classic GA with the exception of \textit{pr1002}, where the dataset dimension would have not allowed such a setting considering the computational limits. 
-In this particular case we take $Tp = 100$. 
-For each dataset used with KGA $Tp = 100$ considering the reduced dimensionality of the sub-problems which such an algorithm is applied to.
-\item The action of elitism mechanism is controlled by a parameter, $elite\_n$,  corresponding to the number of individuals selected due to elitism, taken equal to $10\%$ of $Tp$.
-\item Number of generations ($MaxIt$) is set to $MaxIt = 1000$ in classic GA except for \textit{pr1002} where $MaxIt = 5000$ attempting to achieve a decent performance on such a large dataset.
-Instead, in KGA a larger value of $MaxIt = 5000$ is used for each dataset still considering the dimensional reduction associated with the clustering.
+In this particular case we take $Tp = 125$. 
+For each dataset used with KGA $Tp = 125$ considering the reduced dimensionality of the sub-problems which such an algorithm is applied to.
+\item Selection mechanism as mentioned in Sec.~\ref{sec:methodological_GA} is set to $tournament$ in classic GA, and $roulette-wheel$ in KGA.
+\item The action of elitism mechanism is controlled by a parameter, $elite\_n$,  corresponding to the number of individuals selected due to elitism, taken equal to $10\%$ of $Tp$ in most cases. In KGA $elite\_n$ is taken equal to $25$.
+\item Number of generations ($MaxGen$) is set to $MaxGen = 5000$ in classic GA attempting to achieve a decent performance on such a large dataset.
+Instead, in KGA a larger value of $MaxGen = 1000$ is used for each dataset still considering the dimensional reduction associated with the clustering.
 \item Specifically for KGA algorithm, $k$ is the number of clusters created with the K-Means algorithm in order to split the main problem into smaller sub-problems. In this implementation $k$ is set to different values according to original problem's dimension.
 In particular
 \begin{itemize}
 \item $k = 2$ for dj38;
 \item $k = 3$ for berlin52;
-\item $k = 10$ for ch130;
-\item $k = 40$ for d198;
-\item $k = 30$ for pr1002.
+\item $k = 8$ for ch130;
+\item $k = 30$ for d198;
+\item $k = 60$ for pr1002.
 \end{itemize}
 The $k$ dimensions are chose referring to the datasets' points shape.
-%FIXME: check with max 
+\item it is worth to notice that KGA in addition to the number of generations into each cluster, has a number of iterations also to determine the optimal path between clusters' centroids as mentioned in Sec.~\ref{sec:KGA}. This parameter is set to $1000$ for each dataset regardless the clusters' number. This is due to the will to equal compare the algorithm's performance for each dataset.
 \end{itemize}
 Finally, Tab.~\ref{tab:ga_results} presents the results of such a testing procedure for the GA algorithm, whereas Tab.~\ref{tab:kga_results} provides the same information for the KGA approach.
 
@@ -692,11 +692,11 @@ Finally, Tab.~\ref{tab:ga_results} presents the results of such a testing proced
 Dataset            & \multicolumn{7}{c}{GA}                                                              \\
 \hline
 & OptimalTour & Mean & SD & Best & \% Avg Dist & \% Best Dist & Avg time (s) \\ \hline
-dj38 & 6656 & 7032.91 & 574.34 & 6659.43 & 5.66 & 0.05 & 263.32 \\ 
-berlin52 & 7542 & 8095.35 & 167.27 & 7868.72 & 7.34 & 4.33 & 285.81 \\ 
-ch130 & 6110 & 7933.02 & 1041.27 & 6929.81 & 29.84 & 13.42 & 434.95 \\ 
-d198 & 15780 & 27579.73 & 1869.54 & 25537.85 & 74.78 & 61.84 & 603.96 \\ 
-pr1002 & 259045 & 4666413.09 & 12608.57 & 4652556.08 & 1701.39 & 1696.04 & 2640.88 \\ 
+dj38 & 6656 & 7032.91 & 574.34 & 6659.43 & 5.66 & 0.05 & 263 \\ 
+berlin52 & 7542 & 8095.35 & 167.27 & 7868.72 & 7.34 & 4.33 & 286 \\ 
+ch130 & 6110 & 7933.02 & 1041.27 & 6929.81 & 29.84 & 13.42 & 435 \\ 
+d198 & 15780 & 27579.73 & 1869.54 & 25537.85 & 74.78 & 61.84 & 604 \\ 
+pr1002 & 259045 & 4666413.09 & 12608.57 & 4652556.08 & 1701.39 & 1696.04 & 2641 \\ 
 
 \end{tabular}
 }
@@ -711,11 +711,11 @@ pr1002 & 259045 & 4666413.09 & 12608.57 & 4652556.08 & 1701.39 & 1696.04 & 2640.
 Dataset            & \multicolumn{7}{c}{KGA}                                                              \\
 \hline
 & OptimalTour & Mean & SD & Best & \% Avg Dist & \% Best Dist & Avg time (s) \\ \hline
-dj38 & 6656 & 9608.77 & 1817.02 & 7720.03 & 44.36 & 15.99 & 140.05 \\ 
-berlin52 & 7542 & 8879.59 & 446.69 & 8218.95 & 17.74 & 8.98 & 188.05 \\ 
-ch130 & 6110 & 7790.85 & 312.17 & 7314.08 & 27.51 & 19.71 & 408.72 \\ 
-d198 & 15780 & 24023.86 & 3066.94 & 20830.94 & 52.24 & 32.01 & 1412.78 \\ 
-pr1002 & 259045 & 379495.87 & 6343.57 & 373865.26 & 46.50 & 44.32 & 4456.37 \\ 
+dj38 & 6656 & 9608.77 & 1817.02 & 7720.03 & 44.36 & 15.99 & 140 \\ 
+berlin52 & 7542 & 8879.59 & 446.69 & 8218.95 & 17.74 & 8.98 & 188 \\ 
+ch130 & 6110 & 7790.85 & 312.17 & 7314.08 & 27.51 & 19.71 & 409 \\ 
+d198 & 15780 & 24023.86 & 3066.94 & 20830.94 & 52.24 & 32.01 & 1413 \\ 
+pr1002 & 259045 & 379495.87 & 6343.57 & 373865.26 & 46.50 & 44.32 & 4456 \\ 
 \end{tabular}
 }
 \caption{\label{tab:kga_results}The resulting KGA performances on the test datasets.}
@@ -732,21 +732,22 @@ Regarding the ACO and Ant-Q results, the following conclusions can be drawn:
 
 \item a comparison between the two algorithms can be done in terms of the percentage variation. Observing the plot in Fig.~\ref{FIXME fig:ant-results} it can be clearly stated that the Ant-Q has slightly better performances, especially in providing the best solution and typically having a better average execution time (even though the magnitude order remains similar between the two algorithms).
 Thus, the introduction of the Q-learning-like updating rule (Eq.~\ref{eq:antq-eq}) seems to improve the performance over the ``simple" ACO. Therefore the hybrid approach performs better than the classic one. 
-This results is in agreement with those of Gambardella and Dorigo in ref.~\cite{undici}.
+This results is in agreement with those of Gambardella and Dorigo in Ref.~\cite{undici}.
 
 \item it is worth to notice that one could increase the performances of such algorithms even in case of larger dataset, just providing more computational resources and time. The good news of this approach consist in being able to scale out pretty easily, just by setting up an MPI cluster\footnote{For more info see \url{https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/}} and configuring an host-file for the parent-children scheduling.
 However, for our limited resources, the last runs on large datasets were pretty limited in the number of iterations, thus producing a wider gap with the globally optimal solution.
 \end{itemize}
-
 For as regards the evolutionary approach, GA and KGA in particular for this work, the following conclusions are drawn:
 \begin{itemize}
 \item Both algorithms perform well but, due to their nature, they require a large amount of iteration i.e. time, to reach good performance in terms of average displacements from the globally optimal solution.
 \item both algorithms are rather slow, especially if compared in terms of ratio between time and displacements from the optimal solution in average.
-\item GA seems to be more efficient on small dataset while KGA seems to suffer not in finding the optimal solutions for the sub-problems but in reconstruct the total optimal solution linking the sub-problems ones. This is due to the linking mechanism that could cause a small distortion for each linking operation causing its accumulation and amplification. Indeed bigger the dataset is, more efficient seems to become KGA compared with GA; where GA seems to substantially from the optimal solution, KGA improve his performance as the problem dimension grows.
-\item comparing the two algorithms in terms of percentage variation is possible observing Fig.~\ref{fig:GA_KGA_performance}.
-%FIXME: da finire
+\item comparing the two algorithms in terms of percentage variation is possible observing Fig.~\ref{fig:GA_KGA_performance}. GA seems to be more efficient on small dataset while KGA seems to suffer not in finding the optimal solutions for the sub-problems but in reconstruct the total optimal solution linking the sub-problems ones. This is due to the linking mechanism that could cause a small distortion for each linking operation causing its accumulation and amplification. Indeed bigger the dataset is, more efficient seems to become KGA compared with GA; where GA seems to substantially diverge from the optimal solution, KGA improve his performance as the problem dimension grows.
+\item it is worth to notice that both algorithms' performance could be improved with a fine parameters tuning and providing more computational resources on a larger amount of time, maybe implementing a parallel computation approach. 
 \end{itemize}
-Going further in comparison, it is worth to make a parallel between the performance of the Ant-family algorithms and the evolutionary ones. FIXME: kekekek
+Going further in comparison, it is worth to make a parallel between the performance of the Ant-family algorithms and the evolutionary ones:
+\begin{itemize}
+\item FIXME:kekekeke
+\end{itemize}
 
 \section{Conclusions}
 %Conclusions should summarize the central points made in the Discussion section, reinforcing for the reader the value and implications of the work. If the results were not definitive, specific future work that may be needed can be (briefly) described. The conclusions should never contain ``surprises''. Therefore, any conclusions should be based on observations and data already discussed. It is considered extremely bad form to introduce new data in the conclusions.
