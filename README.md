@@ -1,10 +1,12 @@
 # Q-ant
-ACO Applied to TSP with RL algorithm integration (Q-learning) 
+ACO with RL algorithm integration (Q-learning) 
+Genetic with k-means clustering
 
+Applied to symmetric Traveling Salesman Problem
 
 ## To Do List:
 <ol>
-  <li>Find benchmarks (stile taillard)
+  <li>Find benchmarks (stile taillard) (done, available at)
     <ul>
       <!-- <li><a href = "http://www.math.uwaterloo.ca/tsp/world/countries.html#%20DJ"> try this!</a></li> -->
       <li><a href = "https://wwwproxy.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/tsp/">Data</a> <br>
@@ -20,5 +22,6 @@ ACO Applied to TSP with RL algorithm integration (Q-learning)
         - berlin52
         - ch130
         - d198
-        - maybe dj38 (http://www.math.uwaterloo.ca/tsp/world/dj38.tsp) 
+        - dj38 (http://www.math.uwaterloo.ca/tsp/world/dj38.tsp) 
+        - pr1002
         
