@@ -59,9 +59,9 @@ Folders:
 <a name="datasets"></a>
 ## &#9741; &nbsp; Datasets per test performances:
         - [dj38](http://www.math.uwaterloo.ca/tsp/world/dj38.tsp)
-        - berlin52
-        - ch130
-        - d198
+        - berlin52 http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsp/berlin52.tsp
+        - ch130 http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsp/ch130.tsp
+        - d198 http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsp/d198.tsp
         - [pr1002](http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsp/pr1002.tsp)
 
 <a name="aboutus"></a>
