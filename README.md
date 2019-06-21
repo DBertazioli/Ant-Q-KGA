@@ -31,17 +31,17 @@ Folders:
   <li><a href = "https://github.com/DBertazioli/Ant-Q-KGA/tree/master/report">report</a> contains the project repo along with its latex source code.</li>
 </ul> -->
   
-  - **Sequential_ACO** contains the sequential ACO implementation, used as an internal reference while developing the parallel algorithm. No results among those produced in the report belongs to such an implementation.
+  - [**Sequential_ACO**](https://github.com/DBertazioli/Ant-Q-KGA/tree/master/Sequential_ACO) contains the sequential ACO implementation, used as an internal reference while developing the parallel algorithm. No results among those produced in the report belongs to such an implementation.
 
-  - **genomic** contains out implementation of the genomic algorithm, along with the hybrid approach.
+  - [**genomic**](https://github.com/DBertazioli/Ant-Q-KGA/tree/master/genomic) contains out implementation of the genomic algorithm, along with the hybrid approach.
   
-  - **parallel-ACO** contains the parallel implementation of Ant Colony Algorithm in Python.
+  - [**parallel-ACO**](https://github.com/DBertazioli/Ant-Q-KGA/tree/master/parallel-ACO) contains the parallel implementation of Ant Colony Algorithm in Python.
   
-  - **parallel-AntQ** contains the parallel implementation of Ant-Q Algorithm in Python.
+  - [**parallel-AntQ**](https://github.com/DBertazioli/Ant-Q-KGA/tree/master/parallel-AntQ) contains the parallel implementation of Ant-Q Algorithm in Python.
   
-  - **presentation** is a section under developement (spoiler alert: should contain the presentation slides!)
+  - [**presentation**](https://github.com/DBertazioli/Ant-Q-KGA/tree/master/presentation) is a section under developement (spoiler alert: should contain the presentation slides!)
   
-  - **report** contains the project repo along with its latex source code.
+  - [**report**](https://github.com/DBertazioli/Ant-Q-KGA/tree/master/report) contains the project repo along with its latex source code.
   
   
 <!-- ## To Do List:
