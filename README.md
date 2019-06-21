@@ -3,7 +3,7 @@
 </p>
 
 <h4 align = "center">An hybrid metaheuristic approach</h4> 
-<h6 align = "center">to the travelling salesman problem</h6> 
+<h6 align = "center">to the traveling salesman problem</h6> 
 
 <p align="center">
   <a href="#content">Content &nbsp;</a> |
@@ -58,11 +58,11 @@ Folders:
 
 <a name="datasets"></a>
 ## &#9741; &nbsp; Datasets per test performances:
+        - [dj38](http://www.math.uwaterloo.ca/tsp/world/dj38.tsp)
         - berlin52
         - ch130
         - d198
-        - dj38 (http://www.math.uwaterloo.ca/tsp/world/dj38.tsp) 
-        - pr1002
+        - [pr1002](http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsp/pr1002.tsp)
 
 <a name="aboutus"></a>
 ## &#9741; &nbsp; About us
