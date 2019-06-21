@@ -17,7 +17,7 @@
 %\usepackage{varioref}
 \usepackage{float}
 \restylefloat{table}
-\usepackage[toc,page]{appendix}
+\usepackage[title]{appendix}
 \usepackage[margin=3cm]{geometry}
 \usepackage{enumitem}
 
@@ -80,8 +80,10 @@ Massimiliano Perletti - 847548 - m.perletti2@campus.unimib.it\\[1cm] % Your name
 \end{titlepage}
 \vspace*{5cm}
 \begin{abstract}
-In order to try to approach a non-linear optimization problem, especially a combinatorial one, and the state-of-the-art in metaheuristics and hybridization, the travelling salesman problem (TSP), in particular the symmetric version, was chosen, together with two specific algorithms: Ant Colony and Genetic Algorithm.
-Our main goal is to apply this two algorithms on TSP, with the aim of obtain good performances referring to the abundant literature concerning these specific algorithms. After that, our objective is try to improve an hybrid version of each algorithm, in particular implementing Ant Colony with elements of Reinforcement Learning i.e. Q-Learning algorithm, while Genetic Algorithm with techniques of dimensionality reduction, such as clustering.
+In order to face a non-linear optimization problem, especially a combinatorial one, and the state-of-the-art in metaheuristics and hybridization, the travelling salesman problem (TSP), in particular in its symmetric version, was chosen, together with two specific algorithms: Ant Colony and Genetic Algorithm.
+The main goal of this work consists of applying the two algorithms on TSP, referring to the abundant implementations in literature concerning these specific algorithms. 
+After that, our objective is to attempt an improvement through an hybrid version of each algorithm, in particular combining Ant Colony together with elements of Reinforcement Learning i.e. Q-Learning algorithm, while Genetic Algorithm are integrated along with techniques of dimensionality reduction, such as clustering.
+A series of tests and comparisons are performed, not only between each algorithm and its hybrid version, where the hybridization is proven to provide a relevant performance boost, but also among the two different sets of algorithms. In such a comparison, interesting results are found, suggesting the first Ant-type algorithms to be better suitable in cases of performant hardware or low-dimensional datasets, whereas the second evolutionary approach combined with clustering to be better performant on large datasets and especially in those situations where the objective is an exploratory analysis of the problem, requiring a responsible approach in a reasonable (cpu-)time.
 %FIXME: giusto un tentativo, non so se vi possa piacere l'impostazione.
 %The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
 %The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
@@ -756,14 +758,15 @@ Regarding the ACO and Ant-Q results, the following conclusions can be drawn:
 \item a comparison between the two algorithms can be done in terms of the percentage variation. Observing the plot in Fig.~\ref{fig:aco-comparison} it can be clearly stated that the Ant-Q has slightly but systematically better performances, especially in providing the best solution and typically having a better average execution time (even though the magnitude order remains similar between the two algorithms).
 
 Thus, the introduction of the Q-learning-like updating rule (Eq.~\ref{eq:antq-eq}) seems to improve the performance over the ``simple" ACO. Therefore the hybrid approach performs better than the classic one. 
-This results is in agreement with those of Gambardella and Dorigo in Ref.~\cite{undici}.
+This result is in agreement with those of Gambardella and Dorigo in Ref.~\cite{undici}.
 
-\item it is worth to notice that one could increase the performances of such algorithms even in case of larger dataset, just providing more computational resources and time. The good news of this approach consists of being able to scale out pretty easily, just by setting up an MPI cluster\footnote{For more info see \url{https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/}} and configuring an host-file for the parent-children scheduling.
+\item it is worth to notice that one could increase the performances of such algorithms even in case of larger dataset, just providing more computational resources and time. 
+The good news of this approach consist of being able to scale out pretty easily, just by setting up an MPI cluster\footnote{For more info see \url{https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/}} and configuring an host-file for the parent-children scheduling.
 However, for our limited resources, the last runs on large datasets were pretty limited in the number of iterations, thus producing a wider gap with the globally optimal solution.
 \end{itemize}
 In regard to  the evolutionary approach, GA and KGA in particular for this work, the following conclusions are drawn:
 \begin{itemize}
-\item Both algorithms perform well but, due to their nature, they require a large amount of iteration i.e. time, to reach good performance in terms of average displacements from the globally optimal solution.
+\item Both algorithms perform well but, due to their nature, they require a large amount of iteration (that is, time), to reach good performance in terms of average displacements from the globally optimal solution.
 \item both algorithms are rather slow, especially if compared in terms of ratio between time and displacements from the optimal solution in average.
 \item comparing the two algorithms in terms of percentage variation is possible observing Fig.~\ref{fig:GA_KGA_performance}. GA seems to be more efficient on small dataset while KGA seems to suffer not in finding the optimal solutions for the sub-problems but in reconstruct the total optimal solution linking the sub-problems ones. This is due to the linking mechanism that could cause a small distortion for each linking operation causing its accumulation and amplification. Indeed bigger the dataset is, more efficient seems to become KGA compared with GA; where GA seems to substantially diverge from the optimal solution, KGA improve his performance as the problem dimension grows.
 \item it is worth to notice that both algorithms performance could be improved with a fine parameters tuning and providing more computational resources on a larger amount of time, maybe implementing a parallel computation approach. 
@@ -771,11 +774,11 @@ In regard to  the evolutionary approach, GA and KGA in particular for this work,
 Going further in comparison, it is worth to make a parallel between the performance of the Ant-family algorithms and the evolutionary ones:
 \begin{itemize}
 \item As shown in Fig.~(\ref{fig:aco-comparison},\ref{fig:GA_KGA_performance}) the ACO and Ant-Q algorithms seems achieve better performance than GA and KGA on small and medium-size datasets. 
-This is probably due to the nature of this algorithms.
-While Ant family algorithms use a "brute-force" approach, evolutionary algorithms works on entire permutations and this prevents them from achieving good results;
+This is probably due to the nature of those algorithms.
+While Ant family algorithms use an iteratively constructing approach, evolutionary algorithms works on entire permutations and this might limit them from achieving good results on the TSP problem, unless a brilliant optimization of parameters is done, and unless a great computational power (or time) is given;
 \item Always referring to the figures already mentioned, but especially to Tab.~(\ref{tab:aco_results},\ref{tab:antq_results},\ref{tab:ga_results},\ref{tab:kga_results}) where is possible to see also the information about times required for each algorithm to reach their respective results, evolutionary family algorithms appears good for exploratory works on large datasets especially in absence of high performance hardware.
-In fact GA for small and KGA for larger datasets, represents a good solution for initial approach to a combinatorial problem, in order to save computational time to achieve pretty good approximate solutions, maybe with the aim to find a good starting point for another algorithm.
-Instead, if the aim is to try to find the global optimal solution, and especially if in condition to have powerful hardware and enough time, then Ant family algorithms are more suited.
+\\In fact GA for small and KGA for larger datasets, represents a good solution for initial approach to a combinatorial problem, in order to save computational time to achieve pretty good approximate solutions, maybe with the aim to find a good starting point for another algorithm.
+Instead, whether the aim is of finding the global optimal solution, and especially when powerful hardware and enough time are available, then suitable algorithms seems to be those of the Ant family.
 \end{itemize}
 \begin{figure}
 \centering \includegraphics[scale=0.5]{figs/ACO_Ant-Q_avg_best.png}
@@ -888,4 +891,13 @@ Krishna, K and Murty, Narasimha M (1999) Genetic K-Means Algorithm. In: IEEE Tra
 An Analysis of Ant Colony Clustering Methods: Models, Algorithms and Applications Gong Zhe, Li Dan, An Baoyu, Ou Yangxi, Cui Wei, Niu Xinxin, Xin Yang, \url{https://pdfs.semanticscholar.org/6b8e/36adaa1cbe7781ebac1ff7903dfea492c59a.pdf}
 \end{thebibliography}
 %FIXME: add aknoledgments and APPENDIX WITH LINKS VARI
+\begin{appendix}
+\appendix
+\section{Appendix: code and data}
+The entire structure of the project has developed on a github repository.
+
+Thus, the full code and the provided results can be found at https://github.com/DBertazioli/Ant-Q-KGA.
+
+The reader can refer to the repo README in order to get informations about the repo structure.
+\end{appendix}
 \end{document}
