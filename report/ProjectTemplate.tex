@@ -145,7 +145,7 @@ In iteratively building a solution (a total path) for a single ant, a local stoc
 Exploration is also encouraged  by a mechanism of  pheromone  evaporation, which prevents the  colony from  getting stuck into a solution corresponding to a (only) local optimum \footnote{However, notice that in real ant colonies pheromone evaporation is too slow to be a significant part of their search mechanism.}.
 
 \subsubsection{Ant-Q Metaheuristic}\label{sec:antq}
-In order to favor a better understanding of the working mechanism of Ant-Q Metaheuristic (presented in details in Sec.~(\ref{sec:met-antq}) and to give deeper insight in our implentation (following \cite{undici} ), let us introduce some theoretical hints about the context.
+In order to favor a better understanding of the working mechanism of Ant-Q Metaheuristic (presented in details in Sec.~(\ref{sec:met-antq}) and to give deeper insight in our implentation following \cite{undici} ), let us introduce some theoretical hints about the context.
 \paragraph{Hints on reinforcement learning:}
 Reinforcement  Learning  (RL)  is  an  (almost) unsupervised  learning  approach.
 
@@ -173,7 +173,7 @@ and accordingly:
 \begin{equation}
 Q^\pi(s,a)=E_\pi \{ \sum_i \gamma^i r_{t+1, i+1 ~|~ s_t=s,~ a_t=a } \}~,
 \end{equation}
-where $r_{t+1}$ is the reward associated with the $t-th$ transition between system states $s_t$ and $s_{t+1}$.
+where $r_{t+1}$ is the reward associated with the $t$-th transition between system states $s_t$ and $s_{t+1}$.
 
 The RL problem consists of the agent trying to find the optimal policy $\pi^*$ that maximizes the value  functions, obtaining:
 \begin{equation}
@@ -411,7 +411,7 @@ Therefore, the update rule Eq.~(\ref{eq:antq-eq}) is reapplied at the completion
 \label{eq:antq-delay}
 \end{equation}
 
-\item still according to \cite{undici},\cite{diciotto} $\Delta \tau_{ij}$ can be updated with an iteration  best  rule (update every single colony iteration) or  global  best (update based on the global best value.
+\item still according to \cite{undici},\cite{diciotto} $\Delta \tau_{ij}$ can be updated with an iteration  best  rule (update every single colony iteration) or  global  best (update based on the global best value).
 \end{itemize}
 
 Notice that many other attempts were made in the direction of hybridizing ACO and reinforcement learning based algorithms, some particularly interesting and successful, such as \cite{sedici},\cite{quattordici},\cite{quindici}. However, due to the few time available, we could head our forces in implementing only the in-detail-described Ant-Q.
@@ -814,12 +814,14 @@ Even further hybridization would be possible to implement, as a future scenario.
 %\bibliography{references.bib}
 \newpage
 \section*{Acknowledgements}
-We would like to thank our professors 
-\begin{itemize}
-\item \textit{Vincezina Messina} for the whole course of \textit{Decision Models} and for the interest aroused for all the topics covered;
-\item \textit{Michele Ciavotta} for all the practical exercises concerning the topics covered in class and for his constant availability;
-\item \textit{Antonio Candelieri} for the specific lesson concerning reinforcement learning and for having aroused in us the interest in this scientific discipline.
-\end{itemize}
+%We would like to thank our professors 
+%\begin{itemize}
+%\item \textit{Vincezina Messina} for the whole course of \textit{Decision Models} and for the interest aroused for all the topics covered;
+%\item \textit{Michele Ciavotta} for all the practical exercises concerning the topics covered in class and for his constant availability;
+%\item \textit{Antonio Candelieri} for the specific lesson concerning reinforcement learning and for having aroused in us the interest in this scientific discipline.
+%\end{itemize}
+This project was made possible thanks to the professors of the \textit{Decision Models} course of the \textit{University of Milano-Bicocca}: \textit{Vincenzina Messina}, \textit{Michele Ciavotta} and \textit{Antonio Candelieri}.
+
 
 \begin{thebibliography}{9}
 %\bibitem{uno}
