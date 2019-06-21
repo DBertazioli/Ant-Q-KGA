@@ -39,7 +39,7 @@ Folders:
   
   - parallel-AntQ contains the parallel implementation of Ant-Q Algorithm in Python.
   
-  - presentation/slides are sections under developement (spoiler alert: should contain the presentation slides!)
+  - presentation is a section under developement (spoiler alert: should contain the presentation slides!)
   
   - report contains the project repo along with its latex source code.
   
