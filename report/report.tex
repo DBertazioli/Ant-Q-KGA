@@ -116,9 +116,9 @@ The first type of ``Ant-like" algorithm we implement is the \textbf{Ant Colony O
 The procedure draws inspiration from a ``real"  Ant  Colony. 
 In nature, such a system is  known  to  accomplish  some  difficult  tasks,  being beyond  the capabilities  of  a  single  ant,  exploiting the individuals collaborating  with  each  other.  
 
-In particular, ACO algorithm  is based on  foraging  behaviour  of  some  ant species.  
+In particular, ACO algorithm  is based on  emulating the  behaviour  of  some  ant species.  
 This behaviour  can  be  summed up as the ability of an ant colony to find the shortest  paths between  a source of food  and  the nest.
-Cooperation  among  the  ants  has inspired researchers to apply a similar collaboration based algorithm to those problems whose solutions can be formulated as a least cost path between an origin and a destination.
+Cooperation  among  the  ants  has inspired researchers to apply a similar cooperation based algorithm to those problems whose solutions can be formulated as a shortest-path  problem between an origin and a destination.
 Since most optimisation problems  admit such a formulation, this family of algorithms reveals to be pretty interesting.
 
 The first ACO algorithm, Ant System, was proposed by Dorigo \cite{cinque, sei, sette, otto, nove} (in different versions).
@@ -131,7 +131,7 @@ Ant species are almost blind, thus they interact with the environment and commun
 In particular some  ant species are associated with a special kind of hormone called \textbf{pheromone}: they lay pheromone trails on the paths they explore, these traces act as stimuli and other ants belonging to the colony are attracted to follow the paths having relatively more tracks.  
 Due to this mechanism, an individual who is following a  path  because of the  pheromone  trail also reinforces  it  by dropping its own pheromone too.  
 
-Thus, the  more ants  follow  a  specific  path,  the  more  likely  that  path  becomes  to  be  followed  by  the  ants  in the colony \cite{ cinque,otto, nove}.  
+Thus, the  more ants  follow  a  specific  path,  the  more  likely  that  path  becomes  to  be  followed  by  the  ants  in the colony \cite{cinque,otto, nove}.  
 
 ACO  algorithm  makes use  of ant-like agents called \textbf{artificial ants}, constructing their solutions collaboratively by sharing their experience related to the quality of solutions reached so far.
 The pheromone trails play  a  leading  role  in  the  exploitation of collective experience.
@@ -203,8 +203,7 @@ The basic structure belongs to the Ant family, whereas the update rule as well a
 \subsubsection{Genetic Algorithm} \label{sec:gen_alg}
 The latter approach we faced along this work is the \textbf{Genetic Algorithm} (GA), which we initially implement in its classical version.
 This algorithm is based on a biological metaphor: the resolution of a problem is seen as a competition among a population whose evolving individuals become better and better candidates solutions over time. 
-A ``fitness" function is used to evaluate each individual to decide whether it will contribute to the next
-generation. 
+A ``fitness" function is used to evaluate each individual to decide whether it will contribute to the next generation. 
 Then, in analogy with the biological metaphor (the gene transfer in sexual reproduction), a crossover operator is applied in order to generate the next generation of the population.
 This process, in analogy to the evolutionary theory (Darwinism), should lead after a certain number of iterations to a much more fit ensemble of individuals representing ``good" candidate solutions to the considered problem.
 
