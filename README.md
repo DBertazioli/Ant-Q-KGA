@@ -39,7 +39,7 @@ Folders:
   
   - parallel-AntQ contains the parallel implementation of Ant-Q Algorithm in Python.
   
-  - presentation/slides are sections under developement (spoiler alert: should contain the presentation slides!)
+  - presentation is a section under developement (spoiler alert: should contain the presentation slides!)
   
   - report contains the project repo along with its latex source code.
   
@@ -71,7 +71,7 @@ Folders:
 &#8860; &nbsp; **Dario Bertazioli**
 
 - *Cosa studio*: Studente Magistrale di Data Science presso l'Università degli Studi di Milano-Bicocca;
-- *Traguardi precedenti*: Laurea triennale in Fisica presso l'Università degli Studi di Milano.
+- *Studi precedenti*: Laurea triennale in Fisica presso l'Università degli Studi di Milano.
 <br>
 
 <p align = "center">
@@ -81,7 +81,7 @@ Folders:
 &#8860; &nbsp; **Fabrizio D'Intinosante**
 
 - *Cosa studio*: Studente Magistrale di Data Science presso l'Università degli Studi di Milano-Bicocca;
-- *Traguardi precedenti*: Laurea triennale in Economia e Statistica per le organizzazioni presso l'Università degli Studi di Torino.
+- *Studi precedenti*: Laurea triennale in Economia e Statistica per le organizzazioni presso l'Università degli Studi di Torino.
 <br>
 
 <p align = "center">
@@ -91,7 +91,7 @@ Folders:
 &#8860; &nbsp; **Massimiliano Perletti**
 
 - *Cosa studio*: Studente Magistrale di Data Science presso l'Università degli Studi di Milano-Bicocca;
-- *Traguardi precedenti*: Laurea triennale in Ingegneria dei materiali e delle nano-tecnologie presso il Politecnico di Milano.
+- *Studi precedenti*: Laurea triennale in Ingegneria dei materiali e delle nano-tecnologie presso il Politecnico di Milano.
 <br>
 
 <p align = "center">
