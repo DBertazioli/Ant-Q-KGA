@@ -3,7 +3,7 @@
 </p>
 
 <h3 align = "center">An hybrid metaheuristic approach</h4> 
-<h6 align = "center">to the traveling salesman problem</h6> 
+<h6 align = "center">to the travelling salesman problem</h6> 
 
 <p align="center">
   <a href="#content">Content &nbsp;</a> |
@@ -17,7 +17,7 @@
 ACO with RL algorithm integration (Q-learning) 
 Genetic with k-means clustering
 
-Applied to symmetric Traveling Salesman Problem
+Applied to symmetric Travelling Salesman Problem
 
 <a name="structure"></a>
 ## &#9741; &nbsp; Repo Structure
