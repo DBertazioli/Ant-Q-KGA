@@ -2,7 +2,7 @@
   <a href="http://datascience.disco.unimib.it/it/"><img src = "https://github.com/malborroni/Foundations_of_Computer-Science/blob/master/images/DSunimib.png" width = "100%"></a>
 </p>
 
-<h4 align = "center">An hybrid metaheuristic approach</h4> 
+<h3 align = "center">An hybrid metaheuristic approach</h4> 
 <h6 align = "center">to the traveling salesman problem</h6> 
 
 <p align="center">
