@@ -20,7 +20,7 @@ the folder:
   - report contains the project repo along with its latex source code.
   
   
-<! --- ## To Do List:
+<! -- ## To Do List:
 <ol>
   <li>Find benchmarks (stile taillard) (done, available at)
     <ul>
@@ -33,7 +33,7 @@ the folder:
   <li>Study</li>
   
 </ol>
---- >
+-- >
 ## Datasets per test performances:
         - berlin52
         - ch130
