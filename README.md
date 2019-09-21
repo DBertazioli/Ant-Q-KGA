@@ -15,7 +15,8 @@
 <a name="content"></a>
 ## &#9741; &nbsp; Content
 ACO with RL algorithm integration (Q-learning) 
-Genetic with k-means clustering
+
+Genetic algorithm scaled with k-means clustering
 
 Applied to symmetric Travelling Salesman Problem
 
